@@ -9,6 +9,7 @@ TagManager:
   - LookPos
   - Undefined
   - PlayerEye
+  - RunningRoot
   layers:
   - Default
   - TransparentFX
