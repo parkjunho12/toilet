@@ -12,6 +12,8 @@ public class ActionCamera : MonoBehaviour
         FOLLOW
     }
 
+    public static ActionCamera _uniqueInstance;
+
     [SerializeField] float _movSpeed;
     [SerializeField] float _rotSpeed;
     [SerializeField] Vector3 _followOffset = new Vector3(0, 1.8f, -2);
@@ -27,14 +29,16 @@ public class ActionCamera : MonoBehaviour
     float _timeCheck;
 
     eStateCamera _curCameraAction;
-
+    
     public eStateCamera CAMERAACTION
     {
+        get { return _curCameraAction; }
         set { _curCameraAction = value; }
     }
 
     void Awake()
     {
+        _uniqueInstance = this;
         _ltPositions = new List<Vector3>();
     }
 
@@ -64,10 +68,28 @@ public class ActionCamera : MonoBehaviour
                 transform.LookAt(_posPlayer);
                 break;
             case eStateCamera.CHANGE_FOLLOW:
-
+                Vector3 tp = _posPlayer.position;
+                Quaternion tq = Quaternion.LookRotation(_lookPos.position - tp);
+                transform.position = Vector3.Slerp(transform.position, tp, Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, tq, Time.deltaTime * _rotSpeed);
+                if(Vector3.Distance(transform.position, tp) <= 0.2f)
+                {
+                    transform.position = tp;
+                    transform.LookAt(_lookPos);
+                    _curCameraAction = eStateCamera.FOLLOW;
+                }
                 break;
             case eStateCamera.FOLLOW:
+                float currAngleY = Mathf.LerpAngle(transform.eulerAngles.y, _posPlayer.eulerAngles.y, Time.deltaTime);
 
+                Quaternion rot = Quaternion.Euler(0, currAngleY, 0);
+                _posGoal = _posPlayer.position
+                    - (rot * Vector3.forward * _followOffset.z) + (Vector3.up * _followOffset.y);
+
+                transform.position = Vector3.MoveTowards(transform.position, _posGoal, Time.deltaTime * 2 * _movSpeed);
+                transform.LookAt(_lookPos);
+
+                LobbyManager.INSTANCE.NOWGAMESTATE = LobbyManager.eGameState.PLYRUNNING;
                 break;
         }
     }

@@ -10,6 +10,8 @@ TagManager:
   - Undefined
   - PlayerEye
   - RunningRoot
+  - RoammingRoot
+  - GameStartBtn
   layers:
   - Default
   - TransparentFX

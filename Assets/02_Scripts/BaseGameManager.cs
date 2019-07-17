@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BaseGameManager : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class BaseGameManager : MonoBehaviour
     {
         NONE    = 0,
         LOBBY,
-        INGAME,
+        INGAME01,
+        INGAME02,
+        INGAME03,
     }
 
     public static BaseGameManager _uniqueinstance;
@@ -45,13 +48,8 @@ public class BaseGameManager : MonoBehaviour
     void Start()
     {
         _uniqueinstance = this;
+        SceneManager.LoadSceneAsync("LobbySceneManager", LoadSceneMode.Additive);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
 
 }
