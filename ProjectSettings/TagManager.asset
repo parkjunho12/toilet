@@ -12,6 +12,7 @@ TagManager:
   - RunningRoot
   - RoammingRoot
   - GameStartBtn
+  - ToiletWaterFall
   layers:
   - Default
   - TransparentFX

@@ -1984,14 +1984,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354568305209340623}
-  m_LocalRotation: {x: -0.63607824, y: -0.77162457, z: 0, w: 0}
+  m_LocalRotation: {x: -0.8458303, y: -0.53345203, z: 0, w: 0}
   m_LocalPosition: {x: -0.41190925, y: -0.000012308359, z: 0.00000044703484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1354568305209700067}
   m_Father: {fileID: 1354568305209700047}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: -101}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: -64.478}
 --- !u!65 &2480718706967600233
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2017,7 +2017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5629aeab14c118e468309807dbb3c115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footSound: {fileID: 8300000, guid: 73566419a899c524896092ecd1f6756a, type: 3}
+  footSound: {fileID: 8300000, guid: 7c2a1016c32895b41aeaf8fef39f7dd5, type: 3}
 --- !u!1 &1354568305209340625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,14 +2105,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354568305209340629}
-  m_LocalRotation: {x: -0.63607824, y: -0.77162457, z: 0, w: 0}
-  m_LocalPosition: {x: -0.41188264, y: -4.9960035e-17, z: 8.198866e-17}
+  m_LocalRotation: {x: -0.8458313, y: -0.53345066, z: -3.2664436e-17, w: 5.1792223e-17}
+  m_LocalPosition: {x: -0.41191503, y: 0.0000023543835, z: 0.00000013411045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1354568305209700049}
   m_Father: {fileID: 1354568305209700043}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: -101}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: -64.478}
 --- !u!65 &6591975723974612413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5629aeab14c118e468309807dbb3c115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footSound: {fileID: 8300000, guid: 73566419a899c524896092ecd1f6756a, type: 3}
+  footSound: {fileID: 8300000, guid: 7c2a1016c32895b41aeaf8fef39f7dd5, type: 3}
 --- !u!1 &1354568305209340631
 GameObject:
   m_ObjectHideFlags: 0

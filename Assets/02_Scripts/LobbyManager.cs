@@ -20,6 +20,8 @@ public class LobbyManager : MonoBehaviour
     public GameObject[] _startPosition;
 
     [SerializeField] GameObject _prefabPlayer;
+    [SerializeField] GameObject _gameStartBtn;
+    [SerializeField] GameObject _toiletWaterFall;
 
     PlayerControl _player;
     eGameState _curState;
@@ -105,9 +107,17 @@ public class LobbyManager : MonoBehaviour
     public void StartBtn()
     {
         Debug.Log("Start Button Working");
+        _gameStartBtn.SetActive(false);
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.TOILET_SOUND);
         //BaseSceneManager.INSTANCE.SceneMoveAtLobby(_curStageIdx);
 
+        // 소변기 물내려가는 이펙트 및 소리
+        Transform tf = GameObject.FindGameObjectWithTag("ToiletWaterFall").transform;
+        GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
+        Destroy(go, 7);
+
+        GameStartBtn._uniqueInstance.CLICKBTN = true;
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }

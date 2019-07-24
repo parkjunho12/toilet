@@ -44,22 +44,30 @@ public class PlayerControl : MonoBehaviour
         aniCtrl = GetComponent<Animator>();
         _naviAgent = GetComponent<NavMeshAgent>();
         
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
         _posTarget = transform.position;
         _lookPos = GameObject.FindWithTag("LookPos").transform;
-        //_gameStartBtn = GameObject.FindWithTag("GameStartBtn").transform;
         _isActing = false;
+        _timeCheck = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
-        if(!SpawnControl._uniqueInstance.SPAWNCHECK)
+        if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         {
             switch(_curPlyState)
             {
                 case ePlayerActState.RUN:
                     _timeCheck += Time.deltaTime;
+                    Debug.Log(_timeCheck);
+                    if(_timeCheck > 2.7f)
+                    {
+                        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+                        _timeCheck = 0;
+                    }
+
                     if (!SpawnControl._uniqueInstance.SPAWNCHECK)
                     {
                         if (Vector3.Distance(transform.position, _ltPoints[_idxRoamming]) < 0.2f)
@@ -77,6 +85,7 @@ public class PlayerControl : MonoBehaviour
                     if (Vector3.Distance(transform.position, _walkPoints[_idxRoamming]) < 0.2f)
                     {
                         ChangedAction(PlayerControl.ePlayerActState.IDEL);
+                        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                         _isActing = true;
                         //_idxRoamming++;
                         //_isActing = false;
@@ -98,6 +107,9 @@ public class PlayerControl : MonoBehaviour
         {
             _idxRoamming = 0;
             ChangedAction(ePlayerActState.IDEL);
+            //Quaternion tq = Quaternion.LookRotation(_lookPos.position);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, tq, Time.deltaTime * 5);
+            //transform.LookAt(_lookPos);
             return;
         }
 
