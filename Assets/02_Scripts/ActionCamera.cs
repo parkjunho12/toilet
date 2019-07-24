@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +41,12 @@ public class ActionCamera : MonoBehaviour
     {
         _uniqueInstance = this;
         _ltPositions = new List<Vector3>();
+
+        _posPlayer = GameObject.FindWithTag("Player").transform;
+        _curCameraAction = eStateCamera.FOLLOW;
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -68,7 +74,7 @@ public class ActionCamera : MonoBehaviour
                 transform.LookAt(_posPlayer);
                 break;
             case eStateCamera.CHANGE_FOLLOW:
-                Vector3 tp = _posPlayer.position;
+                Vector3 tp = _posPlayer.position + _followOffset;
                 Quaternion tq = Quaternion.LookRotation(_lookPos.position - tp);
                 transform.position = Vector3.Slerp(transform.position, tp, Time.deltaTime);
                 transform.rotation = Quaternion.Slerp(transform.rotation, tq, Time.deltaTime * _rotSpeed);
@@ -87,9 +93,10 @@ public class ActionCamera : MonoBehaviour
                     - (rot * Vector3.forward * _followOffset.z) + (Vector3.up * _followOffset.y);
 
                 transform.position = Vector3.MoveTowards(transform.position, _posGoal, Time.deltaTime * 2 * _movSpeed);
-                transform.LookAt(_lookPos);
+                //transform.LookAt(_lookPos);
 
-                LobbyManager.INSTANCE.NOWGAMESTATE = LobbyManager.eGameState.PLYRUNNING;
+                //LobbyManager.INSTANCE.NOWGAMESTATE = LobbyManager.eGameState.PLYRUNNING;
+                //PlayerControl._uniqueInstance.CURSTATE = PlayerControl.ePlayerActState.RUN;
                 break;
         }
     }
@@ -104,13 +111,13 @@ public class ActionCamera : MonoBehaviour
             _ltPositions.Add(_tfRootPos.GetChild(n).position);
         }
 
-        _posPlayer = GameObject.FindWithTag("PlayerEye").transform;
+        _posPlayer = GameObject.FindWithTag("Player").transform;
         _lookPos = GameObject.FindWithTag("LookPos").transform;
 
         transform.position = _ltPositions[_curIndex];
         transform.LookAt(_posPlayer);
         _nextIndex = _curIndex + 1;
-        _curCameraAction = eStateCamera.NONE;
+        _curCameraAction = eStateCamera.FOLLOW;       
     }
 
 }
