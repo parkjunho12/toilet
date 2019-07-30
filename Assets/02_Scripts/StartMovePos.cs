@@ -43,7 +43,7 @@ public class StartMovePos : MonoBehaviour
         ply.SettingWalkPathRoamming(_roamPoints);
         _ltSpawns.Add(go);
 
-        Debug.Log("StartMovePos WalkPath Success");
+        //Debug.Log("StartMovePos WalkPath Success");
     }
 
     public void GatheringRoammingPoint()

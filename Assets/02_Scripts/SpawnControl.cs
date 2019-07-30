@@ -62,7 +62,7 @@ public class SpawnControl : MonoBehaviour
         _ltSpawns.Add(go);
 
         PlayerControl._uniqueInstance.CURSTATE = PlayerControl.ePlayerActState.RUN;
-        Debug.Log("SpawnControl SpawnObj Success");
+        //Debug.Log("SpawnControl SpawnObj Success");
     }
 
     void GatheringRoammingPoint()

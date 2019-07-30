@@ -13,7 +13,7 @@ public class PlyFootSound : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             _footCount++;
-            Debug.Log(_footCount);
+            //Debug.Log(_footCount);
             AudioSource.PlayClipAtPoint(footSound, transform.position);
         }
     }

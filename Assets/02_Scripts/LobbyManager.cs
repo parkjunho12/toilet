@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -22,11 +23,15 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _gameStartBtn;
     [SerializeField] GameObject _toiletWaterFall;
+    [SerializeField] GameObject _gameStateTxt;
+    [SerializeField] Text _timer;
+    [SerializeField] Text _myScore;
 
     PlayerControl _player;
     eGameState _curState;
 
     float _timeCheck;
+    float _score;
     bool _isSpawn;
 
     public static LobbyManager INSTANCE
@@ -49,10 +54,14 @@ public class LobbyManager : MonoBehaviour
     {
         _uniqueInstance = this;
         SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
-
         SettingPlayer();
-    }
 
+        _timeCheck = 50.0f;
+        _score = 0.0f;
+        _timer.text = _timeCheck.ToString("N2");
+        _myScore.text = "점수 : " + _score.ToString();        
+        _gameStateTxt.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -63,8 +72,38 @@ public class LobbyManager : MonoBehaviour
                 GameReady();
                 GameMapSetting();
                 break;
-            case eGameState.PLYRUNNING:
+            case eGameState.START:
+                _gameStateTxt.GetComponent<Text>().text = "GameStart!";      // GameStart! 문구 나옴.
+                _timeCheck += Time.deltaTime;
+                if(_timeCheck >= 51.5f)
+                {
+                    _gameStateTxt.SetActive(false);
+                    _timeCheck = 50.0f;
+                    _curState = eGameState.PLAY;
+                }
+                break;
+            case eGameState.PLAY:
+                _timeCheck -= Time.deltaTime;
+                _timer.text = _timeCheck.ToString("N2");        // 소수점 두번째 까지 표현.                
 
+                if (_timeCheck <= 0)
+                {
+                    _timeCheck = 0;
+                    _timer.text = _timeCheck.ToString("N2");        // 소수점 두번째 까지 표현.                
+                    _gameStateTxt.GetComponent<Text>().text = "GameOver~";
+                    _curState = eGameState.END;
+                }
+                break;
+            case eGameState.END:            
+                 _curState = eGameState.RESULT;             
+                break;
+            case eGameState.RESULT:
+                _timeCheck += Time.deltaTime;
+
+                if(_timeCheck >= 1.5f)
+                {
+
+                }
                 break;
         }
     }
@@ -106,7 +145,7 @@ public class LobbyManager : MonoBehaviour
     // Game관련 버튼.
     public void StartBtn()
     {
-        Debug.Log("Start Button Working");
+        //Debug.Log("Start Button Working");
         _gameStartBtn.SetActive(false);
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.TOILET_SOUND);
