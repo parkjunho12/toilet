@@ -14,7 +14,8 @@ public class SoundManager : MonoBehaviour
         BTN,
         RUNNING_BREATH,
         ZIPPERDOWN,
-        PEE,
+        FINISHPEE,
+        BREATH,
         ZIPPERUP,
         TOILET_SOUND
     }

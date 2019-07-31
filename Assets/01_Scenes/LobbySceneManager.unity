@@ -95,8 +95,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000020, guid: b9ca8d5b8585a5849a901466ac57c932,
     type: 2}
   m_UseShadowmask: 0
@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlyUIFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 1554915105, guid: 8885fa752a96246418d513a6a005896d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 314
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8885fa752a96246418d513a6a005896d, type: 3}
 --- !u!1 &864243022 stripped
@@ -394,7 +398,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 864243024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1838765641 stripped
@@ -406,7 +410,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1934111060
@@ -436,7 +440,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934111060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
@@ -455,7 +459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934111060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
@@ -1005,6 +1009,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: LobbySceneMnagerObj
       objectReference: {fileID: 0}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _startPosition.Array.data[0]
+      value: 
+      objectReference: {fileID: 59408788}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _prefabPlayer
+      value: 
+      objectReference: {fileID: 864243022}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _gameStartBtn
+      value: 
+      objectReference: {fileID: 821631276020940962}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _gameStateTxt
+      value: 
+      objectReference: {fileID: 864243023}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _timer
+      value: 
+      objectReference: {fileID: 1838765641}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _myScore
+      value: 
+      objectReference: {fileID: 1554915106}
     - target: {fileID: 6615058137706476068, guid: 2f312d10f67801e4cb2279f9b44e2309,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1060,35 +1094,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _startPosition.Array.data[0]
-      value: 
-      objectReference: {fileID: 59408788}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _prefabPlayer
-      value: 
-      objectReference: {fileID: 864243022}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _gameStartBtn
-      value: 
-      objectReference: {fileID: 821631276020940962}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _gameStateTxt
-      value: 
-      objectReference: {fileID: 864243023}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _timer
-      value: 
-      objectReference: {fileID: 1838765641}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _myScore
-      value: 
-      objectReference: {fileID: 1554915106}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f312d10f67801e4cb2279f9b44e2309, type: 3}

@@ -94,8 +94,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -187,6 +187,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7239410400157406677, guid: d4c994cdadb41534eb535ee0adec00df,
+        type: 3}
+      propertyPath: _effClips.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239410400157406677, guid: d4c994cdadb41534eb535ee0adec00df,
+        type: 3}
+      propertyPath: _effClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 418f0f071a41dbf42aea2d320dcecc45, type: 3}
+    - target: {fileID: 7239410400157406677, guid: d4c994cdadb41534eb535ee0adec00df,
+        type: 3}
+      propertyPath: _effClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: d7ca3e35ab9858f43875dadd2bfb140a, type: 3}
+    - target: {fileID: 7239410400157406677, guid: d4c994cdadb41534eb535ee0adec00df,
+        type: 3}
+      propertyPath: _effClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 42b5ad6503d76df4ea7f07c97b5fae63, type: 3}
+    - target: {fileID: 7239410400157406677, guid: d4c994cdadb41534eb535ee0adec00df,
+        type: 3}
+      propertyPath: _effClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: e5fc0031a2f58cf46afa7dfb28c8e5d6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4c994cdadb41534eb535ee0adec00df, type: 3}
 --- !u!1001 &8788982709313879668

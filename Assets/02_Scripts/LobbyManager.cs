@@ -14,7 +14,7 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         END,
-        RESULT
+        RESULT,
     }
 
     public static LobbyManager _uniqueInstance;
@@ -56,10 +56,11 @@ public class LobbyManager : MonoBehaviour
         SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
         SettingPlayer();
 
-        _timeCheck = 50.0f;
+        _timeCheck = 10.0f;
         _score = 0.0f;
         _timer.text = _timeCheck.ToString("N2");
-        _myScore.text = "점수 : " + _score.ToString();        
+        _myScore.text = "점수 : " + _score.ToString();
+        _gameStateTxt.GetComponent<Text>();
         _gameStateTxt.SetActive(false);
     }
 
@@ -73,12 +74,13 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.START:
+                _gameStateTxt.SetActive(true);                  // 현재 게임상태 등장.
                 _gameStateTxt.GetComponent<Text>().text = "GameStart!";      // GameStart! 문구 나옴.
                 _timeCheck += Time.deltaTime;
-                if(_timeCheck >= 51.5f)
+                if(_timeCheck >= 11.5f)
                 {
-                    _gameStateTxt.SetActive(false);
-                    _timeCheck = 50.0f;
+                    _gameStateTxt.SetActive(false);             // 현재 게임상태 가림.
+                    _timeCheck = 10.0f;
                     _curState = eGameState.PLAY;
                 }
                 break;
@@ -88,22 +90,26 @@ public class LobbyManager : MonoBehaviour
 
                 if (_timeCheck <= 0)
                 {
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.FINISHPEE);
+
                     _timeCheck = 0;
-                    _timer.text = _timeCheck.ToString("N2");        // 소수점 두번째 까지 표현.                
-                    _gameStateTxt.GetComponent<Text>().text = "GameOver~";
+                    _timer.text = _timeCheck.ToString("N2");                // 소수점 두번째 까지 표현.       
+                    _gameStateTxt.SetActive(true);
+                    _gameStateTxt.GetComponent<Text>().text = "GameOver~";  // 현재 게임상태.
                     _curState = eGameState.END;
                 }
                 break;
-            case eGameState.END:            
-                 _curState = eGameState.RESULT;             
-                break;
-            case eGameState.RESULT:
+            case eGameState.END:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 1.5f)
+                if(_timeCheck >= 1.0f)
                 {
-
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    _timeCheck = 0;
+                    _curState = eGameState.RESULT;             
                 }
+                break;
+            case eGameState.RESULT:
                 break;
         }
     }
