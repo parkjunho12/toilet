@@ -18,6 +18,7 @@ public class ParticleLauncher : MonoBehaviour
     float _timeCheck;
     float _urinalScore;
     float _flyScore;
+    float _sum;
     bool _hit;
 
     public float URINAL
@@ -29,6 +30,11 @@ public class ParticleLauncher : MonoBehaviour
     {
         get { return _flyScore; }
         set { _flyScore = value; }
+    }
+    public float SUM
+    {
+        get { return _sum; }
+        set { _sum = value; }
     }
     public bool HIT
     {
@@ -48,15 +54,14 @@ public class ParticleLauncher : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Toilet"))
         {
-            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}",  (_urinalScore + _flyScore).ToString());
-            _urinalScore++;
-            Debug.Log("+1점");
+            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}",  (_urinalScore + _flyScore).ToString("N1"));
+            _urinalScore += 0.1f;
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
-            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString());
-            _flyScore++;
-            Debug.Log("+3점");
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
+            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
+            _flyScore += 2.0f;
         }
 
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);

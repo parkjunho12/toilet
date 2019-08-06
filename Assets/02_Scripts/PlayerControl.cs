@@ -13,9 +13,6 @@ public class PlayerControl : MonoBehaviour
     }
     
     public static PlayerControl _uniqueInstance;
-    public FixedTouchField TouchField;
-    public GameObject _shootPoint;
-    public GameObject _touchShootUI;
     public GameObject _shootPos;
 
     protected float ShootAngle;
@@ -59,7 +56,6 @@ public class PlayerControl : MonoBehaviour
         _isActing = false;
         _timeCheck = 0;
         
-        _touchShootUI.SetActive(false);
         _shootPos.SetActive(false);
     }
 
@@ -97,7 +93,6 @@ public class PlayerControl : MonoBehaviour
                     if (Vector3.Distance(transform.position, _walkPoints[_idxRoamming]) < 0.2f)
                     {
                         _shootPos.SetActive(true);
-                        _touchShootUI.SetActive(true);
 
                         LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
                         ChangedAction(PlayerControl.ePlayerActState.IDEL);

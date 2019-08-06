@@ -17,10 +17,7 @@ public class BaseGameManager : MonoBehaviour
     public enum eStageState
     {
         NONE    = 0,
-        LOBBY,
-        INGAME01,
-        INGAME02,
-        INGAME03,
+        LobbySceneManager,
     }
 
     public static BaseGameManager _uniqueinstance;
@@ -49,7 +46,80 @@ public class BaseGameManager : MonoBehaviour
     {
         _uniqueinstance = this;
         SceneManager.LoadSceneAsync("LobbySceneManager", LoadSceneMode.Additive);
+        SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
     }
-    
 
+    /// <summary>
+    /// 게임 끝난 후 물내리는 버튼을 누를 때 발생.
+    /// </summary>
+    public void SceneRestart(eStageState stage)
+    {
+        _curStage = stage;
+
+        string[] unloadStage = new string[1];
+        unloadStage[0] = _curStage.ToString();
+
+        string[] loadStage = new string[1];
+        loadStage[0] = stage.ToString();
+
+        SceneManager.UnloadSceneAsync(unloadStage[0].ToString());
+        SceneManager.LoadSceneAsync(loadStage[0].ToString(), LoadSceneMode.Additive);
+        //StartCoroutine(LoadingScene(loadStage, unloadStage));
+    }
+
+    public IEnumerator LoadingScene(string[] loadName = null, string[] unloadName = null)
+    {
+        AsyncOperation AO;
+
+        int amount;
+        if (unloadName == null)
+        {
+            amount = 0;
+        }
+        else
+        {
+            amount = unloadName.Length;
+        }
+        _curStateLoading = eLoadingState.START;
+        // Unload 실행.
+        _curStateLoading = eLoadingState.UNLOADING;
+        for (int i = 0; i < amount; i++)
+        {
+            AO = SceneManager.UnloadSceneAsync(unloadName[i]);
+            while (!AO.isDone)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(2);
+        }
+
+        _curStateLoading = eLoadingState.LOADING;
+        // Load 실행.
+        if (loadName == null)
+        {
+            amount = 0;
+        }
+        else
+        {
+            amount = loadName.Length;
+        }
+        for (int i = 0; i < amount; i++)
+        {
+            AO = SceneManager.LoadSceneAsync(loadName[i], LoadSceneMode.Additive);
+            while (!AO.isDone)
+            {
+                yield return null;
+            }
+            yield return new WaitForSeconds(2);
+        }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadName[amount - 1]));
+
+        // BGM 사운드
+        //if (_curStage == eStageState.LOBBY01)
+        //{
+        //    SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
+        //}
+
+        _curStateLoading = eLoadingState.END;
+    }
 }

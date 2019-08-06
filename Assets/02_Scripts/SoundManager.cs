@@ -17,7 +17,8 @@ public class SoundManager : MonoBehaviour
         FINISHPEE,
         BREATH,
         ZIPPERUP,
-        TOILET_SOUND
+        TOILET_SOUND,
+        HITFLY,
     }
 
     public static SoundManager _uniqueinstance;

@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6615058137706476069}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -49,6 +49,7 @@ MonoBehaviour:
   _gameStartBtn: {fileID: 0}
   _toiletWaterFall: {fileID: 4666633608610267372, guid: f4ea23e3703f1034e9052436943261eb,
     type: 3}
+  _gameStateUI: {fileID: 0}
   _gameStateTxt: {fileID: 0}
   _timer: {fileID: 0}
   _myScore: {fileID: 0}
