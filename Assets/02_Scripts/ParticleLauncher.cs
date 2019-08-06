@@ -55,13 +55,13 @@ public class ParticleLauncher : MonoBehaviour
         if(other.gameObject.CompareTag("Toilet"))
         {
             _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}",  (_urinalScore + _flyScore).ToString("N1"));
-            _urinalScore += 0.1f;
+            _urinalScore += 0.01f;
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
             _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
-            _flyScore += 2.0f;
+            _flyScore += 5.0f;
         }
 
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
