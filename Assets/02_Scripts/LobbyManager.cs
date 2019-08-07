@@ -12,6 +12,7 @@ public class LobbyManager : MonoBehaviour
         READY   = 0,
         MAPSETTING,
         PLYRUNNING,
+        STARTFIND,
         START,
         PLAY,
         END,
@@ -67,7 +68,7 @@ public class LobbyManager : MonoBehaviour
         _timer.text = _timeCheck.ToString("N2");
         _myScore.text = "점수 : " + _score.ToString();
 
-        _touchShootUI.SetActive(false);
+        _touchShootUI.SetActive(true);
         _gameStateUI.SetActive(false);
         _gameStateTxt.GetComponent<Text>();
         _gameStateTxt.SetActive(false);
@@ -77,11 +78,18 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_curState);
         switch(_curState)
         {
             case eGameState.READY:
                 GameReady();
                 GameMapSetting();
+                break;
+            case eGameState.STARTFIND:
+                if(GameStartBtn._uniqueInstance.CLICKBTN)
+                {
+                    NOWGAMESTATE = eGameState.START;
+                }
                 break;
             case eGameState.START:
                 _gameStateUI.SetActive(true);
@@ -137,29 +145,17 @@ public class LobbyManager : MonoBehaviour
     {
         _curState = eGameState.MAPSETTING;
         // 스폰 포인트 활성화.
-        _isSpawn = true;     
+        _isSpawn = true;
         // 카메라 워킹 위치 설정.
         //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         //Camera.main.GetComponent<ActionCamera>().SetCameraActionRoot(tf);
+        _curState = eGameState.STARTFIND;
     }
 
     public void SettingPlayer()
     {
-        //if(BaseGameManager.INSTANCE.CURSTAGE == BaseGameManager.eStageState.INGAME01)
-        {
-            _prefabPlayer.transform.position = _startPosition[0].transform.position;
-            _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;
-        }
-        //else if (BaseGameManager.INSTANCE.CURSTAGE == BaseGameManager.eStageState.INGAME02)
-        //{
-        //    _prefabPlayer.transform.position = _startPosition[1].transform.position;
-        //    _prefabPlayer.transform.rotation = _startPosition[1].transform.rotation;
-        //}
-        //else if (BaseGameManager.INSTANCE.CURSTAGE == BaseGameManager.eStageState.INGAME03)
-        //{
-        //    _prefabPlayer.transform.position = _startPosition[2].transform.position;
-        //    _prefabPlayer.transform.rotation = _startPosition[2].transform.rotation;
-        //}
+        _prefabPlayer.transform.position = _startPosition[0].transform.position;
+        _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
     }
 
     // Game관련 버튼.

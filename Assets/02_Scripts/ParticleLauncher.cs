@@ -52,13 +52,14 @@ public class ParticleLauncher : MonoBehaviour
     // 파티클 충돌 이벤트 감지
     void OnParticleCollision(GameObject other)
     {
-        if(other.gameObject.CompareTag("Toilet"))
+        if (other.gameObject.CompareTag("Toilet"))
         {
-            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}",  (_urinalScore + _flyScore).ToString("N1"));
+            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _urinalScore += 0.01f;
         }
-        else if (other.gameObject.CompareTag("Fly"))
+        if (other.gameObject.CompareTag("Fly"))
         {
+            Debug.Log("2점");
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
             _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _flyScore += 5.0f;
@@ -70,6 +71,7 @@ public class ParticleLauncher : MonoBehaviour
             EmitAtLocation(collisionEvent[i]);
         }
     }
+
     void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
     {
         splatter.transform.position = particleCollisionEvent.intersection;

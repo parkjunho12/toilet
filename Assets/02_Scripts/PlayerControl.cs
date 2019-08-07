@@ -7,13 +7,14 @@ public class PlayerControl : MonoBehaviour
 {
     public enum ePlayerActState
     {
-        RUN,
-        IDEL,
-        WALK
+        IDLE,
+        WALK,
+        RUN
     }
     
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
+    public Transform _player;
 
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
@@ -62,32 +63,62 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_curPlyState);
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
         if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         {
             switch(_curPlyState)
             {
                 case ePlayerActState.RUN:
-                    _timeCheck += Time.deltaTime;
-                    //Debug.Log(_timeCheck);
-                    if(_timeCheck > 2.7f)
+                    if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
-                        _timeCheck = 0;
-                    }
-
-                    if (!SpawnControl._uniqueInstance.SPAWNCHECK)
-                    {
-                        if (Vector3.Distance(transform.position, _ltPoints[_idxRoamming]) < 0.2f)
+                        if (FixedTouchField._uniqueInstance.PRESSED)
                         {
-                             ChangedAction(PlayerControl.ePlayerActState.RUN);
-                            _idxRoamming++;
-                            _isActing = false;
+                            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+
+
+                            //float rotAmountX = Camera.main.transform.rotation.y;
+                            //Vector3 rotPlayer = transform.rotation.eulerAngles;
+                            //rotPlayer.y += rotAmountX;
+
+                            //transform.rotation = Quaternion.Euler(rotPlayer);
+                        }
+                        else
+                        {
+                            ChangedAction(ePlayerActState.IDLE);
                         }
                     }
+                    //_timeCheck += Time.deltaTime;                                                      
+                    //if(_timeCheck > 2.7f)
+                    //{
+                    //    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+                    //    _timeCheck = 0;
+                    //}
+
+                    //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
+                    //{
+                    //    if (Vector3.Distance(transform.position, _ltPoints[_idxRoamming]) < 0.2f)
+                    //    {
+                    //         ChangedAction(PlayerControl.ePlayerActState.RUN);
+                    //        _idxRoamming++;
+                    //        _isActing = false;
+                    //    }
+                    //}
                     break;
-                case ePlayerActState.IDEL:
+                case ePlayerActState.IDLE:
                     _isActing = true;
+
+                    if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
+                    {
+                        if (FixedTouchField._uniqueInstance.PRESSED)
+                        {
+                            ChangedAction(ePlayerActState.RUN);
+                        }
+                        else
+                        {
+                            ChangedAction(ePlayerActState.IDLE);
+                        }
+                    }
                     break;
                 case ePlayerActState.WALK:
                     if (Vector3.Distance(transform.position, _walkPoints[_idxRoamming]) < 0.2f)
@@ -95,7 +126,7 @@ public class PlayerControl : MonoBehaviour
                         _shootPos.SetActive(true);
 
                         LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
-                        ChangedAction(PlayerControl.ePlayerActState.IDEL);
+                        ChangedAction(PlayerControl.ePlayerActState.IDLE);
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                         _isActing = true;
                         //_idxRoamming++;
@@ -117,7 +148,7 @@ public class PlayerControl : MonoBehaviour
         if (_idxRoamming == _ltPoints.Count)
         {
             _idxRoamming = 0;
-            ChangedAction(ePlayerActState.IDEL);
+            ChangedAction(ePlayerActState.IDLE);
             //Quaternion tq = Quaternion.LookRotation(_lookPos.position);
             //transform.rotation = Quaternion.Slerp(transform.rotation, tq, Time.deltaTime * 5);
             //transform.LookAt(_lookPos);
@@ -133,12 +164,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (_isActing)
             return;
-
-        //Debug.Log("hello");
+        
         if (_idxRoamming == _walkPoints.Count)
         {// 다 걸어왔으면 제자리 멈춤 && 발사가능
-            ChangedAction(ePlayerActState.IDEL);
-
+            ChangedAction(ePlayerActState.IDLE);
             return;
         }
 
@@ -157,7 +186,7 @@ public class PlayerControl : MonoBehaviour
                 _naviAgent.speed = 3.5f;
                 _naviAgent.stoppingDistance = 0;
                 break;
-            case ePlayerActState.IDEL:
+            case ePlayerActState.IDLE:
                 _naviAgent.enabled = false;
                 break;
             case ePlayerActState.WALK:
@@ -189,6 +218,5 @@ public class PlayerControl : MonoBehaviour
             _walkPoints.Add(points[n].position);
         }
         //Debug.Log("SettingWalkPathRoamming Success");
-
     }
 }

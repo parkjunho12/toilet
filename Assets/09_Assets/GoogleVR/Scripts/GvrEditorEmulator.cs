@@ -77,6 +77,7 @@ public class GvrEditorEmulator : MonoBehaviour
     /// <summary>Gets the emulated head rotation.</summary>
     /// <value>The emulated head rotation.</value>
     public Quaternion HeadRotation { get; private set; }
+    public Transform _player;
 
     /// <summary>Recenters the emulated headset.</summary>
     public void Recenter()
@@ -217,6 +218,12 @@ public class GvrEditorEmulator : MonoBehaviour
     {
         HeadRotation = Quaternion.Euler(mouseY, mouseX, mouseZ);
         HeadPosition = (HeadRotation * NECK_OFFSET) - (NECK_OFFSET.y * Vector3.up);
+
+        //Vector3 rotPlayer = _player.transform.rotation.eulerAngles;
+        //rotPlayer.x -= HeadRotation.y;
+        //rotPlayer.z = 0;
+
+        _player.rotation = HeadRotation;
     }
 
     private void ApplyHeadOrientationToVRCameras()

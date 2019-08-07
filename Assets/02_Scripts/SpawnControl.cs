@@ -73,7 +73,7 @@ public class SpawnControl : MonoBehaviour
         _ltSpawns.Add(go);
         _ftSpawns.Add(fo);
 
-        PlayerControl._uniqueInstance.CURSTATE = PlayerControl.ePlayerActState.RUN;
+        PlayerControl._uniqueInstance.CURSTATE = PlayerControl.ePlayerActState.IDLE;
         //Debug.Log("SpawnControl SpawnObj Success");
     }
 
