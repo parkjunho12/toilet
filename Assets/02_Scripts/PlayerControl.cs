@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
-    public Transform _player;
+    public GameObject _unrinal;
 
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
@@ -72,28 +72,28 @@ public class PlayerControl : MonoBehaviour
                 case ePlayerActState.RUN:
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
+                        _timeCheck += Time.deltaTime;
+                        if (_timeCheck > 2.7f)
+                        {// 숨소리 효과음.
+                            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+                            _timeCheck = 0;
+                        }
+
                         if (FixedTouchField._uniqueInstance.PRESSED)
-                        {
+                        {// 화면이 터치될 시 캐릭터 움직임..
                             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
-
-
-                            //float rotAmountX = Camera.main.transform.rotation.y;
-                            //Vector3 rotPlayer = transform.rotation.eulerAngles;
-                            //rotPlayer.y += rotAmountX;
-
-                            //transform.rotation = Quaternion.Euler(rotPlayer);
                         }
                         else
-                        {
+                        {// 화면 터치가 안됬을 시 캐릭터 IDLE..
                             ChangedAction(ePlayerActState.IDLE);
                         }
                     }
-                    //_timeCheck += Time.deltaTime;                                                      
-                    //if(_timeCheck > 2.7f)
-                    //{
-                    //    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
-                    //    _timeCheck = 0;
-                    //}
+
+                    if (Vector3.Distance(transform.position, _unrinal.transform.position) <= 1.5f)
+                    {// 내 캐릭터와 소변기 거리가 1.5 이하이면 => 스타트버튼 클릭 후 게임 시작..
+                        LobbyManager._uniqueInstance.StartBtn();
+                        _curPlyState = ePlayerActState.WALK;
+                    }
 
                     //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
                     //{
@@ -107,7 +107,6 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case ePlayerActState.IDLE:
                     _isActing = true;
-
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
                         if (FixedTouchField._uniqueInstance.PRESSED)

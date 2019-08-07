@@ -7,6 +7,7 @@ public class ParticleLauncher : MonoBehaviour
 {
     public static ParticleLauncher _uniqueInstance;
     public AudioClip _peeSound;
+    public AudioClip _hitFlySound;
     [SerializeField] GameObject _peeScore;
 
     public ParticleSystem particleLauncher;         // 총알 발사되는 파티클 개체
@@ -60,7 +61,8 @@ public class ParticleLauncher : MonoBehaviour
         if (other.gameObject.CompareTag("Fly"))
         {
             Debug.Log("2점");
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
+            //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
+            AudioSource.PlayClipAtPoint(_hitFlySound, transform.position);
             _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _flyScore += 5.0f;
         }

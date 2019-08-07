@@ -23,9 +23,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject[] _startPosition;
 
     [SerializeField] GameObject _prefabPlayer;
-    [SerializeField] GameObject _gameStartBtn;
-    [SerializeField] GameObject _gameReStartBtn;
-    [SerializeField] GameObject _fly;
+    //[SerializeField] GameObject _gameStartBtn;
+    //[SerializeField] GameObject _gameReStartBtn;
+    //[SerializeField] GameObject _fly;
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _touchShootUI;
     [SerializeField] GameObject _gameStateUI;
@@ -34,7 +34,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text _myScore;
 
     BaseGameManager.eStageState _curStageIdx;
-    List<Vector3> _flyMovePos;
     PlayerControl _player;
     eGameState _curState;
 
@@ -72,7 +71,7 @@ public class LobbyManager : MonoBehaviour
         _gameStateUI.SetActive(false);
         _gameStateTxt.GetComponent<Text>();
         _gameStateTxt.SetActive(false);
-        _gameReStartBtn.SetActive(false);
+        //_gameReStartBtn.SetActive(false);
     }
 
     // Update is called once per frame
@@ -119,7 +118,7 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
             case eGameState.END:
-                _gameReStartBtn.SetActive(true);
+                //_gameReStartBtn.SetActive(true);
                 _timeCheck += Time.deltaTime;
 
                 if(_timeCheck >= 1.0f)
@@ -161,9 +160,8 @@ public class LobbyManager : MonoBehaviour
     // Game관련 버튼.
     public void StartBtn()
     {
-        //Debug.Log("Start Button Working");
         _touchShootUI.SetActive(true);
-        _gameStartBtn.SetActive(false);
+        //_gameStartBtn.SetActive(false);
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.TOILET_SOUND);
         //BaseSceneManager.INSTANCE.SceneMoveAtLobby(_curStageIdx);

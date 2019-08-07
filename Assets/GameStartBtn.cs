@@ -28,6 +28,12 @@ public class GameStartBtn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LobbyManager._uniqueInstance.NOWGAMESTATE >= LobbyManager.eGameState.PLAY)
+        {
+            lamp.material.color = originColor;
+            return;
+        }
+
         //if (_clickBtn)
         //{
         //    lamp.material.color = Color.gray;
