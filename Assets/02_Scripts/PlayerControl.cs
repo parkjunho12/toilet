@@ -81,7 +81,21 @@ public class PlayerControl : MonoBehaviour
 
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
-                            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+                            // 시간차에 따른 캐릭터 달리기 속도 저하..
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT <= 90
+                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 60)
+                            {
+                                transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+                            }
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 60
+                                && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
+                            {
+                                transform.Translate(Vector3.forward * 3 * Time.deltaTime);
+                            }
+                            else
+                            {
+                                transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+                            }
                         }
                         else
                         {// 화면 터치가 안됬을 시 캐릭터 IDLE..
@@ -127,6 +141,7 @@ public class PlayerControl : MonoBehaviour
                         LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
                         ChangedAction(PlayerControl.ePlayerActState.IDLE);
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
+                        LobbyManager._uniqueInstance.PLAYCOUNT = 50.0f;
                         _isActing = true;
                         //_idxRoamming++;
                         //_isActing = false;
@@ -182,7 +197,7 @@ public class PlayerControl : MonoBehaviour
         {
             case ePlayerActState.RUN:
                 _naviAgent.enabled = true;
-                _naviAgent.speed = 3.5f;
+                _naviAgent.speed = 3.5f;                
                 _naviAgent.stoppingDistance = 0;
                 break;
             case ePlayerActState.IDLE:

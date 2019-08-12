@@ -30,6 +30,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _touchShootUI;
     [SerializeField] GameObject _gameStateUI;
     [SerializeField] GameObject _gameStateTxt;
+    [SerializeField] Text _findTimer;
     [SerializeField] Text _timer;
     [SerializeField] Text _myScore;
 
@@ -55,6 +56,11 @@ public class LobbyManager : MonoBehaviour
         get { return _isSpawn; }
         set { _isSpawn = value; }
     }
+    public float PLAYCOUNT
+    {
+        get { return _timeCheck; }
+        set { _timeCheck = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +68,6 @@ public class LobbyManager : MonoBehaviour
         _uniqueInstance = this;
         SettingPlayer();
 
-        _timeCheck = 50.0f;
         _score = 0.0f;
         _timer.text = _timeCheck.ToString("N2");
         _myScore.text = "점수 : " + _score.ToString();
@@ -84,11 +89,46 @@ public class LobbyManager : MonoBehaviour
                 GameReady();
                 GameMapSetting();
                 break;
-            case eGameState.STARTFIND:
-                if(GameStartBtn._uniqueInstance.CLICKBTN)
+            case eGameState.MAPSETTING:
+                //_timeCheck += Time.deltaTime;
+                //if(_timeCheck > 2)
                 {
-                    NOWGAMESTATE = eGameState.START;
+                    _timeCheck = 90.0f;
+                    _curState = eGameState.STARTFIND;
                 }
+                break;
+            case eGameState.STARTFIND:
+                _timeCheck -= Time.deltaTime;
+                _findTimer.text = _timeCheck.ToString("N2");
+                if (_timeCheck <= 80 && _timeCheck > 70)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.1f);
+                }
+                else if (_timeCheck <= 70 && _timeCheck > 60)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.2f);
+                }
+                else if (_timeCheck <= 60 && _timeCheck > 50)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.3f);
+                }
+                else if (_timeCheck <= 50 && _timeCheck > 40)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.5f);
+                }
+                else if (_timeCheck <= 40 && _timeCheck > 30)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.7f);
+                }
+                else if (_timeCheck <= 30 && _timeCheck > 20)
+                {
+                    UIFader._uniqueInstance.FadeIn(0.8f);
+                }
+                else if (_timeCheck <= 20 && _timeCheck > 0)
+                {
+                    UIFader._uniqueInstance.FadeIn(1.0f);
+                }
+                //if (_timeCheck == 85.0f)
                 break;
             case eGameState.START:
                 _gameStateUI.SetActive(true);
@@ -148,7 +188,8 @@ public class LobbyManager : MonoBehaviour
         // 카메라 워킹 위치 설정.
         //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         //Camera.main.GetComponent<ActionCamera>().SetCameraActionRoot(tf);
-        _curState = eGameState.STARTFIND;
+        UIFader._uniqueInstance.FadeOut();
+        _timeCheck = 0;
     }
 
     public void SettingPlayer()
