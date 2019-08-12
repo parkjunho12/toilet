@@ -9,7 +9,7 @@ public class UIFader : MonoBehaviour
 
     void Awake()
     {
-        _uniqueInstance = this;    
+        _uniqueInstance = this;
     }
 
     public void FadeIn(float _alpha)
@@ -28,9 +28,9 @@ public class UIFader : MonoBehaviour
         float timeSinceStarted = Time.time - _timeStartedLerping;
         float percentageComplete = timeSinceStarted / lerpTime;
 
-        if(end == 0)
+        if (end == 0)
         {
-            while(true)
+            while (true)
             {
                 timeSinceStarted = Time.time - _timeStartedLerping;
                 percentageComplete = timeSinceStarted / lerpTime;
@@ -50,5 +50,4 @@ public class UIFader : MonoBehaviour
             cg.alpha = end;
         }
     }
-
 }

@@ -82,7 +82,7 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_curState);
+        //Debug.Log(_curState);
         switch(_curState)
         {
             case eGameState.READY:
@@ -114,11 +114,11 @@ public class LobbyManager : MonoBehaviour
                 }
                 else if (_timeCheck <= 50 && _timeCheck > 40)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.5f);
+                    UIFader._uniqueInstance.FadeIn(0.4f);
                 }
                 else if (_timeCheck <= 40 && _timeCheck > 30)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.7f);
+                    UIFader._uniqueInstance.FadeIn(0.6f);
                 }
                 else if (_timeCheck <= 30 && _timeCheck > 20)
                 {
@@ -137,6 +137,7 @@ public class LobbyManager : MonoBehaviour
                 _timeCheck += Time.deltaTime;
                 if(_timeCheck >= 51.5f)
                 {
+                    _findTimer.enabled = false;
                     _gameStateTxt.SetActive(false);             // 현재 게임상태 가림.
                     _timeCheck = 50.0f;
                     _curState = eGameState.PLAY;
@@ -212,7 +213,7 @@ public class LobbyManager : MonoBehaviour
         GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
         Destroy(go, 7);
 
-        GameStartBtn._uniqueInstance.CLICKBTN = true;
+        //GameStartBtn._uniqueInstance.CLICKBTN = true;
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }
