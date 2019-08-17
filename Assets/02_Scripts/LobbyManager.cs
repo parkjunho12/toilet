@@ -24,6 +24,7 @@ public class LobbyManager : MonoBehaviour
 
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _toiletWaterFall;
+    [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
     [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
@@ -80,7 +81,7 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _prefabPlayer.transform.rotation = Quaternion.Euler(0, 0, 0);
+        _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
         //Debug.Log(_curState);
         switch(_curState)
         {
@@ -89,13 +90,13 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 180.0f;
+                _timeCheck = 150.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
                 _timeCheck -= Time.deltaTime;
                 _findTimer.text = _timeCheck.ToString("N2");
-                if (_timeCheck <= 140 && _timeCheck > 70)
+                if (_timeCheck <= 110 && _timeCheck > 70)
                 {
                     UIFader._uniqueInstance.FadeIn(0.1f);
                 }
@@ -181,6 +182,9 @@ public class LobbyManager : MonoBehaviour
         _curState = eGameState.MAPSETTING;
         // 스폰 포인트 활성화.
         _isSpawn = true;
+        // 플레이어 소변기에 접근시 걸어갈 위치활성화.
+        // 빈물병 스폰 위치활성화.
+       
         // 카메라 워킹 위치 설정.
         //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         //Camera.main.GetComponent<ActionCamera>().SetCameraActionRoot(tf);
@@ -210,7 +214,8 @@ public class LobbyManager : MonoBehaviour
         // 소변기 물내려가는 이펙트 및 소리
         Transform tf = GameObject.FindGameObjectWithTag("ToiletWaterFall").transform;
         GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
-        Destroy(go, 7);
+        Destroy(go, 4);
+        _prefabPlayer.transform.LookAt(tf);
         
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();

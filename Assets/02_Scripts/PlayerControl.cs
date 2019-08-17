@@ -25,7 +25,6 @@ public class PlayerControl : MonoBehaviour
     
     Transform _lookPos;
     Transform _gameStartBtn;
-    List<Vector3> _ltPoints;
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
@@ -36,7 +35,7 @@ public class PlayerControl : MonoBehaviour
     bool _isActing;
 
     public ePlayerActState CURSTATE
-    {
+    {// 플레이어 에니메이션 상태.
         get { return _curPlyState; }
         set { _curPlyState = value; }
     }
@@ -72,8 +71,8 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         //Debug.Log(_curPlyState);
+        //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
-        if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         {
             switch(_curPlyState)
             {
@@ -90,19 +89,21 @@ public class PlayerControl : MonoBehaviour
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
                             // 시간차에 따른 캐릭터 달리기 속도 저하..
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT <= 90
-                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 60)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 70)
                             {
-                                transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
+                                    * 6.5f * Time.deltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 60
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 70
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
                             {
-                                transform.Translate(Vector3.forward * 3 * Time.deltaTime);
+                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
+                                                                    * 4.5f * Time.deltaTime);
                             }
                             else
                             {
-                                transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
+                                                                    * 3.0f * Time.deltaTime);
                             }
                         }
                         else
@@ -145,29 +146,8 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
             }
-
-            //ProcessAI();
+            
         }
-    }
-    
-    public void ProcessAI()
-    {
-        if (_isActing)
-            return;
-
-        if (_idxRoamming == _ltPoints.Count)
-        {
-            _idxRoamming = 0;
-            ChangedAction(ePlayerActState.IDLE);
-            //Quaternion tq = Quaternion.LookRotation(_lookPos.position);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, tq, Time.deltaTime * 5);
-            //transform.LookAt(_lookPos);
-            return;
-        }
-
-        _posTarget = _ltPoints[_idxRoamming];
-        _naviAgent.SetDestination(_posTarget);
-        _isActing = true;
     }
 
     public void PlayerWalkToToilet()
@@ -187,6 +167,10 @@ public class PlayerControl : MonoBehaviour
         _isActing = true;
     }
 
+    /// <summary>
+    /// 플레이어 에니메이션 체인지.
+    /// </summary>
+    /// <param name="state"></param>
     public void ChangedAction(ePlayerActState state)
     {
         switch(state)
@@ -211,15 +195,10 @@ public class PlayerControl : MonoBehaviour
         _curPlyState = state;
     }
 
-    public void SettingRoammingType(Transform[] points = null)
-    {
-         _ltPoints = new List<Vector3>();
-         for (int n = 0; n < points.Length; n++)
-         {
-             _ltPoints.Add(points[n].position);
-         }
-        //Debug.Log("SettingRoamming Success");
-    }
+    /// <summary>
+    /// 플레이어가 소변기 주변에 갈 때 걸어갈 위치스폰 초기화.
+    /// </summary>
+    /// <param name="points"></param>
     public void SettingWalkPathRoamming(Transform[] points = null)
     {
         _walkPoints = new List<Vector3>();
@@ -228,5 +207,15 @@ public class PlayerControl : MonoBehaviour
             _walkPoints.Add(points[n].position);
         }
         //Debug.Log("SettingWalkPathRoamming Success");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Bottle"))
+        {
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.FINISHPEE);
+            LobbyManager._uniqueInstance.PLAYCOUNT += 15.0f;
+            Destroy(other.gameObject);
+        }
     }
 }

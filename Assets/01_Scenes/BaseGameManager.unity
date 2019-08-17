@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmClips:
-  - {fileID: 8300000, guid: 7063f78b56f379c4d8325f68b07c0c12, type: 3}
+  - {fileID: 8300000, guid: 8b713c82e2cb0984598a0d20191c3b9c, type: 3}
   _effClips:
   - {fileID: 8300000, guid: 72433c9ff1ef4134c91c8d216c2ea5f1, type: 3}
   - {fileID: 8300000, guid: b35b6f23f9b658240bea529df704476e, type: 3}
