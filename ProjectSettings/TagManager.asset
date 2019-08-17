@@ -13,6 +13,10 @@ TagManager:
   - RoammingRoot
   - GameStartBtn
   - ToiletWaterFall
+  - ShootPointer
+  - Toilet
+  - Fly
+  - Minus
   layers:
   - Default
   - TransparentFX

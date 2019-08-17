@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +7,16 @@ public class GameStartBtn : MonoBehaviour
 {
     public static GameStartBtn _uniqueInstance;
 
+    [SerializeField] GameObject _prefabFly;
+
     public Renderer lamp;
     private Color originColor;
 
+    Transform _flyrootRoam;         // 파리 포인트.
+    Transform[] _flyPoints;
+    List<GameObject> _ftSpawns;
+
+    bool spawnCheck;
     bool _clickBtn;
     public bool CLICKBTN
     {
@@ -20,6 +28,11 @@ public class GameStartBtn : MonoBehaviour
     void Start()
     {
         _uniqueInstance = this;
+
+        _flyrootRoam = transform.GetChild(9);
+        GatheringFlyRoammingPoint();
+        _ftSpawns = new List<GameObject>();
+        spawnCheck = true;
 
         originColor = lamp.material.color;
         _clickBtn = false;
@@ -33,6 +46,15 @@ public class GameStartBtn : MonoBehaviour
             lamp.material.color = originColor;
             return;
         }
+        else if (LobbyManager.INSTANCE.ENABLESPAWN)
+        {
+            if (spawnCheck)
+            {
+                SpawnFlyPos();
+                spawnCheck = false;
+            }
+        }
+
 
         //if (_clickBtn)
         //{
@@ -42,5 +64,27 @@ public class GameStartBtn : MonoBehaviour
 
         float flicker = Mathf.Abs(Mathf.Sin(Time.time * 10));
         lamp.material.color = originColor * flicker;
+    }
+
+    private void SpawnFlyPos()
+    {
+        FlyController fly;
+
+        GameObject fo = _prefabFly;
+        fly = fo.GetComponent<FlyController>();
+        fly.SettingFlyMovePathRoamming(_flyPoints);
+        _ftSpawns.Add(fo);
+    }
+
+    void GatheringFlyRoammingPoint()
+    {
+        if (_flyrootRoam.childCount == 0)
+            return;
+
+        _flyPoints = new Transform[_flyrootRoam.childCount];
+        for (int n = 0; n < _flyPoints.Length; n++)
+        {
+            _flyPoints[n] = _flyrootRoam.GetChild(n);
+        }
     }
 }

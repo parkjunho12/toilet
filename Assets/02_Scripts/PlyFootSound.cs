@@ -10,9 +10,9 @@ public class PlyFootSound : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        //if (other.gameObject.layer == LayerMask.NameToLayer("Environment"))
         {
-            _footCount++;
+            //_footCount++;
             AudioSource.PlayClipAtPoint(footSound, transform.position);
         }
     }

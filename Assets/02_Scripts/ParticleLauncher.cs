@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class ParticleLauncher : MonoBehaviour
 {
     public static ParticleLauncher _uniqueInstance;
-    public AudioClip _peeSound;
-    public AudioClip _hitFlySound;
-    [SerializeField] GameObject _peeScore;
+    public AudioClip[] _soundEff;
+    [SerializeField] GameObject[] _peeScore;
 
     public ParticleSystem particleLauncher;         // 총알 발사되는 파티클 개체
     public ParticleSystem splatter;                 // 발사된 총알개체가 벽에 충돌될때 호출되는 충돌반응 이펙트  
@@ -21,6 +20,7 @@ public class ParticleLauncher : MonoBehaviour
     float _flyScore;
     float _sum;
     bool _hit;
+    int _rndNum;
 
     public float URINAL
     {
@@ -48,6 +48,8 @@ public class ParticleLauncher : MonoBehaviour
     {
         _uniqueInstance = this;
         collisionEvent = new List<ParticleCollisionEvent>();
+
+        _rndNum = PlayerControl._uniqueInstance.RNDNUM;
     }
 
     // 파티클 충돌 이벤트 감지
@@ -55,17 +57,23 @@ public class ParticleLauncher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Toilet"))
         {
-            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _urinalScore += 0.01f;
         }
         if (other.gameObject.CompareTag("Fly"))
         {
             Debug.Log("2점");
             //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
-            AudioSource.PlayClipAtPoint(_hitFlySound, transform.position);
-            _peeScore.GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
+            AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _flyScore += 5.0f;
         }
+        if(other.gameObject.CompareTag("Minus"))
+        {
+            Debug.Log("-1");
+            AudioSource.PlayClipAtPoint(_soundEff[2], transform.position);
+        }
+        _sum += _urinalScore + _flyScore;
 
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
         for (int i = 0; i < collisionEvent.Count; i++)
@@ -99,7 +107,7 @@ public class ParticleLauncher : MonoBehaviour
                 if(_timeCheck > 0.1f)
                 {
                     _timeCheck = 0;
-                    AudioSource.PlayClipAtPoint(_peeSound, particleLauncher.transform.position);
+                    AudioSource.PlayClipAtPoint(_soundEff[0], particleLauncher.transform.position);
                 }
             }
             else

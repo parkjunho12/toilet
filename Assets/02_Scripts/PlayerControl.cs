@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
-    public GameObject _unrinal;
+    public GameObject[] _unrinal;
 
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
 
     float _timeCheck;
     int _idxRoamming = 0;
+    int _rndNumber;
     bool _isActing;
 
     public ePlayerActState CURSTATE
@@ -43,6 +44,11 @@ public class PlayerControl : MonoBehaviour
     {
         set { _isActing = value; }
     }
+    public int RNDNUM
+    {// 랜덤하게 켜질 변기번호 및 플레이어가 걸어갈 위치번호..
+        get { return _rndNumber; }
+        set { _rndNumber = value; }
+    }
 
     void Awake()
     {
@@ -53,11 +59,13 @@ public class PlayerControl : MonoBehaviour
         
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
         _posTarget = transform.position;
-        _lookPos = GameObject.FindWithTag("LookPos").transform;
+
         _isActing = false;
         _timeCheck = 0;
         
         _shootPos.SetActive(false);
+        _rndNumber = Random.Range(0, _unrinal.Length);
+        _unrinal[_rndNumber].SetActive(true);
     }
 
     // Update is called once per frame
@@ -103,21 +111,12 @@ public class PlayerControl : MonoBehaviour
                         }
                     }
 
-                    if (Vector3.Distance(transform.position, _unrinal.transform.position) <= 1.5f)
+                    if (Vector3.Distance(transform.position, _unrinal[_rndNumber].transform.position) <= 1.5f)
                     {// 내 캐릭터와 소변기 거리가 1.5 이하이면 => 스타트버튼 클릭 후 게임 시작..
                         LobbyManager._uniqueInstance.StartBtn();
                         _curPlyState = ePlayerActState.WALK;
                     }
-
-                    //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
-                    //{
-                    //    if (Vector3.Distance(transform.position, _ltPoints[_idxRoamming]) < 0.2f)
-                    //    {
-                    //         ChangedAction(PlayerControl.ePlayerActState.RUN);
-                    //        _idxRoamming++;
-                    //        _isActing = false;
-                    //    }
-                    //}
+                    
                     break;
                 case ePlayerActState.IDLE:
                     _isActing = true;
@@ -134,7 +133,7 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case ePlayerActState.WALK:
-                    if (Vector3.Distance(transform.position, _walkPoints[_idxRoamming]) < 0.2f)
+                    if (Vector3.Distance(transform.position, _walkPoints[_rndNumber]) < 0.2f)
                     {
                         _shootPos.SetActive(true);
 
@@ -143,14 +142,11 @@ public class PlayerControl : MonoBehaviour
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                         LobbyManager._uniqueInstance.PLAYCOUNT = 50.0f;
                         _isActing = true;
-                        //_idxRoamming++;
-                        //_isActing = false;
                     }
                     break;
             }
 
-            ProcessAI();
-            transform.LookAt(_lookPos);
+            //ProcessAI();
         }
     }
     
@@ -179,14 +175,14 @@ public class PlayerControl : MonoBehaviour
         if (_isActing)
             return;
         
-        if (_idxRoamming == _walkPoints.Count)
+        if (_rndNumber == _walkPoints.Count)
         {// 다 걸어왔으면 제자리 멈춤 && 발사가능
             ChangedAction(ePlayerActState.IDLE);
             return;
         }
 
         ChangedAction(PlayerControl.ePlayerActState.WALK);
-        _posTarget = _walkPoints[_idxRoamming];
+        _posTarget = _walkPoints[_rndNumber];
         _naviAgent.SetDestination(_posTarget);
         _isActing = true;
     }

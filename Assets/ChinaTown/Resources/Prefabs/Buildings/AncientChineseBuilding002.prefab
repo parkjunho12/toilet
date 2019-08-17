@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1536426124657222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4252585925917782}
+  - component: {fileID: 33594360560002432}
+  - component: {fileID: 23673670751796280}
+  m_Layer: 0
+  m_Name: AncientChineseBuilding002
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4252585925917782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536426124657222}
+  m_LocalRotation: {x: -0.70710635, y: -0, z: -0, w: 0.7071073}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4297215502436530}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
+--- !u!33 &33594360560002432
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536426124657222}
+  m_Mesh: {fileID: 4300194, guid: 5d0fb12995d19fd4db347a69c8ae6a18, type: 3}
+--- !u!23 &23673670751796280
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536426124657222}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8b5eaffe4f876064ab0fe550b9f048de, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: ac3414c23939bcd43839982339f7561c, type: 2}
+  - {fileID: 2100000, guid: df8374203a06e00499c11bf74a361e53, type: 2}
+  - {fileID: 2100000, guid: 11a9dca2062c38a4d985215958041418, type: 2}
+  - {fileID: 2100000, guid: 1d91a6d3d4baec04dbd91d14b026d750, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: b37c67a7261f8bd4fbd7e289babe49aa, type: 2}
+  - {fileID: 2100000, guid: 76e1d80dedb04594ab5dffec594c6590, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: 04892607e2ed46b4eb2be551561e6473, type: 2}
+  - {fileID: 2100000, guid: 04892607e2ed46b4eb2be551561e6473, type: 2}
+  - {fileID: 2100000, guid: bafce0106f204ac43bc840c0695eb292, type: 2}
+  - {fileID: 2100000, guid: b37c67a7261f8bd4fbd7e289babe49aa, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: 8c7445c6292e224479bf3d8a573c9238, type: 2}
+  - {fileID: 2100000, guid: d5801c55748418c4c9cadbde87886c0a, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: b37c67a7261f8bd4fbd7e289babe49aa, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: b37c67a7261f8bd4fbd7e289babe49aa, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: b37c67a7261f8bd4fbd7e289babe49aa, type: 2}
+  - {fileID: 2100000, guid: dd5e8afc9fc54b04a803b52b4fac2c06, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 04892607e2ed46b4eb2be551561e6473, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 1107c4d3e322d304baffe50ee584696d, type: 2}
+  - {fileID: 2100000, guid: afc69c67c20d1d14688d7c5fa571027a, type: 2}
+  - {fileID: 2100000, guid: 75ffa3c36aacd1145bf99336dccaea99, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: 1d42ed2fb76c74842a915f371719e6c3, type: 2}
+  - {fileID: 2100000, guid: 1d42ed2fb76c74842a915f371719e6c3, type: 2}
+  - {fileID: 2100000, guid: 21c33b6a5625e8c4197c3ccf052aaeaa, type: 2}
+  - {fileID: 2100000, guid: 8b8d9b432ab66764b990f73b4f7a108b, type: 2}
+  - {fileID: 2100000, guid: 7ee29d4ef3729bf4fb39703954753c7c, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: f11f1443c9b9bf2488c72e0682d7bf4d, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  - {fileID: 2100000, guid: 8b8d9b432ab66764b990f73b4f7a108b, type: 2}
+  - {fileID: 2100000, guid: 8b8d9b432ab66764b990f73b4f7a108b, type: 2}
+  - {fileID: 2100000, guid: 6754a29d5ea45d64f8b5a66870115f81, type: 2}
+  - {fileID: 2100000, guid: 1d851dc48e247544c93feb838b8a06f0, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!1 &1662057047715880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4297215502436530}
+  m_Layer: 0
+  m_Name: AncientChineseBuilding002
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4297215502436530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662057047715880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4252585925917782}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
