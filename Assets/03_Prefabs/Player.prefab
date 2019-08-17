@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1673605968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4771,6 +4771,11 @@ PrefabInstance:
     - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,
         type: 3}
       propertyPath: _peeScore.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,
+        type: 3}
+      propertyPath: _plus.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,

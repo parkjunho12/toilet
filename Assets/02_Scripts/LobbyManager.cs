@@ -31,6 +31,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
+    [SerializeField] Text[] _Plus;
 
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
@@ -164,6 +165,7 @@ public class LobbyManager : MonoBehaviour
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
+                    _Plus[_rndNum].gameObject.SetActive(false);
                     _curState = eGameState.RESULT;
                 }
                 break;
