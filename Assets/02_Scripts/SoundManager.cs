@@ -19,6 +19,10 @@ public class SoundManager : MonoBehaviour
         ZIPPERUP,
         TOILET_SOUND,
         HITFLY,
+        CAR_PASS,
+        CAR_HORN,
+        CAR_CRASH,
+        GAMEOVER,
     }
 
     public static SoundManager _uniqueinstance;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -15,14 +16,14 @@ public class PlayerControl : MonoBehaviour
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
     public GameObject[] _unrinal;
-
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
 
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
-    
+
+    GameObject _car;
     Transform _lookPos;
     Transform _gameStartBtn;
     List<Vector3> _walkPoints;
@@ -33,6 +34,7 @@ public class PlayerControl : MonoBehaviour
     int _idxRoamming = 0;
     int _rndNumber;
     bool _isActing;
+    bool _crash;
 
     public ePlayerActState CURSTATE
     {// 플레이어 에니메이션 상태.
@@ -84,11 +86,19 @@ public class PlayerControl : MonoBehaviour
                         {// 숨소리 효과음.
                             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
                             _timeCheck = 0;
+
+                            if (_crash)
+                            {
+                                _crash = false;
+                                UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
+                                UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
+                            }
                         }
+
 
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
-                            // 시간차에 따른 캐릭터 달리기 속도 저하..
+                         // 시간차에 따른 캐릭터 달리기 속도 저하..
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 70)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
@@ -216,6 +226,15 @@ public class PlayerControl : MonoBehaviour
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.FINISHPEE);
             LobbyManager._uniqueInstance.PLAYCOUNT += 15.0f;
             Destroy(other.gameObject);
+        }
+        if(other.gameObject.CompareTag("Car"))
+        {
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
+            UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+            UIFader._uniqueInstance.FadeIn(0.4f);
+            _crash = true;
+            Destroy(other.gameObject);
+            LobbyManager._uniqueInstance.PLAYCOUNT -= 10.0f;
         }
     }
 }

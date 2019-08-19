@@ -18,6 +18,7 @@ TagManager:
   - Fly
   - Minus
   - Bottle
+  - Car
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,12 @@ public class UIFader : MonoBehaviour
     public static UIFader _uniqueInstance;
     public CanvasGroup uiElement;
 
+    public CanvasGroup UIELEMENT
+    {
+        get { return uiElement; }
+        set { uiElement = value; }
+    }
+
     void Awake()
     {
         _uniqueInstance = this;

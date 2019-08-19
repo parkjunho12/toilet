@@ -16,7 +16,8 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         END,
-        RESULT,
+        REPLAY_IF_FINISH,
+        REPLAY_IFNOT_FINISH,
     }
 
     public static LobbyManager _uniqueInstance;
@@ -26,9 +27,10 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
-    [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
+    [SerializeField] GameObject _prefabCarPoints;
+    [SerializeField] Text _findTimer;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
@@ -39,6 +41,7 @@ public class LobbyManager : MonoBehaviour
 
     float _timeCheck;
     float _score;
+    float _fadeNum;
     bool _isSpawn;
     int _rndNum;
 
@@ -60,6 +63,11 @@ public class LobbyManager : MonoBehaviour
     {
         get { return _timeCheck; }
         set { _timeCheck = value; }
+    }
+    public float FADENUM
+    {
+        get { return _fadeNum; }
+        set { _fadeNum = value; }
     }
 
     // Start is called before the first frame update
@@ -91,7 +99,7 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 150.0f;
+                _timeCheck = 180.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
@@ -99,33 +107,49 @@ public class LobbyManager : MonoBehaviour
                 _findTimer.text = _timeCheck.ToString("N2");
                 if (_timeCheck <= 110 && _timeCheck > 70)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.1f);
+                    _fadeNum = 0.1f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 70 && _timeCheck > 60)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.2f);
+                    _fadeNum = 0.2f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 60 && _timeCheck > 50)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.3f);
+                    _fadeNum = 0.3f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 50 && _timeCheck > 40)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.4f);
+                    _fadeNum = 0.4f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 40 && _timeCheck > 30)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.6f);
+                    _fadeNum = 0.5f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 30 && _timeCheck > 20)
                 {
-                    UIFader._uniqueInstance.FadeIn(0.8f);
+                    _fadeNum = 0.6f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 20 && _timeCheck > 0)
                 {
-                    UIFader._uniqueInstance.FadeIn(1.0f);
+                    _fadeNum = 0.8f;
+                    UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                //if (_timeCheck == 85.0f)
+                else if (_timeCheck <= 0)
+                {// 게임오버 표시,플레이어 에니메이션(IDLE), 자동차들 안보이게, 화면 노랗게 유지.
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.GAMEOVER, 1.0f);
+                    PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.IDLE);
+                    _prefabCarPoints.SetActive(false);
+                    UIFader._uniqueInstance.FadeIn(1.0f);
+                    _findTimer.text = "GameOver";
+                    _timeCheck = 0;
+                    _curState = eGameState.REPLAY_IFNOT_FINISH;
+                }
                 break;
             case eGameState.START:
                 _gameStateUI[_rndNum].SetActive(true);
@@ -134,6 +158,7 @@ public class LobbyManager : MonoBehaviour
                 _timeCheck += Time.deltaTime;
                 if(_timeCheck >= 51.5f)
                 {
+                    _prefabCarPoints.SetActive(false);
                     _findTimer.enabled = false;
                     _gameStateTxt[_rndNum].SetActive(false);             // 현재 게임상태 가림.
                     _timeCheck = 50.0f;
@@ -156,7 +181,6 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
             case eGameState.END:
-                //_gameReStartBtn.SetActive(true);
                 _timeCheck += Time.deltaTime;
 
                 if(_timeCheck >= 1.0f)
@@ -166,10 +190,28 @@ public class LobbyManager : MonoBehaviour
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
-                    _curState = eGameState.RESULT;
+                    _curState = eGameState.REPLAY_IF_FINISH;
                 }
                 break;
-            case eGameState.RESULT:
+            case eGameState.REPLAY_IF_FINISH:
+                _timeCheck += Time.deltaTime;
+
+                if(_timeCheck >= 5.0f)
+                {
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Click Restart!";
+                    if(FixedTouchField._uniqueInstance.PRESSED)
+                        RestartBtn();
+                }
+                break;
+            case eGameState.REPLAY_IFNOT_FINISH:
+                _timeCheck += Time.deltaTime;
+
+                if(_timeCheck >= 3.0f)
+                {
+                    _findTimer.text = "Click Retry TT";
+                    if(FixedTouchField._uniqueInstance.PRESSED)
+                        RestartClick();
+                }
                 break;
         }
     }
@@ -204,6 +246,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 게임 시작 메소드.
     /// 플레이어가 변기 주변에 가까이 갈시
     /// 물이 내려가고, 플레이어가 걸어간다.
     /// </summary>
@@ -222,6 +265,9 @@ public class LobbyManager : MonoBehaviour
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }
+    /// <summary>
+    /// 소변기에서 게임을 완료했을시 게임다시시작.
+    /// </summary>
     public void RestartBtn()
     {
         int stageIdx = UnityEngine.Random.Range(1, 2);
@@ -241,6 +287,21 @@ public class LobbyManager : MonoBehaviour
 
         BaseGameManager._uniqueinstance.SceneRestart(_curStageIdx);
     }
+    /// <summary>
+    /// 소변기를 찾지 못했을 시 게임다시시작 메소드.
+    /// </summary>
+    public void RestartClick()
+    {
+        int stageIdx = UnityEngine.Random.Range(1, 2);
+        if ((int)_curStageIdx != stageIdx)
+            _curStageIdx = (BaseGameManager.eStageState)stageIdx;
+        else
+            _curStageIdx = 0;
+        
+        SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
+        BaseGameManager._uniqueinstance.SceneRestart(_curStageIdx);
+    }
+
     public void QuitBtn()
     {
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);

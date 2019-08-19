@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38219777, g: 0.468821, b: 0.61403686, a: 1}
+  m_IndirectSpecularColor: {r: 0.3821952, g: 0.46956164, b: 0.61443454, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,9 +98,9 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.05
-    agentHeight: 2
+    agentHeight: 4
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -306,3 +306,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e5fc0031a2f58cf46afa7dfb28c8e5d6, type: 3}
   - {fileID: 8300000, guid: d7ca3e35ab9858f43875dadd2bfb140a, type: 3}
   - {fileID: 8300000, guid: a8c8c37063d809e4e80a157155c29943, type: 3}
+  - {fileID: 8300000, guid: 01c1476730086f84e95847218e852bcb, type: 3}
+  - {fileID: 8300000, guid: 98b5506372c0e2a40a778c64aec3b95a, type: 3}
+  - {fileID: 8300000, guid: 713ff657b928fda45a90f13723b344d6, type: 3}
+  - {fileID: 8300000, guid: 981ecbb37ec38ff4892ac88ccb4fbbc4, type: 3}
