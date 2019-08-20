@@ -99,21 +99,21 @@ public class PlayerControl : MonoBehaviour
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
                          // 시간차에 따른 캐릭터 달리기 속도 저하..
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 70)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 80)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
                                     * 6.5f * Time.deltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 70
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 80
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 4.5f * Time.deltaTime);
+                                                                    * 5.0f * Time.deltaTime);
                             }
                             else
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 3.0f * Time.deltaTime);
+                                                                    * 4.0f * Time.deltaTime);
                             }
                         }
                         else

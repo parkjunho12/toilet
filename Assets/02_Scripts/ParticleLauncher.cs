@@ -70,10 +70,10 @@ public class ParticleLauncher : MonoBehaviour
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
             _flyScore += 5.0f;
         }
-        else
-        {
-            _plus[_rndNum].GetComponent<Text>().transform.position = Vector3.zero;
-        }
+        //else
+        //{
+        //    _plus[_rndNum].GetComponent<Text>().transform.position = Vector3.zero;
+        //}
 
         if(other.gameObject.CompareTag("Minus"))
         {
