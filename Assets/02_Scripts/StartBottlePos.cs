@@ -49,8 +49,7 @@ public class StartBottlePos : MonoBehaviour
 
     public void SpawnBottle()
     {
-        int _rndSpawnBottle = UnityEngine.Random.Range(1, _roamPoints.Length + 1);
-        GameObject[] go = new GameObject[_rndSpawnBottle];
+        GameObject[] go = new GameObject[_roamPoints.Length];
 
         for(int n = 0; n < _roamPoints.Length; n++)
         {
