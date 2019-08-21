@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2384530427341618212}
   - component: {fileID: 2409352731140402726}
   - component: {fileID: 2398270990191884238}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BP_cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2398267035075595984}
   - component: {fileID: 8338303343990663917}
   - component: {fileID: 4388680665787277120}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Item
   m_TagString: Bottle
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ Transform:
   m_GameObject: {fileID: 2385882851509315450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2384530427341618212}
   - {fileID: 8694494105499770205}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8694494105499770205}
   - component: {fileID: 8341451141589689490}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,8 +212,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8574539484483337734}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2384502183361195660}
   m_RootOrder: 1

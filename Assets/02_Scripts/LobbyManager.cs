@@ -27,10 +27,11 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
+    [SerializeField] GameObject _miniMap;
+    [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject _prefabCarPoints;
-    [SerializeField] Text _findTimer;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
@@ -84,15 +85,18 @@ public class LobbyManager : MonoBehaviour
         _touchShootUI.SetActive(true);
         _gameStateUI[_rndNum].SetActive(false);
         _gameStateTxt[_rndNum].GetComponent<Text>();
-        _gameStateTxt[_rndNum].SetActive(false);
+        _gameStateTxt[_rndNum].SetActive(false);       
     }
 
     // Update is called once per frame
     void Update()
     {
         _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
+        _miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
+        _miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
+
         //Debug.Log(_curState);
-        switch(_curState)
+        switch (_curState)
         {
             case eGameState.READY:
                 GameReady();
