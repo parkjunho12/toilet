@@ -12,15 +12,17 @@ public class PlayerControl : MonoBehaviour
         WALK,
         RUN
     }
-    
+   
+
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
     public GameObject[] _unrinal;
+    public GameObject[] _unrinalAura;
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
     public Vector2 joystick;
     public GameObject centerEye;
-
+    public GameObject controller;
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
@@ -69,8 +71,9 @@ public class PlayerControl : MonoBehaviour
         _timeCheck = 0;
         
         _shootPos.SetActive(false);
-        _rndNumber = Random.Range(0, _unrinal.Length);
-        _unrinal[_rndNumber].SetActive(true);
+       // _rndNumber = Random.Range(0, _unrinal.Length);
+        _rndNumber = 0;
+       _unrinal[_rndNumber].SetActive(true);
     }
 
     // Update is called once per frame
@@ -176,6 +179,12 @@ public class PlayerControl : MonoBehaviour
                         Debug.Log("dfdf");
                         LobbyManager._uniqueInstance.StartBtn();
                         _curPlyState = ePlayerActState.WALK;
+                        _unrinalAura[_rndNumber].SetActive(false);
+                        //transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
+                        //controller.transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
+                        controller.transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
+                        //transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
+                        //controller.transform.LookAt(_unrinal[_rndNumber].transform.position);
                     }
                     
                     break;
@@ -183,7 +192,8 @@ public class PlayerControl : MonoBehaviour
                     _isActing = true;
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        if (FixedTouchField._uniqueInstance.PRESSED)
+                        //if (FixedTouchField._uniqueInstance.PRESSED)
+                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
                         {
                             ChangedAction(ePlayerActState.RUN);
                         }

@@ -15,9 +15,9 @@ public class LobbyManager : MonoBehaviour
         STARTFIND,
         START,
         PLAY,
-        END,
-        REPLAY_IF_FINISH,
-        REPLAY_IFNOT_FINISH,
+        RESULT,
+        END
+       
     }
 
     public static LobbyManager _uniqueInstance;
@@ -148,7 +148,7 @@ public class LobbyManager : MonoBehaviour
                     UIFader._uniqueInstance.FadeIn(1.0f);
                     _findTimer.text = "GameOver";
                     _timeCheck = 0;
-                    _curState = eGameState.REPLAY_IFNOT_FINISH;
+                    _curState = eGameState.END;
                 }
                 break;
             case eGameState.START:
@@ -177,40 +177,33 @@ public class LobbyManager : MonoBehaviour
                     _timer[_rndNum].text = _timeCheck.ToString("N2");                // 소수점 두번째 까지 표현.       
                     _gameStateTxt[_rndNum].SetActive(true);
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "GameOver~";  // 현재 게임상태.
-                    _curState = eGameState.END;
+                    _curState = eGameState.RESULT;
                 }
                 break;
-            case eGameState.END:
+            case eGameState.RESULT:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 1.0f)
+                if (_timeCheck >= 2.0f)
                 {
                     _timeCheck = 0;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
-                    _curState = eGameState.REPLAY_IF_FINISH;
+                    _curState = eGameState.END;
                 }
                 break;
-            case eGameState.REPLAY_IF_FINISH:
+            case eGameState.END:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 5.0f)
+                if (_timeCheck >= 4.0f)
                 {
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Click Restart!";
-                    if(FixedTouchField._uniqueInstance.PRESSED)
-                        RestartBtn();
-                }
-                break;
-            case eGameState.REPLAY_IFNOT_FINISH:
-                _timeCheck += Time.deltaTime;
-
-                if(_timeCheck >= 3.0f)
-                {
-                    _findTimer.text = "Click Retry TT";
-                    if(FixedTouchField._uniqueInstance.PRESSED)
-                        RestartClick();
+                    _timeCheck = 0;
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    _touchShootUI.SetActive(false);
+                    _Plus[_rndNum].gameObject.SetActive(false);
+                   // BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
                 }
                 break;
         }
@@ -260,8 +253,8 @@ public class LobbyManager : MonoBehaviour
         Transform tf = GameObject.FindGameObjectWithTag("ToiletWaterFall").transform;
         GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
         Destroy(go, 4);
-        _prefabPlayer.transform.LookAt(tf);
-        
+       // _prefabPlayer.transform.LookAt(tf);
+       _prefabPlayer.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.x, Camera.main.transform.rotation.y, Camera.main.transform.rotation.z);
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }

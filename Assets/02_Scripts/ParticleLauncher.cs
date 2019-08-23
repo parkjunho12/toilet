@@ -103,9 +103,11 @@ public class ParticleLauncher : MonoBehaviour
         //if (Input.GetMouseButtonDown(0))
         if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
         {
+            bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
             //if (FixedTouchField._uniqueInstance.PRESSED)
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+            if (iskeydown)
             {
+                
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;
                 ParticleSystem.MainModule psmain = particleLauncher.main;
                 psmain.startColor = particleGradient.Evaluate(UnityEngine.Random.Range(0f, 1f));
