@@ -29,7 +29,8 @@ public class StartCarPos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(LobbyManager._uniqueInstance.ENABLESPAWN)
+        if(
+            BaseGameManager._uniqueinstance.CURSTAGE == BaseGameManager.eStageState.NONE)
         {
             _timeCheck += Time.deltaTime;
             if(_timeCheck >= _rndTime)

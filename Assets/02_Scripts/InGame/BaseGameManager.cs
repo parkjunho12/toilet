@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,8 @@ public class BaseGameManager : MonoBehaviour
     public enum eStageState
     {
         NONE    = 0,
-        LobbySceneManager,
+        LOBBY,
+        INGAME,
     }
 
     public static BaseGameManager _uniqueinstance;
@@ -46,7 +48,8 @@ public class BaseGameManager : MonoBehaviour
     {
         _uniqueinstance = this;
         SceneManager.LoadSceneAsync("LobbySceneManager", LoadSceneMode.Additive);
-        SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
+        SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY);
+        _curStage = eStageState.LOBBY;
     }
 
     /// <summary>
@@ -67,7 +70,7 @@ public class BaseGameManager : MonoBehaviour
         //StartCoroutine(LoadingScene(loadStage, unloadStage));
     }
 
-    public IEnumerator LoadingScene(string[] loadName = null, string[] unloadName = null)
+    public IEnumerator LoaddingScene(string[] loadName = null, string[] unloadName = null)
     {
         AsyncOperation AO;
 
@@ -115,11 +118,67 @@ public class BaseGameManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadName[amount - 1]));
 
         // BGM 사운드
-        //if (_curStage == eStageState.LOBBY01)
-        //{
-        //    SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
-        //}
+        if (_curStage == eStageState.INGAME)
+        {
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
+        }
 
         _curStateLoading = eLoadingState.END;
+    }
+
+    public IEnumerator StageToLobby(string[] loadName = null, string[] unloadName = null)
+    {
+        int amount;
+        if (unloadName == null)
+            amount = 0;
+        else
+            amount = unloadName.Length;
+
+        for(int n = 0; n < amount; n++)
+        {
+            SceneManager.UnloadSceneAsync(unloadName[n]);
+        }
+
+        if (loadName == null)
+            amount = 0;
+        else
+            amount = loadName.Length;
+
+        for(int n = 0; n < amount; n++)
+        {
+            SceneManager.LoadScene(loadName[n], LoadSceneMode.Additive);
+        }
+
+        yield return null;
+    }
+
+    public void SceneMoveAtLobby(eStageState stage)
+    {
+        _curStage = stage;
+
+        string[] unloadStage = new string[1];
+        unloadStage[0] = "LobbySceneManager";
+
+        string[] loadStage = new string[1];
+        loadStage[0] = "InGameSceneManager";
+
+        StartCoroutine(LoaddingScene(loadStage, unloadStage));
+    }
+
+    public void SceneMoveAtStage(eStageState stage)
+    {
+        string[] unloadStage = new string[1];
+        string[] loadStage = new string[1];
+        if(stage == eStageState.LOBBY)
+        {
+            unloadStage[0] = "InGameSceneManager";
+            loadStage[0] = "LobbySceneManager";
+        }
+        else
+        {
+            Debug.Log("error");
+        }
+
+        StartCoroutine(StageToLobby(loadStage, unloadStage));
     }
 }

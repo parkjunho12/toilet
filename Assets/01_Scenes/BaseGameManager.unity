@@ -111,7 +111,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 78e3753ea842a61459956e0f402eec31, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7365995c43960594bb8ad65b297486ed, type: 2}
 --- !u!1 &53440938
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmClips:
+  - {fileID: 8300000, guid: 939ccb35e2e159c41a1b8b4bcd7da7dc, type: 3}
   - {fileID: 8300000, guid: 8b713c82e2cb0984598a0d20191c3b9c, type: 3}
   _effClips:
   - {fileID: 8300000, guid: 72433c9ff1ef4134c91c8d216c2ea5f1, type: 3}
@@ -310,3 +311,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98b5506372c0e2a40a778c64aec3b95a, type: 3}
   - {fileID: 8300000, guid: 713ff657b928fda45a90f13723b344d6, type: 3}
   - {fileID: 8300000, guid: 981ecbb37ec38ff4892ac88ccb4fbbc4, type: 3}
+  - {fileID: 8300000, guid: 2c1c26f065d2bd345b51e7da448ddf4a, type: 3}

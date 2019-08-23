@@ -5011,12 +5011,12 @@ PrefabInstance:
     - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,
         type: 3}
       propertyPath: _peeScore.Array.size
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,
         type: 3}
       propertyPath: _plus.Array.size
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3289620996628080191, guid: a545dd2e372bf5443bed75b1bc843ceb,
         type: 3}

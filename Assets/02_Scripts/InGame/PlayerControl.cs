@@ -76,7 +76,7 @@ public class PlayerControl : MonoBehaviour
         //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
         {
-            switch(_curPlyState)
+            switch (_curPlyState)
             {
                 case ePlayerActState.RUN:
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
@@ -102,18 +102,18 @@ public class PlayerControl : MonoBehaviour
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 80)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                    * 6.5f * Time.deltaTime);
+                                    * 8.5f * Time.deltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 80
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 5.0f * Time.deltaTime);
+                                                                    * 6.0f * Time.deltaTime);
                             }
                             else
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 4.0f * Time.deltaTime);
+                                                                    * 5.0f * Time.deltaTime);
                             }
                         }
                         else

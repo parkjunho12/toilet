@@ -15,9 +15,8 @@ public class LobbyManager : MonoBehaviour
         STARTFIND,
         START,
         PLAY,
+        RESULT,
         END,
-        REPLAY_IF_FINISH,
-        REPLAY_IFNOT_FINISH,
     }
 
     public static LobbyManager _uniqueInstance;
@@ -103,7 +102,7 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 180.0f;
+                _timeCheck = 185.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
@@ -152,7 +151,8 @@ public class LobbyManager : MonoBehaviour
                     UIFader._uniqueInstance.FadeIn(1.0f);
                     _findTimer.text = "GameOver";
                     _timeCheck = 0;
-                    _curState = eGameState.REPLAY_IFNOT_FINISH;
+                    BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
+                    //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
                 break;
             case eGameState.START:
@@ -181,40 +181,33 @@ public class LobbyManager : MonoBehaviour
                     _timer[_rndNum].text = _timeCheck.ToString("N2");                // 소수점 두번째 까지 표현.       
                     _gameStateTxt[_rndNum].SetActive(true);
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "GameOver~";  // 현재 게임상태.
-                    _curState = eGameState.END;
+                    _curState = eGameState.RESULT;
                 }
                 break;
-            case eGameState.END:
+            case eGameState.RESULT:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 1.0f)
+                if (_timeCheck >= 2.0f)
                 {
                     _timeCheck = 0;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
-                    _curState = eGameState.REPLAY_IF_FINISH;
+                    _curState = eGameState.END;
                 }
                 break;
-            case eGameState.REPLAY_IF_FINISH:
+            case eGameState.END:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 5.0f)
+                if(_timeCheck >= 4.0f)
                 {
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Click Restart!";
-                    if(FixedTouchField._uniqueInstance.PRESSED)
-                        RestartBtn();
-                }
-                break;
-            case eGameState.REPLAY_IFNOT_FINISH:
-                _timeCheck += Time.deltaTime;
-
-                if(_timeCheck >= 3.0f)
-                {
-                    _findTimer.text = "Click Retry TT";
-                    if(FixedTouchField._uniqueInstance.PRESSED)
-                        RestartClick();
+                    _timeCheck = 0;
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    _touchShootUI.SetActive(false);
+                    _Plus[_rndNum].gameObject.SetActive(false);
+                    BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
                 }
                 break;
         }
@@ -310,15 +303,5 @@ public class LobbyManager : MonoBehaviour
     {
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
         //_prefabeQuitGame.SetActive(true);
-    }
-    public void YesClick()
-    {
-        SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
-        //Application.Quit();
-    }
-    public void NoClick()
-    {
-        SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
-        //_prefabeQuitGame.SetActive(false);
     }
 }

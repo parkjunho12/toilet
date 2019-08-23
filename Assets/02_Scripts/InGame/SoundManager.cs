@@ -6,7 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public enum eBGMType
     {
-        LOBBY_GAME01  = 0,
+        LOBBY  = 0,
+        INGAME,
     }
 
     public enum eEffType
@@ -23,6 +24,7 @@ public class SoundManager : MonoBehaviour
         CAR_HORN,
         CAR_CRASH,
         GAMEOVER,
+        PEE_SOUND,
     }
 
     public static SoundManager _uniqueinstance;
