@@ -17,7 +17,8 @@ public class BaseGameManager : MonoBehaviour
     public enum eStageState
     {
         NONE    = 0,
-        LobbySceneManager,
+        LOBBY,
+        INGAME,
     }
 
     public static BaseGameManager _uniqueinstance;
@@ -121,5 +122,61 @@ public class BaseGameManager : MonoBehaviour
         //}
 
         _curStateLoading = eLoadingState.END;
+    }
+
+    public IEnumerator StageToLobby(string[] loadName = null, string[] unloadName = null)
+    {
+        int amount;
+        if (unloadName == null)
+            amount = 0;
+        else
+            amount = unloadName.Length;
+
+        for (int n = 0; n < amount; n++)
+        {
+            SceneManager.UnloadSceneAsync(unloadName[n]);
+        }
+
+        if (loadName == null)
+            amount = 0;
+        else
+            amount = loadName.Length;
+
+        for (int n = 0; n < amount; n++)
+        {
+            SceneManager.LoadScene(loadName[n], LoadSceneMode.Additive);
+        }
+
+        yield return null;
+    }
+
+    public void SceneMoveAtLobby(eStageState stage)
+    {
+        _curStage = stage;
+
+        string[] unloadStage = new string[1];
+        unloadStage[0] = "LobbySceneManager";
+
+        string[] loadStage = new string[1];
+        loadStage[0] = "InGameSceneManager";
+
+        StartCoroutine(LoadingScene(loadStage, unloadStage));
+    }
+
+    public void SceneMoveAtStage(eStageState stage)
+    {
+        string[] unloadStage = new string[1];
+        string[] loadStage = new string[1];
+        if (stage == eStageState.LOBBY)
+        {
+            unloadStage[0] = "InGameSceneManager";
+            loadStage[0] = "LobbySceneManager";
+        }
+        else
+        {
+            Debug.Log("error");
+        }
+
+        StartCoroutine(StageToLobby(loadStage, unloadStage));
     }
 }
