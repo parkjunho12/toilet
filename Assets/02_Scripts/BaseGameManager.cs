@@ -47,7 +47,7 @@ public class BaseGameManager : MonoBehaviour
     {
         _uniqueinstance = this;
         SceneManager.LoadSceneAsync("LobbySceneManager", LoadSceneMode.Additive);
-        SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
+        SoundManager.INSTANCE.PlayBGMSound(SoundManager.eBGMType.LOBBY);
     }
 
     /// <summary>
@@ -116,10 +116,10 @@ public class BaseGameManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadName[amount - 1]));
 
         // BGM 사운드
-        //if (_curStage == eStageState.LOBBY01)
-        //{
-        //    SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY_GAME01);
-        //}
+        if (_curStage == eStageState.INGAME)
+        {
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
+        }
 
         _curStateLoading = eLoadingState.END;
     }

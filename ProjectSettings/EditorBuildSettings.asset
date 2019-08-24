@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/01_Scenes/BaseGameManager.unity
     guid: 50425b0aeb9438a4094640d0e9f982ed
   - enabled: 1
-    path: Assets/01_Scenes/LobbySceneManager.unity
+    path: Assets/01_Scenes/InGameSceneManager.unity
     guid: b6ca1756db6b14945b4116ce8880ae82
   m_configObjects: {}

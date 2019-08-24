@@ -6,7 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public enum eBGMType
     {
-        LOBBY_GAME01  = 0,
+        LOBBY  = 0,
+        INGAME,
     }
 
     public enum eEffType
