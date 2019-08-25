@@ -151,7 +151,7 @@ public class LobbyManager : MonoBehaviour
                     UIFader._uniqueInstance.FadeIn(1.0f);
                     _findTimer.text = "GameOver";
                     _timeCheck = 0;
-                    BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
+                    _curState = eGameState.END;
                     //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
                 break;
@@ -198,17 +198,7 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
             case eGameState.END:
-                _timeCheck += Time.deltaTime;
-
-                if(_timeCheck >= 4.0f)
-                {
-                    _timeCheck = 0;
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
-                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
-                    _touchShootUI.SetActive(false);
-                    _Plus[_rndNum].gameObject.SetActive(false);
-                    BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
-                }
+                SceneChanger._uniqueInstance.FadeToLevel(1);
                 break;
         }
     }
