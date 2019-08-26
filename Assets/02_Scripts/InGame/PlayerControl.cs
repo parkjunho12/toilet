@@ -182,7 +182,7 @@ public class PlayerControl : MonoBehaviour
                         _unrinalAura[_rndNumber].SetActive(false);
                         //transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         //controller.transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
-                        controller.transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
+                        transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
                         //transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
                         //controller.transform.LookAt(_unrinal[_rndNumber].transform.position);
                     }
