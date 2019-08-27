@@ -16,8 +16,7 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         RESULT,
-        END
-       
+        END,
     }
 
     public static LobbyManager _uniqueInstance;
@@ -27,10 +26,11 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
+    //[SerializeField] GameObject _miniMap;
+    [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject _prefabCarPoints;
-    [SerializeField] Text _findTimer;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
@@ -84,22 +84,25 @@ public class LobbyManager : MonoBehaviour
         _touchShootUI.SetActive(true);
         _gameStateUI[_rndNum].SetActive(false);
         _gameStateTxt[_rndNum].GetComponent<Text>();
-        _gameStateTxt[_rndNum].SetActive(false);
+        _gameStateTxt[_rndNum].SetActive(false);       
     }
 
     // Update is called once per frame
     void Update()
     {
         _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
+        //_miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
+        //_miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
+
         //Debug.Log(_curState);
-        switch(_curState)
+        switch (_curState)
         {
             case eGameState.READY:
                 GameReady();
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 180.0f;
+                _timeCheck = 185.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
@@ -149,6 +152,7 @@ public class LobbyManager : MonoBehaviour
                     _findTimer.text = "GameOver";
                     _timeCheck = 0;
                     _curState = eGameState.END;
+                    //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
                 break;
             case eGameState.START:
@@ -196,15 +200,8 @@ public class LobbyManager : MonoBehaviour
             case eGameState.END:
                 _timeCheck += Time.deltaTime;
 
-                if (_timeCheck >= 4.0f)
-                {
-                    _timeCheck = 0;
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
-                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
-                    _touchShootUI.SetActive(false);
-                    _Plus[_rndNum].gameObject.SetActive(false);
-                   // BaseGameManager._uniqueinstance.SceneMoveAtStage(BaseGameManager.eStageState.LOBBY);
-                }
+                if(_timeCheck >= 2.0f)
+                    SceneChanger._uniqueInstance.FadeToLevel_Lobby();
                 break;
         }
     }
@@ -253,8 +250,8 @@ public class LobbyManager : MonoBehaviour
         Transform tf = GameObject.FindGameObjectWithTag("ToiletWaterFall").transform;
         GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
         Destroy(go, 4);
-       // _prefabPlayer.transform.LookAt(tf);
-       _prefabPlayer.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.x, Camera.main.transform.rotation.y, Camera.main.transform.rotation.z);
+        _prefabPlayer.transform.LookAt(tf);
+        
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }
@@ -299,15 +296,5 @@ public class LobbyManager : MonoBehaviour
     {
         SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
         //_prefabeQuitGame.SetActive(true);
-    }
-    public void YesClick()
-    {
-        SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
-        //Application.Quit();
-    }
-    public void NoClick()
-    {
-        SoundManager.INSTANCE.PlayEffSound(SoundManager.eEffType.BTN);
-        //_prefabeQuitGame.SetActive(false);
     }
 }
