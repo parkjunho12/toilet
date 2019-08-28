@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.44
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30126855, g: 0.3366652, b: 0.39235565, a: 0.44}
+  m_IndirectSpecularColor: {r: 0.25553742, g: 0.3175934, b: 0.42049584, a: 0.44}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1540,7 +1540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403735190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.268, z: 0.599}
+  m_LocalPosition: {x: 0, y: 2.214, z: 0.599}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 864243025}
@@ -2762,6 +2762,47 @@ PrefabInstance:
       propertyPath: _prefabPlayer
       value: 
       objectReference: {fileID: 864243022}
+    - target: {fileID: 657540602014290961, guid: ee2422934b98bb04ab8b3db1a5b21830,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261558171, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 915579400, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 129.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 786648322, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -140
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650662708, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894089706, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 46.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 720111040, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -150.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 716555456, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -145.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1411619722, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -103.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 195799011, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -148.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee2422934b98bb04ab8b3db1a5b21830, type: 3}
 --- !u!1 &657540603226349961 stripped
