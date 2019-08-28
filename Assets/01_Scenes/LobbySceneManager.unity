@@ -586,8 +586,24 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2020936780862530861, guid: c3d680c33ceb2524b96d383e00e19fbc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.449
+      objectReference: {fileID: 0}
+    - target: {fileID: 7940831842223367991, guid: c3d680c33ceb2524b96d383e00e19fbc,
+        type: 3}
+      propertyPath: _fadeImage
+      value: 
+      objectReference: {fileID: 2699432391004030491}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3d680c33ceb2524b96d383e00e19fbc, type: 3}
+--- !u!1 &2699432391004030491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4192810542093461050, guid: c3d680c33ceb2524b96d383e00e19fbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 2699432391004030490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2699432391004030497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7014834445579687648, guid: c3d680c33ceb2524b96d383e00e19fbc,
