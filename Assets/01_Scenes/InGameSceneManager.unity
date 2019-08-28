@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.44
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25553742, g: 0.3175934, b: 0.42049584, a: 0.44}
+  m_IndirectSpecularColor: {r: 0.30126855, g: 0.3366652, b: 0.39235565, a: 0.44}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -252,6 +252,10 @@ PrefabInstance:
       propertyPath: _unrinalAura.Array.data[8]
       value: 
       objectReference: {fileID: 2276479409067684155}
+    - target: {fileID: 864243023, guid: 8885fa752a96246418d513a6a005896d, type: 3}
+      propertyPath: _controller
+      value: 
+      objectReference: {fileID: 864243027}
     - target: {fileID: 1354568305209700087, guid: 8885fa752a96246418d513a6a005896d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,6 +574,12 @@ Transform:
 --- !u!1 &864243026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1677131774, guid: 8885fa752a96246418d513a6a005896d,
+    type: 3}
+  m_PrefabInstance: {fileID: 864243021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &864243027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3946660257037584729, guid: 8885fa752a96246418d513a6a005896d,
     type: 3}
   m_PrefabInstance: {fileID: 864243021}
   m_PrefabAsset: {fileID: 0}

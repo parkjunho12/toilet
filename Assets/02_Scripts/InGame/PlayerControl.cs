@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
    
 
     public static PlayerControl _uniqueInstance;
+    public GameObject _controller;
     public GameObject _shootPos;
     public GameObject[] _unrinal;
     public GameObject[] _unrinalAura;
@@ -30,6 +31,8 @@ public class PlayerControl : MonoBehaviour
     GameObject _car;
     Transform _lookPos;
     Transform _gameStartBtn;
+    Transform _controllerPos;
+
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
@@ -74,6 +77,8 @@ public class PlayerControl : MonoBehaviour
        // _rndNumber = Random.Range(0, _unrinal.Length);
         _rndNumber = 0;
        _unrinal[_rndNumber].SetActive(true);
+
+        _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
     }
 
     // Update is called once per frame
@@ -82,8 +87,10 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(_curPlyState);
         //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
+        _controller.transform.position = _controllerPos.position;
+
         {
-            switch(_curPlyState)
+            switch (_curPlyState)
             {
                 case ePlayerActState.RUN:
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)

@@ -23,7 +23,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject[] _startPosition;
 
     [SerializeField] GameObject _prefabPlayer;
-    [SerializeField] GameObject _controller;
+    //[SerializeField] GameObject _controller;
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
@@ -93,7 +93,7 @@ public class LobbyManager : MonoBehaviour
     void Update()
     {
         _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
-        _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
+        //_controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
         //_miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
         //_miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
 
