@@ -11,7 +11,13 @@ public class LobbyManagers : MonoBehaviour
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);
         SceneChanger._uniqueInstance.FadeToLevel(1);
     }
-
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartBtn();
+        }
+    }
     public void QuitBtn()
     {
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);

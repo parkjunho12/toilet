@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-
+    public GameObject _arrow;
     float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
@@ -71,8 +71,8 @@ public class PlayerControl : MonoBehaviour
         _timeCheck = 0;
         
         _shootPos.SetActive(false);
-       // _rndNumber = Random.Range(0, _unrinal.Length);
-        _rndNumber = 0;
+        _rndNumber = Random.Range(0, _unrinal.Length);
+       // _rndNumber = 0;
        _unrinal[_rndNumber].SetActive(true);
     }
 
@@ -154,6 +154,7 @@ public class PlayerControl : MonoBehaviour
                         LobbyManager._uniqueInstance.StartBtn();
                         _curPlyState = ePlayerActState.WALK;
                         _unrinalAura[_rndNumber].SetActive(false);
+                        _arrow.SetActive(false);
                         //transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         //controller.transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
