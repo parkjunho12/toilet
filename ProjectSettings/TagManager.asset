@@ -19,6 +19,9 @@ TagManager:
   - Minus
   - Bottle
   - Car
+  - dontmove
+  - listlast
+  - ControllerSpawn
   layers:
   - Default
   - TransparentFX

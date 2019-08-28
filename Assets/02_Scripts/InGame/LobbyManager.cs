@@ -23,6 +23,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject[] _startPosition;
 
     [SerializeField] GameObject _prefabPlayer;
+    [SerializeField] GameObject _controller;
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
@@ -37,6 +38,7 @@ public class LobbyManager : MonoBehaviour
 
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
+    Transform _controllerPos;
     eGameState _curState;
 
     float _timeCheck;
@@ -91,6 +93,7 @@ public class LobbyManager : MonoBehaviour
     void Update()
     {
         _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
+        _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
         //_miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
         //_miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
 
@@ -216,9 +219,9 @@ public class LobbyManager : MonoBehaviour
         _curState = eGameState.MAPSETTING;
         // 스폰 포인트 활성화.
         _isSpawn = true;
-        // 플레이어 소변기에 접근시 걸어갈 위치활성화.
-        // 빈물병 스폰 위치활성화.
-       
+
+        // 컨트롤러 오브젝트 
+
         // 카메라 워킹 위치 설정.
         //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         //Camera.main.GetComponent<ActionCamera>().SetCameraActionRoot(tf);
