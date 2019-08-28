@@ -279,9 +279,5 @@ public class PlayerControl : MonoBehaviour
             Destroy(other.gameObject);
             LobbyManager._uniqueInstance.PLAYCOUNT -= 10.0f;
         }
-        else if(other.gameObject.CompareTag("Environment"))
-        {
-            transform.Translate(Vector3.zero);
-        }
     }
 }
