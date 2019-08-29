@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.67
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cdbb40e11399e4a17882ada20a1b896a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.44
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25553742, g: 0.3175934, b: 0.42049584, a: 0.44}
+  m_IndirectSpecularColor: {r: 0.25764546, g: 0.31965828, b: 0.42349872, a: 0.44}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -402,11 +402,15 @@ PrefabInstance:
       propertyPath: splatter
       value: 
       objectReference: {fileID: 1944906012}
-    - target: {fileID: 6906020308943922527, guid: 8885fa752a96246418d513a6a005896d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 1403735191, guid: 8885fa752a96246418d513a6a005896d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.313
       objectReference: {fileID: 0}
+    - target: {fileID: 1354568305223008193, guid: 8885fa752a96246418d513a6a005896d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 521d879a2ef4e384e89e12ec5f8a3b2e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8885fa752a96246418d513a6a005896d, type: 3}
 --- !u!1 &864243022 stripped
@@ -421,15 +425,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 864243021}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &864243025 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1354568305209700087, guid: 8885fa752a96246418d513a6a005896d,
+--- !u!114 &864243024 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4761512158958454954, guid: 8885fa752a96246418d513a6a005896d,
     type: 3}
   m_PrefabInstance: {fileID: 864243021}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &864243026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1677131774, guid: 8885fa752a96246418d513a6a005896d,
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &864243025 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1354568305209700087, guid: 8885fa752a96246418d513a6a005896d,
     type: 3}
   m_PrefabInstance: {fileID: 864243021}
   m_PrefabAsset: {fileID: 0}
@@ -726,7 +736,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _findTimer
       value: 
-      objectReference: {fileID: 1696773273}
+      objectReference: {fileID: 864243024}
     - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
         type: 3}
       propertyPath: _gameStateUI.Array.data[0]
@@ -957,11 +967,6 @@ PrefabInstance:
       propertyPath: _Plus.Array.data[8]
       value: 
       objectReference: {fileID: 1676709328}
-    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
-        type: 3}
-      propertyPath: _miniMap
-      value: 
-      objectReference: {fileID: 864243026}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f312d10f67801e4cb2279f9b44e2309, type: 3}
 --- !u!1 &1660509813 stripped
@@ -995,18 +1000,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 144968128281249656}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676709324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1696773273 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1696773273, guid: 8885fa752a96246418d513a6a005896d,
-    type: 3}
-  m_PrefabInstance: {fileID: 864243021}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}

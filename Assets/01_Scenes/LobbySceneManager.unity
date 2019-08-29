@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38506603, g: 0.47316885, b: 0.6191112, a: 1}
+  m_IndirectSpecularColor: {r: 0.3821952, g: 0.46956164, b: 0.61443454, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -596,6 +596,14 @@ PrefabInstance:
       propertyPath: _fadeImage
       value: 
       objectReference: {fileID: 2699432391004030491}
+    - target: {fileID: 511040236, guid: c3d680c33ceb2524b96d383e00e19fbc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.431
+      objectReference: {fileID: 0}
+    - target: {fileID: 511040236, guid: c3d680c33ceb2524b96d383e00e19fbc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 97.427
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3d680c33ceb2524b96d383e00e19fbc, type: 3}
 --- !u!1 &2699432391004030491 stripped

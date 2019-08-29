@@ -71,6 +71,13 @@ public class ParticleLauncher : MonoBehaviour
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
         }
 
+
+        if(other.gameObject.CompareTag("Minus"))
+        {
+            Debug.Log("-1");
+            AudioSource.PlayClipAtPoint(_soundEff[2], transform.position);
+        }
+
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
         for (int i = 0; i < collisionEvent.Count; i++)
         {

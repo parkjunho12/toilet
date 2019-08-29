@@ -147,6 +147,11 @@ public class BaseGameManager : MonoBehaviour
             SceneManager.LoadScene(loadName[n], LoadSceneMode.Additive);
         }
 
+        if (_curStage == eStageState.INGAME)
+        {
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
+        }
+
         yield return null;
     }
 

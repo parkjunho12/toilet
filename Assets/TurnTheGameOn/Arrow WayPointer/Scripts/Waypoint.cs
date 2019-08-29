@@ -8,11 +8,14 @@ namespace TurnTheGameOn.ArrowWaypointer{
 		[HideInInspector] public int waypointNumber;
 
 		void Update(){
-			if (waypointController.player) {
-				if(Vector3.Distance(transform.position, waypointController.player.position) < radius){
-					waypointController.ChangeTarget ();
-				}
-			}
+            if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
+            {
+			    if (waypointController.player) {
+				    if(Vector3.Distance(transform.position, waypointController.player.position) < radius){
+					    waypointController.ChangeTarget ();
+				    }
+			    }
+            }
 		}
 
 		void OnTriggerEnter (Collider col) {

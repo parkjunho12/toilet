@@ -130,12 +130,12 @@ public class PlayerControl : MonoBehaviour
                                     dirZ = -1;
                             }
 
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 30)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
                                 Vector3 moveDir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
                                 transform.Translate(moveDir * Time.smoothDeltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 30
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
                                 Vector3 moveDir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
