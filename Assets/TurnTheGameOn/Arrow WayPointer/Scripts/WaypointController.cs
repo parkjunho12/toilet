@@ -5,6 +5,7 @@ namespace TurnTheGameOn.ArrowWaypointer{
 	[ExecuteInEditMode]
 	public class WaypointController : MonoBehaviour {
 
+        public static WaypointController _uniqueInstance;
 		public enum Switch { Off, On }
 
 		[System.Serializable]
@@ -33,8 +34,11 @@ namespace TurnTheGameOn.ArrowWaypointer{
 		private Transform currentWaypoint;
 		private Transform arrowTarget;
         int _rnd_nm;
-		void Start () {
+
+		void Start ()
+        {
 			if(Application.isPlaying){
+                _uniqueInstance = this;
 				GameObject newObject = new GameObject();
 				newObject.name = "Arrow Target";
 				newObject.transform.parent = gameObject.transform;
@@ -46,7 +50,8 @@ namespace TurnTheGameOn.ArrowWaypointer{
 			ChangeTarget ();
 		}
 
-		void Update () {
+		void Update ()
+        {
 			if (configureMode == Switch.Off) {
 				TotalWaypoints = waypointList.Length;
 			}

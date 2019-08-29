@@ -58,29 +58,25 @@ public class ParticleLauncher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Toilet"))
         {
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
             _urinalScore += 0.01f;
+            _sum += _urinalScore;
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
         }
-
-        if (other.gameObject.CompareTag("Fly"))
+        else if (other.gameObject.CompareTag("Fly"))
         {
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
-            //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
-            _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
             _flyScore += 5.0f;
+            _sum += _flyScore;
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
+            _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
         }
-        //else
-        //{
-        //    _plus[_rndNum].GetComponent<Text>().transform.position = Vector3.zero;
-        //}
+
 
         if(other.gameObject.CompareTag("Minus"))
         {
             Debug.Log("-1");
             AudioSource.PlayClipAtPoint(_soundEff[2], transform.position);
         }
-        _sum += _urinalScore + _flyScore;
 
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
         for (int i = 0; i < collisionEvent.Count; i++)

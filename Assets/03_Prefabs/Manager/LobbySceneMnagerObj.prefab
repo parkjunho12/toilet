@@ -46,10 +46,59 @@ MonoBehaviour:
   _startPosition:
   - {fileID: 0}
   _prefabPlayer: {fileID: 0}
-  _gameStartBtn: {fileID: 0}
   _toiletWaterFall: {fileID: 4666633608610267372, guid: f4ea23e3703f1034e9052436943261eb,
     type: 3}
-  _gameStateUI: {fileID: 0}
-  _gameStateTxt: {fileID: 0}
-  _timer: {fileID: 0}
-  _myScore: {fileID: 0}
+  _bottle: {fileID: 2385882851509315450, guid: 9040e957f87c8534a8069baf82b1269c, type: 3}
+  _touchShootUI: {fileID: 0}
+  _findTimer: {fileID: 0}
+  _gameStateUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _gameStateTxt:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _prefabCarPoints: {fileID: 0}
+  _timer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _myScore:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _Plus:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

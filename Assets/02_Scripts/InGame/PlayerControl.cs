@@ -15,15 +15,17 @@ public class PlayerControl : MonoBehaviour
    
 
     public static PlayerControl _uniqueInstance;
-    public GameObject _controller;
-    public GameObject _shootPos;
     public GameObject[] _unrinal;
     public GameObject[] _unrinalAura;
-    protected float ShootAngle;
-    protected float ShootAngleSpeed = 0.2f;
-    public Vector2 joystick;
+    public GameObject _controller;
+    public GameObject _shootPos;
     public GameObject centerEye;
     public GameObject controller;
+    public GameObject _arrow;
+    public Vector2 joystick;
+    protected float ShootAngle;
+    protected float ShootAngleSpeed = 0.2f;
+
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
@@ -36,7 +38,6 @@ public class PlayerControl : MonoBehaviour
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-    public GameObject _arrow;
     float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
@@ -131,13 +132,13 @@ public class PlayerControl : MonoBehaviour
                                     dirZ = -1;
                             }
 
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 80)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 30)
                             {
-                                Vector3 moveDir = new Vector3(dirX * 8.5f, 0, dirZ * 8.5f);
+                                Vector3 moveDir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
                                 transform.Translate(moveDir * Time.smoothDeltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 80
-                                && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 30
+                                && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
                                 Vector3 moveDir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
                                 transform.Translate(moveDir * Time.smoothDeltaTime);

@@ -105,45 +105,41 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 185.0f;
+                _timeCheck = 60.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
                 _timeCheck -= Time.deltaTime;
                 _findTimer.text = _timeCheck.ToString("N2");
-                if (_timeCheck <= 110 && _timeCheck > 70)
+
+                if (_timeCheck <= 60 && _timeCheck > 50)
                 {
                     _fadeNum = 0.1f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                else if (_timeCheck <= 70 && _timeCheck > 60)
+                else if (_timeCheck <= 50 && _timeCheck > 40)
                 {
                     _fadeNum = 0.2f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                else if (_timeCheck <= 60 && _timeCheck > 50)
+                else if (_timeCheck <= 40 && _timeCheck > 30)
                 {
                     _fadeNum = 0.3f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                else if (_timeCheck <= 50 && _timeCheck > 40)
-                {
-                    _fadeNum = 0.4f;
-                    UIFader._uniqueInstance.FadeIn(_fadeNum);
-                }
-                else if (_timeCheck <= 40 && _timeCheck > 30)
+                else if (_timeCheck <= 30 && _timeCheck > 20)
                 {
                     _fadeNum = 0.5f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                else if (_timeCheck <= 30 && _timeCheck > 20)
+                else if (_timeCheck <= 20 && _timeCheck > 10)
                 {
-                    _fadeNum = 0.6f;
+                    _fadeNum = 0.7f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
-                else if (_timeCheck <= 20 && _timeCheck > 0)
+                else if (_timeCheck <= 10 && _timeCheck > 0)
                 {
-                    _fadeNum = 0.8f;
+                    _fadeNum = 0.9f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 0)
@@ -203,7 +199,7 @@ public class LobbyManager : MonoBehaviour
             case eGameState.END:
                 _timeCheck += Time.deltaTime;
 
-                if(_timeCheck >= 2.0f)
+                if(_timeCheck >= 3.0f)
                     SceneChanger._uniqueInstance.FadeToLevel_Lobby();
                 break;
         }
