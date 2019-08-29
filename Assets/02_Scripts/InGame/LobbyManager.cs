@@ -27,7 +27,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
-    //[SerializeField] GameObject _miniMap;
+    public GameObject _miniMap;
     [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
@@ -109,6 +109,17 @@ public class LobbyManager : MonoBehaviour
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
+                bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+                bool isMo = Input.GetMouseButton(0);
+                if (iskeydown)
+                {
+                    _miniMap.SetActive(true);
+
+                }
+                else
+                {
+                    _miniMap.SetActive(false);
+                }
                 _timeCheck -= Time.deltaTime;
                 _findTimer.text = _timeCheck.ToString("N2");
 
