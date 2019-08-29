@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject controller;
     public GameObject _arrow;
     public Vector2 joystick;
+    public GameObject _miniMap;
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
 
@@ -73,7 +74,7 @@ public class PlayerControl : MonoBehaviour
 
         _isActing = false;
         _timeCheck = 0;
-        
+     
         _shootPos.SetActive(false);
         _rndNumber = Random.Range(0, _unrinal.Length);
        // _rndNumber = 0;
@@ -85,15 +86,26 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(_curPlyState);
-        //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
-        //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
+
+
+        bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+
         _controller.transform.position = _controllerPos.position;
 
         {
             switch (_curPlyState)
             {
                 case ePlayerActState.RUN:
+                   
+
+                    if (iskeydown)
+                    {
+                        _miniMap.SetActive(true);
+                    }
+                    else
+                    {
+                        _miniMap.SetActive(false);
+                    }
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
                         _timeCheck += Time.deltaTime;
@@ -109,7 +121,8 @@ public class PlayerControl : MonoBehaviour
                                 UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
                             }
                         }
-                        
+                     
+
                         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
                         {
                             PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.RUN);
@@ -174,6 +187,16 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case ePlayerActState.IDLE:
                     _isActing = true;
+               
+
+                    if (iskeydown)
+                    {
+                        _miniMap.SetActive(true);
+                    }
+                    else
+                    {
+                        _miniMap.SetActive(false);
+                    }
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
                         //if (FixedTouchField._uniqueInstance.PRESSED)
@@ -188,6 +211,16 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case ePlayerActState.WALK:
+                   
+
+                    if (iskeydown)
+                    {
+                        _miniMap.SetActive(true);
+                    }
+                    else
+                    {
+                        _miniMap.SetActive(false);
+                    }
                     if (Vector3.Distance(transform.position, _walkPoints[_rndNumber]) < 0.2f)
                     {
                         _shootPos.SetActive(true);
