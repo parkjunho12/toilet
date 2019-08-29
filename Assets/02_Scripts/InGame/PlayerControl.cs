@@ -88,8 +88,6 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(_curPlyState);
         //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
-        _controller.transform.position = _controllerPos.position;
-
         {
             switch (_curPlyState)
             {
@@ -174,6 +172,8 @@ public class PlayerControl : MonoBehaviour
                     break;
                 case ePlayerActState.IDLE:
                     _isActing = true;
+                    _controller.transform.position = _controllerPos.position;
+
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
                         //if (FixedTouchField._uniqueInstance.PRESSED)
@@ -196,6 +196,7 @@ public class PlayerControl : MonoBehaviour
                         ChangedAction(PlayerControl.ePlayerActState.IDLE);
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                         LobbyManager._uniqueInstance.PLAYCOUNT = 50.0f;
+                        UIFader._uniqueInstance.FadeOut();
                         _isActing = true;
                     }
                     break;
