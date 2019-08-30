@@ -24,8 +24,7 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND ||
-            LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
+        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
         {
             transform.position = Vector3.MoveTowards(transform.position, _carMovePoints[_nextIndex], _movSpeed * Time.deltaTime);
             //transform.LookAt(_carMovePoints[_nextIndex]);

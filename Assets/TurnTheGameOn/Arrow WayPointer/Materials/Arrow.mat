@@ -71,17 +71,22 @@ Material:
     - _DstBlend: 10
     - _EmissionLM: 0
     - _EmissionScaleUI: 0.33
+    - _GlossMapScale: 1
     - _Glossiness: 0
+    - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Shininess: 0.01
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 0.51724154, b: 0, a: 0.34}
+    - _EmisColor: {r: 0.2, g: 0.2, b: 0.2, a: 0}
     - _EmissionColor: {r: 0.33, g: 0.25262073, b: 0, a: 0.33}
     - _EmissionColorUI: {r: 1, g: 0.76551735, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 0.72413796, b: 0, a: 1}

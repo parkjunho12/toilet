@@ -21,11 +21,12 @@ public class PlayerControl : MonoBehaviour
     public GameObject _shootPos;
     public GameObject centerEye;
     public GameObject controller;
+    public GameObject help;
     public GameObject _arrow;
     public Vector2 joystick;
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
-
+    public static Vector3 _movedir;
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
@@ -38,11 +39,12 @@ public class PlayerControl : MonoBehaviour
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-    float _timeCheck;
+    //float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
     bool _isActing;
     bool _crash;
+    bool _exhale;
     float dirX = 0;
     float dirZ = 0;
 
@@ -72,8 +74,9 @@ public class PlayerControl : MonoBehaviour
         _posTarget = transform.position;
 
         _isActing = false;
-        _timeCheck = 0;
-        
+        _exhale = true;
+        //_timeCheck = 0;
+
         _shootPos.SetActive(false);
         _rndNumber = Random.Range(0, _unrinal.Length);
        // _rndNumber = 0;
@@ -94,19 +97,19 @@ public class PlayerControl : MonoBehaviour
                 case ePlayerActState.RUN:
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        _timeCheck += Time.deltaTime;
-                        if (_timeCheck > 2.7f)
-                        {// 숨소리 효과음.
-                            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
-                            _timeCheck = 0;
+                        //_timeCheck += Time.deltaTime;
+                        //if (_timeCheck > 2.7f)
+                        //{// 숨소리 효과음.
+                            //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+                            //_timeCheck = 0;
 
-                            if (_crash)
-                            {
-                                _crash = false;
-                                UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
-                                UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
-                            }
+                        if (_crash)
+                        {
+                            _crash = false;
+                            UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
+                            UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
                         }
+                        //}
                         
                         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
                         {
@@ -132,19 +135,38 @@ public class PlayerControl : MonoBehaviour
 
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
-                                Vector3 moveDir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
-                                transform.Translate(moveDir * Time.smoothDeltaTime);
+                              
+                               _movedir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
-                                Vector3 moveDir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
-                                transform.Translate(moveDir * Time.smoothDeltaTime);
+
+                                bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+                                //if (FixedTouchField._uniqueInstance.PRESSED)
+                                if (iskeydown)
+                                {
+                                    if (_exhale)
+                                        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.EAAAA);
+
+                                    _exhale = false;
+                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);
+                                    help.SetActive(false);
+                                }
+                                else
+                                {
+                                    _exhale = true;
+                                    help.SetActive(true);
+                                    _movedir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
+                                }
+                             
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else
                             {
-                                Vector3 moveDir = new Vector3(dirX * 5.5f, 0, dirZ * 5.5f);
-                                transform.Translate(moveDir * Time.smoothDeltaTime);
+                                _movedir = new Vector3(dirX * 5.5f, 0, dirZ * 5.5f);
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                         }
                         else
@@ -161,6 +183,7 @@ public class PlayerControl : MonoBehaviour
                         _curPlyState = ePlayerActState.WALK;
                         _unrinalAura[_rndNumber].SetActive(false);
                         _arrow.SetActive(false);
+                        help.SetActive(false);
                         //transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         //controller.transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
