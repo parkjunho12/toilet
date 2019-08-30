@@ -21,12 +21,11 @@ public class PlayerControl : MonoBehaviour
     public GameObject _shootPos;
     public GameObject centerEye;
     public GameObject controller;
-    public GameObject help;
     public GameObject _arrow;
     public Vector2 joystick;
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
-    public static Vector3 _movedir;
+
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
@@ -133,33 +132,19 @@ public class PlayerControl : MonoBehaviour
 
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
-                              
-                               _movedir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
-                                transform.Translate(_movedir * Time.smoothDeltaTime);
+                                Vector3 moveDir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
+                                transform.Translate(moveDir * Time.smoothDeltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
-
-                                bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-                                //if (FixedTouchField._uniqueInstance.PRESSED)
-                                if (iskeydown)
-                                {
-                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);
-                                    help.SetActive(false);
-                                }
-                                else
-                                {
-                                    help.SetActive(true);
-                                    _movedir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
-                                }
-                             
-                                transform.Translate(_movedir * Time.smoothDeltaTime);
+                                Vector3 moveDir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
+                                transform.Translate(moveDir * Time.smoothDeltaTime);
                             }
                             else
                             {
-                                _movedir = new Vector3(dirX * 5.5f, 0, dirZ * 5.5f);
-                                transform.Translate(_movedir * Time.smoothDeltaTime);
+                                Vector3 moveDir = new Vector3(dirX * 5.5f, 0, dirZ * 5.5f);
+                                transform.Translate(moveDir * Time.smoothDeltaTime);
                             }
                         }
                         else
@@ -176,7 +161,6 @@ public class PlayerControl : MonoBehaviour
                         _curPlyState = ePlayerActState.WALK;
                         _unrinalAura[_rndNumber].SetActive(false);
                         _arrow.SetActive(false);
-                        help.SetActive(false);
                         //transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         //controller.transform.rotation = Quaternion.Euler(centerEye.transform.rotation.x, centerEye.transform.rotation.y, centerEye.transform.rotation.z);
                         transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);

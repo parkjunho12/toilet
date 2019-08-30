@@ -101,7 +101,7 @@ public class ParticleLauncher : MonoBehaviour
         {
             bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
             //if (FixedTouchField._uniqueInstance.PRESSED)
-            if (iskeydown || Input.GetMouseButton(0))
+            if (iskeydown)
             {
                 
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;

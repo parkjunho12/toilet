@@ -27,9 +27,8 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
-    [SerializeField] GameObject help;
+    //[SerializeField] GameObject _miniMap;
     [SerializeField] Text _findTimer;
-    [SerializeField] GameObject _miniMap;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject _prefabCarPoints;
@@ -110,44 +109,37 @@ public class LobbyManager : MonoBehaviour
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
-              
                 _timeCheck -= Time.deltaTime;
                 _findTimer.text = _timeCheck.ToString("N2");
 
                 if (_timeCheck <= 90 && _timeCheck > 50)
                 {
                     _fadeNum = 0.1f;
-                    help.SetActive(false);
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 50 && _timeCheck > 40)
                 {
                     _fadeNum = 0.2f;
-                    help.SetActive(true);
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 40 && _timeCheck > 30)
                 {
                     _fadeNum = 0.3f;
-                    
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 30 && _timeCheck > 20)
                 {
                     _fadeNum = 0.5f;
-                 
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 20 && _timeCheck > 10)
                 {
                     _fadeNum = 0.7f;
-               
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 10 && _timeCheck > 0)
                 {
                     _fadeNum = 0.9f;
-                
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 0)
@@ -162,7 +154,6 @@ public class LobbyManager : MonoBehaviour
                     //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
                 break;
-               
             case eGameState.START:
                 _gameStateUI[_rndNum].SetActive(true);
                 _gameStateTxt[_rndNum].SetActive(true);                  // 현재 게임상태 등장.
