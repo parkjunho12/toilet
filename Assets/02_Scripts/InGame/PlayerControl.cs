@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     {
         IDLE,
         WALK,
-        RUN
+        RUN,
     }
     
     public static PlayerControl _uniqueInstance;
