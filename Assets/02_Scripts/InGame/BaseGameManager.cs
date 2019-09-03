@@ -70,7 +70,7 @@ public class BaseGameManager : MonoBehaviour
         //StartCoroutine(LoadingScene(loadStage, unloadStage));
     }
 
-    public IEnumerator LoaddingScene(string[] loadName = null, string[] unloadName = null)
+    IEnumerator LoaddingScene(string[] loadName = null, string[] unloadName = null)
     {
         AsyncOperation AO;
 
@@ -118,38 +118,16 @@ public class BaseGameManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadName[amount - 1]));
 
         // BGM 사운드
-        if (_curStage == eStageState.INGAME)
+        if(_curStage == eStageState.LOBBY)
+        {
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
+        }
+        else if (_curStage == eStageState.INGAME)
         {
             SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
         }
 
         _curStateLoading = eLoadingState.END;
-    }
-
-    public IEnumerator StageToLobby(string[] loadName = null, string[] unloadName = null)
-    {
-        int amount;
-        if (unloadName == null)
-            amount = 0;
-        else
-            amount = unloadName.Length;
-
-        for(int n = 0; n < amount; n++)
-        {
-            SceneManager.UnloadSceneAsync(unloadName[n]);
-        }
-
-        if (loadName == null)
-            amount = 0;
-        else
-            amount = loadName.Length;
-
-        for(int n = 0; n < amount; n++)
-        {
-            SceneManager.LoadScene(loadName[n], LoadSceneMode.Additive);
-        }
-
-        yield return null;
     }
 
     public void SceneMoveAtLobby(eStageState stage)
@@ -167,6 +145,8 @@ public class BaseGameManager : MonoBehaviour
 
     public void SceneMoveAtStage(eStageState stage)
     {
+        _curStage = stage;
+
         string[] unloadStage = new string[1];
         string[] loadStage = new string[1];
         if(stage == eStageState.LOBBY)
@@ -179,6 +159,6 @@ public class BaseGameManager : MonoBehaviour
             Debug.Log("error");
         }
 
-        StartCoroutine(StageToLobby(loadStage, unloadStage));
+        StartCoroutine(LoaddingScene(loadStage, unloadStage));
     }
 }

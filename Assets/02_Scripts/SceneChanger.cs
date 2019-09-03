@@ -29,8 +29,16 @@ public class SceneChanger : MonoBehaviour
 
     public void FadeToLevel(int levelIndex)
     {
+        _fadeImage.SetActive(true);
         levelToLoad = levelIndex;
         animator.SetTrigger("FadeOut");
+    }
+
+    public void FadeToLevel02(int levelIndex)
+    {
+        _fadeImage.SetActive(true);
+        levelToLoad = levelIndex;
+        animator.SetTrigger("FadeOutToLobby");
     }
 
     public void OnFadeCompleteLobby()

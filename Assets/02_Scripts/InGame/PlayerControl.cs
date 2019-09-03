@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     public static PlayerControl _uniqueInstance;
     public GameObject _shootPos;
     public GameObject[] _unrinal;
+    public GameObject _arrow;
+
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
 
@@ -95,17 +97,16 @@ public class PlayerControl : MonoBehaviour
                             }
                         }
 
-
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
                          // 시간차에 따른 캐릭터 달리기 속도 저하..
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 80)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
                                     * 8.5f * Time.deltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 80
-                                && LobbyManager._uniqueInstance.PLAYCOUNT > 30)
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
+                                && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
                                                                     * 6.0f * Time.deltaTime);
@@ -126,6 +127,7 @@ public class PlayerControl : MonoBehaviour
                     {// 내 캐릭터와 소변기 거리가 1.5 이하이면 => 스타트버튼 클릭 후 게임 시작..
                         LobbyManager._uniqueInstance.StartBtn();
                         _curPlyState = ePlayerActState.WALK;
+                        _arrow.SetActive(false);
                     }
                     
                     break;
