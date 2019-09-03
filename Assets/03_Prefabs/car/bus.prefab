@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3957593838519809842}
   - component: {fileID: 3961598432948909658}
   - component: {fileID: 8649673209504086360}
+  - component: {fileID: 4525446005444332449}
   m_Layer: 9
   m_Name: bus
   m_TagString: Car
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3957593838519809852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf56d1fd8e554554abf84cbb92960588, type: 3}
   m_Name: 
@@ -106,3 +107,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.652239, y: 2.8050997, z: 2.9036171}
   m_Center: {x: 0.0000026226041, y: -0.000002145767, z: 1.4518088}
+--- !u!114 &4525446005444332449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957593838519809852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe5b547acee7d845aad2fe0fc06bd90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movSpeed: 15
+  _rotSpeed: 5
+  _startPos: {fileID: 0}
+  _endPos: {fileID: 0}

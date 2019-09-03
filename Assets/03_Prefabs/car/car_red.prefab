@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1451010976431798106}
   - component: {fileID: 8197740385772228302}
   - component: {fileID: 5826371280035312044}
+  - component: {fileID: 1778185846663041863}
   m_Layer: 9
   m_Name: car_red
   m_TagString: Car
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451010976431798104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf56d1fd8e554554abf84cbb92960588, type: 3}
   m_Name: 
@@ -106,3 +107,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.755786, y: 2.051233, z: 1.4426157}
   m_Center: {x: -0.00000023841596, y: -0.00004386902, z: 0.7213079}
+--- !u!114 &1778185846663041863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451010976431798104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe5b547acee7d845aad2fe0fc06bd90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movSpeed: 15
+  _rotSpeed: 5
+  _startPos: {fileID: 0}
+  _endPos: {fileID: 0}

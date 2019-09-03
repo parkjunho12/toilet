@@ -30,6 +30,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text _findTimer;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
+    [SerializeField] GameObject[] _ctf3Light;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
@@ -157,14 +158,15 @@ public class LobbyManager : MonoBehaviour
                 break;
             case eGameState.START:
                 _gameStateUI[_rndNum].SetActive(true);
-                _gameStateTxt[_rndNum].SetActive(true);                  // 현재 게임상태 등장.
+                _gameStateTxt[_rndNum].SetActive(true);                               // 현재 게임상태 등장.
                 _gameStateTxt[_rndNum].GetComponent<Text>().text = "GameStart!";      // GameStart! 문구 나옴.
+                _ctf3Light[_rndNum].SetActive(false);
                 _timeCheck += Time.deltaTime;
                 if(_timeCheck >= 51.5f)
                 {
                     _prefabCarPoints.SetActive(false);
                     _findTimer.enabled = false;
-                    _gameStateTxt[_rndNum].SetActive(false);             // 현재 게임상태 가림.
+                    _gameStateTxt[_rndNum].SetActive(false);                          // 현재 게임상태 가림.
                     _timeCheck = 50.0f;
                     _curState = eGameState.PLAY;
                 }
