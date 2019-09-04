@@ -84,21 +84,21 @@ public class ParticleLauncher : MonoBehaviour
         splatter.transform.position = particleCollisionEvent.intersection;
         splatter.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
 
-        if (_flyScore % 100 == 0)
+        if (_flyScore % 150 == 0)
         {// 솜사탕
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
             _scoreEff[3].GetComponent<ParticleSystem>().Play();
             _scoreEff[3].transform.position = particleCollisionEvent.intersection;
             _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 350 == 0)
+        else if (_flyScore % 450 == 0)
         {// BAAM
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
             _scoreEff[2].GetComponent<ParticleSystem>().Play();
             _scoreEff[2].transform.position = particleCollisionEvent.intersection;
             _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 1000 == 0)
+        else if (_flyScore % 800 == 0)
         {// 별
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
             _scoreEff[1].GetComponent<ParticleSystem>().Play();

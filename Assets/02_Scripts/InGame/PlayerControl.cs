@@ -68,8 +68,8 @@ public class PlayerControl : MonoBehaviour
 
         //_shootPos.SetActive(false);
 
-        //_rndNumber = Random.Range(0, _unrinal.Length);
-        _rndNumber = 1;
+        _rndNumber = Random.Range(0, _unrinal.Length);
+        //_rndNumber = 3;
         _unrinal[_rndNumber].SetActive(true);
     }
 

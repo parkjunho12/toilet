@@ -42,6 +42,11 @@ public class SoundManager : MonoBehaviour
     {
         get { return _uniqueinstance; }
     }
+    public AudioSource BGM
+    {
+        get { return _bgmPlayer; }
+        set { _bgmPlayer = value; }
+    }
 
     void Awake()
     {
