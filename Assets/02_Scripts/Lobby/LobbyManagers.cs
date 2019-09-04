@@ -13,10 +13,7 @@ public class LobbyManagers : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartBtn();
-        }
+       
     }
     public void QuitBtn()
     {
