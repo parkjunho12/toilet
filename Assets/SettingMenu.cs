@@ -11,4 +11,9 @@ public class SettingMenu : MonoBehaviour
     {
         SoundManager._uniqueinstance.BGM.volume = _vol.value;
     }
+
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
 }

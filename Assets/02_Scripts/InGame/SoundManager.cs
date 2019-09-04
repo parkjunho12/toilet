@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
         COMBO_SHINE,
         COMBO_YEAHH,
         COMBO,
+        SHOP_BUY,
     }
 
     public static SoundManager _uniqueinstance;
