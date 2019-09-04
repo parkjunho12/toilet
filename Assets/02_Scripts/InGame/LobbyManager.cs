@@ -104,7 +104,7 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 90.0f;
+                _timeCheck = 95.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
@@ -164,6 +164,7 @@ public class LobbyManager : MonoBehaviour
                     _gameStateTxt[_rndNum].SetActive(false);                          // 현재 게임상태 가림.
                     _ctf3Light[_rndNum].SetActive(false);
                     _timeCheck = 50.0f;
+                    UIFader._uniqueInstance.FadeOut();
                     _curState = eGameState.PLAY;
                 }
                 break;

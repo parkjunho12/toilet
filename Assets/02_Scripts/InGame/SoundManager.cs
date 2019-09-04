@@ -25,6 +25,9 @@ public class SoundManager : MonoBehaviour
         CAR_CRASH,
         GAMEOVER,
         PEE_SOUND,
+        COMBO_SHINE,
+        COMBO_YEAHH,
+        COMBO,
     }
 
     public static SoundManager _uniqueinstance;

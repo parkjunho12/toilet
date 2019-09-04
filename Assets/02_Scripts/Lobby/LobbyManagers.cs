@@ -15,6 +15,12 @@ public class LobbyManagers : MonoBehaviour
     public void QuitBtn()
     {
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);
-        Application.Quit();
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_WEBPLAYER
+                Application.OpenURL(webplayerQuitURL);
+        #else
+                Application.Quit();
+        #endif
     }
 }

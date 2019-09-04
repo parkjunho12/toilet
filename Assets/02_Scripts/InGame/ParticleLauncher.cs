@@ -9,6 +9,7 @@ public class ParticleLauncher : MonoBehaviour
     public AudioClip[] _soundEff;
     [SerializeField] GameObject[] _peeScore;
     [SerializeField] GameObject[] _plus;
+    [SerializeField] GameObject[] _scoreEff;        // 물폭탄, 별폭죽, BAAM, 솜사탕폭죽
 
     public ParticleSystem particleLauncher;         // 총알 발사되는 파티클 개체
     public ParticleSystem splatter;                 // 발사된 총알개체가 벽에 충돌될때 호출되는 충돌반응 이펙트  
@@ -58,29 +59,18 @@ public class ParticleLauncher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Toilet"))
         {
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
-            _urinalScore += 0.01f;
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
+            _sum += 0.01f;
         }
-
-        if (other.gameObject.CompareTag("Fly"))
+        else if (other.gameObject.CompareTag("Fly"))
         {
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
             //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", (_urinalScore + _flyScore).ToString("N1"));
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
+            _sum += 5.0f;
             _flyScore += 5.0f;
         }
-        //else
-        //{
-        //    _plus[_rndNum].GetComponent<Text>().transform.position = Vector3.zero;
-        //}
-
-        if(other.gameObject.CompareTag("Minus"))
-        {
-            Debug.Log("-1");
-            AudioSource.PlayClipAtPoint(_soundEff[2], transform.position);
-        }
-        _sum += _urinalScore + _flyScore;
 
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
         for (int i = 0; i < collisionEvent.Count; i++)
@@ -93,6 +83,28 @@ public class ParticleLauncher : MonoBehaviour
     {
         splatter.transform.position = particleCollisionEvent.intersection;
         splatter.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+
+        if (_flyScore % 100 == 0)
+        {// 솜사탕
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
+            _scoreEff[3].GetComponent<ParticleSystem>().Play();
+            _scoreEff[3].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
+        else if (_flyScore % 350 == 0)
+        {// BAAM
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
+            _scoreEff[2].GetComponent<ParticleSystem>().Play();
+            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
+        else if (_flyScore % 1000 == 0)
+        {// 별
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+            _scoreEff[1].GetComponent<ParticleSystem>().Play();
+            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
 
         ParticleSystem.MainModule psMain = splatter.main;
         psMain.startColor = particleGradient.Evaluate(Random.Range(0f, 1f));

@@ -65,9 +65,11 @@ public class PlayerControl : MonoBehaviour
 
         _isActing = false;
         _timeCheck = 0;
-        
-        _shootPos.SetActive(false);
-        _rndNumber = Random.Range(0, _unrinal.Length);
+
+        //_shootPos.SetActive(false);
+
+        //_rndNumber = Random.Range(0, _unrinal.Length);
+        _rndNumber = 1;
         _unrinal[_rndNumber].SetActive(true);
     }
 
@@ -137,6 +139,7 @@ public class PlayerControl : MonoBehaviour
                     {
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {
+                            aniCtrl.enabled = true;
                             ChangedAction(ePlayerActState.RUN);
                         }
                         else
@@ -144,14 +147,18 @@ public class PlayerControl : MonoBehaviour
                             ChangedAction(ePlayerActState.IDLE);
                         }
                     }
+                    else if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
+                    {
+                        aniCtrl.enabled = false;
+                    }
                     break;
                 case ePlayerActState.WALK:
-                    if (Vector3.Distance(transform.position, _walkPoints[_rndNumber]) < 0.2f)
+                    if (Vector3.Distance(transform.position, _walkPoints[_rndNumber]) < 0.15f)
                     {
                         _shootPos.SetActive(true);
 
                         LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
-                        ChangedAction(PlayerControl.ePlayerActState.IDLE);
+                        ChangedAction(ePlayerActState.IDLE);
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                         LobbyManager._uniqueInstance.PLAYCOUNT = 50.0f;
                         _isActing = true;
@@ -193,7 +200,7 @@ public class PlayerControl : MonoBehaviour
                 _naviAgent.stoppingDistance = 0;
                 break;
             case ePlayerActState.IDLE:
-                _naviAgent.enabled = false;
+                _naviAgent.enabled = false;                
                 break;
             case ePlayerActState.WALK:
                 _naviAgent.enabled = true;

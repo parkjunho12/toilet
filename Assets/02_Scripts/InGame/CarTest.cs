@@ -18,10 +18,9 @@ public class CarTest : MonoBehaviour
     float _timeCheck;
     bool _distance;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _prefabPlayer = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -44,6 +43,11 @@ public class CarTest : MonoBehaviour
                     this.gameObject.transform.position = _startPos.transform.position;
                 }
             }
+            else if(Vector3.Distance(transform.position, _prefabPlayer.transform.position) < 3.5f)
+            {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_HORN);
+            }
+
         }
     }
 

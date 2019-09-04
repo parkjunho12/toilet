@@ -25,6 +25,8 @@ public class CharacterMoveToUnrinal : MonoBehaviour
     {
         _aniCtrl = GetComponent<Animator>();
         _naviMesh = GetComponent<NavMeshAgent>();
+
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
     }
 
     // Update is called once per frame
@@ -33,13 +35,6 @@ public class CharacterMoveToUnrinal : MonoBehaviour
         switch(_curState)
         {
             case ePlayerAction.RUN:
-                _timeCheck += Time.deltaTime;
-                if (_timeCheck > 2.7f)
-                {// 숨소리 효과음.
-                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
-                    _timeCheck = 0;
-                }
-
                 if (Vector3.Distance(transform.position, _stopPoint.transform.position) < 0.2f)
                 {
                     ChangedAction(ePlayerAction.IDEL);

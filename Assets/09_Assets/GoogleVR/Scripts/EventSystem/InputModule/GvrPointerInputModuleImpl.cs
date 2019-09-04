@@ -304,9 +304,9 @@ public class GvrPointerInputModuleImpl
               && !(raycastResult.module is GvrPointerGraphicRaycaster)
               && !(raycastResult.module is GvrPointerPhysicsRaycaster))
         {
-            Debug.LogWarning("Using Raycaster (Raycaster: " + raycastResult.module.GetType() +
-            ", Object: " + raycastResult.module.name + "). It is recommended to use " +
-            "GvrPointerPhysicsRaycaster or GvrPointerGrahpicRaycaster with GvrPointerInputModule.");
+            //Debug.LogWarning("Using Raycaster (Raycaster: " + raycastResult.module.GetType() +
+            //", Object: " + raycastResult.module.name + "). It is recommended to use " +
+            //"GvrPointerPhysicsRaycaster or GvrPointerGrahpicRaycaster with GvrPointerInputModule.");
         }
     }
 
