@@ -110,6 +110,12 @@ public class PlayerControl : MonoBehaviour
                             UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
                         }
                         //}
+                        if (Input.GetMouseButton(0))
+                        {
+                            PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.RUN);
+                            transform.Translate(Vector3.forward * 6f * Time.deltaTime);
+
+                        }
                         
                         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
                         {
@@ -200,7 +206,7 @@ public class PlayerControl : MonoBehaviour
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
                         //if (FixedTouchField._uniqueInstance.PRESSED)
-                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad))
+                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) || Input.GetMouseButton(0))
                         {
                             ChangedAction(ePlayerActState.RUN);
                         }

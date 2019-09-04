@@ -21,7 +21,7 @@ public class LobbyManager : MonoBehaviour
 
     public static LobbyManager _uniqueInstance;
     public GameObject[] _startPosition;
-
+    string cAddress = "http://dbwo4011.cafe24.com/unity/Check.php";
     [SerializeField] GameObject _prefabPlayer;
     //[SerializeField] GameObject _controller;
     [SerializeField] GameObject _toiletWaterFall;
@@ -200,6 +200,7 @@ public class LobbyManager : MonoBehaviour
                     _timeCheck = 0;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    StartCoroutine(this.Call(cAddress));   
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
                     _curState = eGameState.END;
@@ -218,7 +219,14 @@ public class LobbyManager : MonoBehaviour
     {
         _curState = eGameState.READY;
     }
-
+    public IEnumerator Call(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", ParticleLauncher._uniqueInstance.SUM.ToString("N1"));
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        Debug.Log(wwwUrl.text);
+    }
     public void GameMapSetting()
     {
         _curState = eGameState.MAPSETTING;
