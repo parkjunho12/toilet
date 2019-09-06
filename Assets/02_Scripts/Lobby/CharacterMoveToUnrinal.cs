@@ -40,6 +40,7 @@ public class CharacterMoveToUnrinal : MonoBehaviour
                     ChangedAction(ePlayerAction.IDEL);
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
                     transform.eulerAngles = new Vector3(0, 180, 0);
+                    StartCoroutine(stopCharac(1.0f));
                 }
                 else
                 {
@@ -73,5 +74,11 @@ public class CharacterMoveToUnrinal : MonoBehaviour
         }
         _aniCtrl.SetInteger("AniState", (int)state);
         _curState = state;
+    }
+
+    IEnumerator stopCharac(float _delayTime)
+    {
+        yield return new WaitForSeconds(_delayTime);
+        _aniCtrl.enabled = false;
     }
 }

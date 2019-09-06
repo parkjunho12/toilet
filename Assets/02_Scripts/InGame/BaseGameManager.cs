@@ -93,7 +93,7 @@ public class BaseGameManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
         }
 
         _curStateLoading = eLoadingState.LOADING;
@@ -113,7 +113,7 @@ public class BaseGameManager : MonoBehaviour
             {
                 yield return null;
             }
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
         }
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadName[amount - 1]));
 

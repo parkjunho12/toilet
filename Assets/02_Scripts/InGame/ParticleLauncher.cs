@@ -91,7 +91,7 @@ public class ParticleLauncher : MonoBehaviour
             _scoreEff[3].transform.position = particleCollisionEvent.intersection;
             _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 450 == 0)
+        else if (_flyScore % 350 == 0)
         {// BAAM
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
             _scoreEff[2].GetComponent<ParticleSystem>().Play();

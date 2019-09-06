@@ -2039,6 +2039,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMenuUIFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 632877076, guid: 8e5161420df36b948b86972f306d2477, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4f77abc1086d71744b33d570ba76e9c2,
+        type: 3}
+    - target: {fileID: 632877076, guid: 8e5161420df36b948b86972f306d2477, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920086525663132542, guid: 8e5161420df36b948b86972f306d2477,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7920086526200390033, guid: 8e5161420df36b948b86972f306d2477,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2188,6 +2202,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2127113024}
+    - target: {fileID: 632877073, guid: 8e5161420df36b948b86972f306d2477, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 632877074, guid: 8e5161420df36b948b86972f306d2477, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.45999908
@@ -2195,15 +2213,6 @@ PrefabInstance:
     - target: {fileID: 632877074, guid: 8e5161420df36b948b86972f306d2477, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.65999985
-      objectReference: {fileID: 0}
-    - target: {fileID: 632877076, guid: 8e5161420df36b948b86972f306d2477, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 4f77abc1086d71744b33d570ba76e9c2,
-        type: 3}
-    - target: {fileID: 632877076, guid: 8e5161420df36b948b86972f306d2477, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e5161420df36b948b86972f306d2477, type: 3}

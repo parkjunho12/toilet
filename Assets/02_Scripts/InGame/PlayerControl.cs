@@ -243,7 +243,7 @@ public class PlayerControl : MonoBehaviour
             UIFader._uniqueInstance.FadeIn(0.4f);
             _crash = true;
             Destroy(other.gameObject);
-            LobbyManager._uniqueInstance.PLAYCOUNT -= 10.0f;
+            LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
         }
     }
 }
