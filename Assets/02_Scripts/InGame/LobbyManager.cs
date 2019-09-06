@@ -41,7 +41,7 @@ public class LobbyManager : MonoBehaviour
     PlayerControl _player;
     Transform _controllerPos;
     eGameState _curState;
-
+    Rigidbody rigidbody;
     float _timeCheck;
     float _score;
     float _fadeNum;
@@ -83,7 +83,7 @@ public class LobbyManager : MonoBehaviour
         _score = 0.0f;
         _timer[_rndNum].text = _timeCheck.ToString("N2");
         _myScore[_rndNum].text = "점수 : " + _score.ToString();
-
+        rigidbody = _prefabPlayer.GetComponent<Rigidbody>();
         _touchShootUI.SetActive(true);
         _gameStateUI[_rndNum].SetActive(false);
         _gameStateTxt[_rndNum].GetComponent<Text>();
@@ -93,7 +93,7 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
+        
         //_controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
         //_miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
         //_miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
@@ -198,7 +198,7 @@ public class LobbyManager : MonoBehaviour
                 if (_timeCheck >= 2.0f)
                 {
                     _timeCheck = 0;
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ((int)ParticleLauncher._uniqueInstance.SUM).ToString("N1");
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     StartCoroutine(this.Call(cAddress));   
                     _touchShootUI.SetActive(false);
@@ -210,6 +210,7 @@ public class LobbyManager : MonoBehaviour
                 _timeCheck += Time.deltaTime;
 
                 if(_timeCheck >= 3.0f)
+
                     SceneChanger._uniqueInstance.FadeToLevel_Lobby();
                 break;
         }
@@ -222,10 +223,11 @@ public class LobbyManager : MonoBehaviour
     public IEnumerator Call(string _address)
     {
         WWWForm cForm = new WWWForm();
-        cForm.AddField("id", ParticleLauncher._uniqueInstance.SUM.ToString("N1"));
+        cForm.AddField("id", ((int)ParticleLauncher._uniqueInstance.SUM));
         WWW wwwUrl = new WWW(_address, cForm);
         yield return wwwUrl;
-        Debug.Log(wwwUrl.text);
+        _gameStateTxt[_rndNum].GetComponent<Text>().text = wwwUrl.text;
+       Debug.Log(wwwUrl.text);
     }
     public void GameMapSetting()
     {
@@ -248,7 +250,7 @@ public class LobbyManager : MonoBehaviour
     public void SettingPlayer()
     {
         _prefabPlayer.transform.position = _startPosition[0].transform.position;
-        _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
+       // _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
     }
 
     /// <summary>
@@ -266,8 +268,10 @@ public class LobbyManager : MonoBehaviour
         Transform tf = GameObject.FindGameObjectWithTag("ToiletWaterFall").transform;
         GameObject go = Instantiate(_toiletWaterFall, tf.position, tf.rotation);
         Destroy(go, 4);
+        //Quaternion quaternion = Quaternion.LookRotation(tf.transform.position);
+        //rigidbody.MoveRotation(quaternion);
         _prefabPlayer.transform.LookAt(tf);
-        
+
         PlayerControl._uniqueInstance.ISACTING = false;
         PlayerControl._uniqueInstance.PlayerWalkToToilet();
     }
