@@ -40,7 +40,7 @@ public class LobbyManager : MonoBehaviour
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
     eGameState _curState;
-    string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
+    string cAddress = "http://dbwo4011.cafe24.com/unity/Check2.php";
     float _timeCheck;
     float _score;
     float _fadeNum;
@@ -193,6 +193,7 @@ public class LobbyManager : MonoBehaviour
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
+                    StartCoroutine(this.Call(cAddress));
                     _curState = eGameState.END;
                 }
                 break;
@@ -241,7 +242,9 @@ public class LobbyManager : MonoBehaviour
     public IEnumerator Call(string _address)
     {
         WWWForm cForm = new WWWForm();
-        WWW wwwUrl = new WWW(_address);
+        cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
+        cForm.AddField("id", ((int)ParticleLauncher._uniqueInstance.SUM));
+        WWW wwwUrl = new WWW(_address, cForm);
         yield return wwwUrl;
         Debug.Log(wwwUrl.text);
     }
