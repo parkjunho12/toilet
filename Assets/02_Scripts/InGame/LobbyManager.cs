@@ -40,7 +40,7 @@ public class LobbyManager : MonoBehaviour
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
     eGameState _curState;
-
+    string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
     float _timeCheck;
     float _score;
     float _fadeNum;
@@ -238,7 +238,13 @@ public class LobbyManager : MonoBehaviour
         _prefabPlayer.transform.position = _startPosition[0].transform.position;
         _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
     }
-
+    public IEnumerator Call(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        WWW wwwUrl = new WWW(_address);
+        yield return wwwUrl;
+        Debug.Log(wwwUrl.text);
+    }
     /// <summary>
     /// 게임 시작 메소드.
     /// 플레이어가 변기 주변에 가까이 갈시

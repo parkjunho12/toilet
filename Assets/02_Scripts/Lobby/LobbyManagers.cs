@@ -13,10 +13,10 @@ public class LobbyManagers : MonoBehaviour
     public Light _gold;
     public Text _myGold;
     public Text _buyState;
-
+    public Text _content;
     int _myProperty;
     bool _arrowBought;
-
+    string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
     public Text GOLD
     {
         get { return _myGold; }
@@ -27,7 +27,8 @@ public class LobbyManagers : MonoBehaviour
     {
         _myProperty = 10000;
         _myGold.text = _myProperty.ToString();
-
+        StartCoroutine(this.Call(cAddress));
+        _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
     }
 
@@ -37,6 +38,14 @@ public class LobbyManagers : MonoBehaviour
 
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);
         SceneChanger._uniqueInstance.FadeToLevel(1);
+    }
+    public IEnumerator Call(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        WWW wwwUrl = new WWW(_address);
+        yield return wwwUrl;
+        _content.GetComponent<Text>().text = wwwUrl.text;
+        Debug.Log(wwwUrl.text);
     }
 
     public void OptionBtn()
