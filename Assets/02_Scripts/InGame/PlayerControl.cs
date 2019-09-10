@@ -102,12 +102,12 @@ public class PlayerControl : MonoBehaviour
                         if (FixedTouchField._uniqueInstance.PRESSED)
                         {// 화면이 터치될 시 캐릭터 움직임..
                          // 시간차에 따른 캐릭터 달리기 속도 저하..
-                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
+                            if (LobbyManager._uniqueInstance.PLAYCOUNT > 40)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
                                     * 8.5f * Time.deltaTime);
                             }
-                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
+                            else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 40
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
                                 transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
@@ -243,7 +243,7 @@ public class PlayerControl : MonoBehaviour
             UIFader._uniqueInstance.FadeIn(0.4f);
             _crash = true;
             Destroy(other.gameObject);
-            LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+            LobbyManager._uniqueInstance.PLAYCOUNT -= 30.0f;
         }
     }
 }

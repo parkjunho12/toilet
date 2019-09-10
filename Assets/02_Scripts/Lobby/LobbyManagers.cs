@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class LobbyManagers : MonoBehaviour
 {
+    public Dictionary<string, GetItem> GetItems = new Dictionary<string, GetItem>();
+    static LobbyManagers _uniqueInstance;
+
     [SerializeField] GameObject _mainMenu;
     [SerializeField] GameObject _optionMenu;
     [SerializeField] GameObject _volumeGraphicMenu;
@@ -17,6 +20,18 @@ public class LobbyManagers : MonoBehaviour
     int _myProperty;
     bool _arrowBought;
 
+    public static LobbyManagers Instance
+    {
+        get
+        {
+            if(_uniqueInstance == null)
+            {
+                _uniqueInstance = GameObject.FindObjectOfType<LobbyManagers>();
+            }
+            return LobbyManagers._uniqueInstance;
+        }
+    }
+
     public Text GOLD
     {
         get { return _myGold; }
@@ -25,10 +40,17 @@ public class LobbyManagers : MonoBehaviour
 
     void Start()
     {
-        _myProperty = 10000;
-        _myGold.text = _myProperty.ToString();
+        //_myProperty = 10000;
+        _myGold.text = PlayerPrefs.GetInt("Money").ToString();
+
+        CreateMyItemState("Arrow", 1000, false);
 
         _buyState.gameObject.SetActive(false);
+    }
+    public void CreateMyItemState(string _itemName , int _itemPrice, bool _boughtState)
+    {
+        GetItem newItem = new GetItem(_itemName, _itemPrice, _boughtState);
+        GetItems.Add(_itemName, newItem);
     }
 
     public void StartBtn()
@@ -61,34 +83,50 @@ public class LobbyManagers : MonoBehaviour
         _volumeGraphicMenu.SetActive(false);
         StartCoroutine(LightGold(2.0f));
     }
-    public void BuyArrow()
+    public void BuyArrow(string itemName)
     {// 네비 화살표 아이템. 가격 임의
 
-        if (_arrowBought)
+        if(GetItems[itemName].MyItem())
         {
             _buyState.gameObject.SetActive(true);
-            _buyState.text = "U already have";
-            StartCoroutine(TextOff(2.0f));
-            return;
-        }
-
-        if(_myProperty > 1000)
-        {// 살 수 있다.
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-            _arrowBought = true;
-            _myProperty -= 1000;
-            _myGold.text = _myProperty.ToString();
-
-            _buyState.gameObject.SetActive(true);
             _buyState.text = "(Arrow) Success!";
+
+            int tmpMoney = PlayerPrefs.GetInt("Money");
+            //PlayerPrefs.SetInt("Money", tmpMoney -= GetItems[itemName].);
             StartCoroutine(TextOff(1.5f));
         }
         else
-        {// 못 산다.
+        {
             _buyState.gameObject.SetActive(true);
             _buyState.text = "Not enough Gold..";
             StartCoroutine(TextOff(1.5f));
         }
+
+        //if (_arrowBought)
+        //{
+        //    _buyState.gameObject.SetActive(true);
+        //    _buyState.text = "U already have";
+        //    StartCoroutine(TextOff(2.0f));
+        //    return;
+        //}
+
+        //if(_myProperty > 1000)
+        //{// 살 수 있다.
+        //    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
+        //    _arrowBought = true;
+        //    _myProperty -= 1000;
+        //    _myGold.text = _myProperty.ToString();
+
+        //    _buyState.gameObject.SetActive(true);
+        //    _buyState.text = "(Arrow) Success!";
+        //    StartCoroutine(TextOff(1.5f));
+        //}
+        //else
+        //{// 못 산다.
+        //    _buyState.gameObject.SetActive(true);
+        //    _buyState.text = "Not enough Gold..";
+        //    StartCoroutine(TextOff(1.5f));
+        //}
     }
     public void BuyShield()
     {// 차를 한 번 막아줄 수 있는 아이템. 가격 임의

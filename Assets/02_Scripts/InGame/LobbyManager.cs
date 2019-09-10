@@ -104,20 +104,15 @@ public class LobbyManager : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.MAPSETTING:                
-                _timeCheck = 95.0f;
+                _timeCheck = 70.0f;
                 _curState = eGameState.STARTFIND;               
                 break;
             case eGameState.STARTFIND:
                 _timeCheck -= Time.deltaTime;
                 _findTimer.text = _timeCheck.ToString("N2");
-                if (_timeCheck <= 90 && _timeCheck > 50)
+                if (_timeCheck <= 70 && _timeCheck > 40)
                 {
                     _fadeNum = 0.1f;
-                    UIFader._uniqueInstance.FadeIn(_fadeNum);
-                }
-                else if (_timeCheck <= 50 && _timeCheck > 40)
-                {
-                    _fadeNum = 0.2f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
                 else if (_timeCheck <= 40 && _timeCheck > 30)

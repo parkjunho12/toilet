@@ -120,11 +120,11 @@ public class BaseGameManager : MonoBehaviour
         // BGM 사운드
         if(_curStage == eStageState.LOBBY)
         {
-            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.LOBBY, SoundManager._uniqueinstance.BGM.volume);
         }
         else if (_curStage == eStageState.INGAME)
         {
-            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
+            SoundManager._uniqueinstance.PlayBGMSound(SoundManager.eBGMType.INGAME, SoundManager._uniqueinstance.BGM.volume);
         }
 
         _curStateLoading = eLoadingState.END;
