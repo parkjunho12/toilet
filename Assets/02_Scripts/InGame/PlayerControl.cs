@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
     List<Vector3> _walkPoints;
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-
+    public Text _isShield;
     float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
@@ -239,11 +239,21 @@ public class PlayerControl : MonoBehaviour
         if(other.gameObject.CompareTag("Car"))
         {
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
-            UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
-            UIFader._uniqueInstance.FadeIn(0.4f);
-            _crash = true;
+ 
+            
             Destroy(other.gameObject);
-            LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+            if (_isShield.GetComponent<Text>().text.Equals("1"))
+            {
+                _isShield.GetComponent<Text>().text = "0";
+            }
+            else
+            {
+                _crash = true;
+                UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+                UIFader._uniqueInstance.FadeIn(0.4f);
+                LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+            }
+
         }
     }
 }

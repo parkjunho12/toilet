@@ -36,7 +36,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
-
+    public Text _isShield;
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
     eGameState _curState;
@@ -285,6 +285,7 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.Log(Shield);
             StartCoroutine(this.UseShield("http://dbwo4011.cafe24.com/unity/UseShield.php", int.Parse(Shield)));
+            _isShield.GetComponent<Text>().text = "1";
         }
 
     }
