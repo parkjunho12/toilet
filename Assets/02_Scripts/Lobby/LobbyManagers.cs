@@ -9,24 +9,29 @@ public class LobbyManagers : MonoBehaviour
     [SerializeField] GameObject _optionMenu;
     [SerializeField] GameObject _volumeGraphicMenu;
     [SerializeField] GameObject _shopMenu;
-
+    public Text _HaveArrow;
+    public Text _HaveShield;
     public Light _gold;
     public Text _myGold;
     public Text _buyState;
     public Text _content;
     int _myProperty;
-    bool _arrowBought;
+    int _shield;
+    private bool _arrowBought;
+
     string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
+    string cAddress2 = "http://dbwo4011.cafe24.com/unity/BuyArrow.php";
     public Text GOLD
     {
         get { return _myGold; }
         set { _myGold = value; }
     }
-
+    
     void Start()
     {
-        _myProperty = 10000;
-        _myGold.text = _myProperty.ToString();
+        StartCoroutine(FindGold("http://dbwo4011.cafe24.com/unity/FindGold.php"));
+        StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
+        StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
         StartCoroutine(this.Call(cAddress));
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
@@ -42,9 +47,63 @@ public class LobbyManagers : MonoBehaviour
     public IEnumerator Call(string _address)
     {
         WWWForm cForm = new WWWForm();
-        WWW wwwUrl = new WWW(_address);
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
         yield return wwwUrl;
         _content.GetComponent<Text>().text = wwwUrl.text;
+    }
+    public IEnumerator BuyArrow(string _address2)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address2, cForm);
+
+        yield return wwwUrl;
+        _myProperty = int.Parse(wwwUrl.text);
+        _myGold.text = _myProperty.ToString();
+        Debug.Log(wwwUrl.text);
+    }
+    public IEnumerator BuyShield(string _address2)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        cForm.AddField("Shield",int.Parse (_HaveShield.text));
+        WWW wwwUrl = new WWW(_address2, cForm);
+        yield return wwwUrl;
+        _shield = int.Parse(wwwUrl.text);
+        _myGold.text = _shield.ToString();
+        Debug.Log(_myProperty);
+    }
+    public IEnumerator FindGold(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        _myProperty = int.Parse(wwwUrl.text);
+        _myGold.text = _myProperty.ToString();
+        Debug.Log(wwwUrl.text.ToString());
+    }
+    public IEnumerator FindArrow(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        if (wwwUrl.text.Equals("1"))
+        {
+            _arrowBought = true;
+            _HaveArrow.GetComponent<Text>().text = "Have";
+        }
+        Debug.Log(wwwUrl.text);
+    }
+    public IEnumerator FindShield(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        _HaveShield.GetComponent<Text>().text = wwwUrl.text.ToString();
         Debug.Log(wwwUrl.text);
     }
 
@@ -72,41 +131,43 @@ public class LobbyManagers : MonoBehaviour
     }
     public void BuyArrow()
     {// 네비 화살표 아이템. 가격 임의
-
-        if (_arrowBought)
+        
+        
+        if (_HaveArrow.GetComponent<Text>().text.Equals("Have"))
         {
             _buyState.gameObject.SetActive(true);
             _buyState.text = "U already have";
             StartCoroutine(TextOff(2.0f));
             return;
         }
-
-        if(_myProperty > 1000)
-        {// 살 수 있다.
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-            _arrowBought = true;
-            _myProperty -= 1000;
-            _myGold.text = _myProperty.ToString();
-
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "(Arrow) Success!";
-            StartCoroutine(TextOff(1.5f));
-        }
         else
-        {// 못 산다.
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "Not enough Gold..";
-            StartCoroutine(TextOff(1.5f));
+        {
+            if (int.Parse(_myGold.text) >= 1000)
+            {// 살 수 있다.
+                StartCoroutine(this.BuyArrow(cAddress2));
+                StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
+                _arrowBought = true;
+                _buyState.gameObject.SetActive(true);
+                _buyState.text = "(Arrow) Success!";
+                StartCoroutine(TextOff(1.5f));
+            }
+            else
+            {// 못 산다.
+                _buyState.gameObject.SetActive(true);
+                _buyState.text = "Not enough Gold..";
+                StartCoroutine(TextOff(1.5f));
+            }
         }
     }
     public void BuyShield()
     {// 차를 한 번 막아줄 수 있는 아이템. 가격 임의
-        if (_myProperty > 1000)
+        Debug.Log(int.Parse(_myGold.text));
+        if (int.Parse(_myGold.text) >= 1000)
         {// 살 수 있다.
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-            _myProperty -= 1000;
-            _myGold.text = _myProperty.ToString();
-
+            StartCoroutine(this.BuyShield("http://dbwo4011.cafe24.com/unity/BuyShield.php"));
+            StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
             _buyState.gameObject.SetActive(true);
             _buyState.text = "(Shield) Success!";
             StartCoroutine(TextOff(1.5f));

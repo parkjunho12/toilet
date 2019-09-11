@@ -194,6 +194,7 @@ public class LobbyManager : MonoBehaviour
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
                     StartCoroutine(this.Call(cAddress));
+                    StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
                     _curState = eGameState.END;
                 }
                 break;
@@ -240,6 +241,15 @@ public class LobbyManager : MonoBehaviour
         _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
     }
     public IEnumerator Call(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
+        cForm.AddField("id", ((int)ParticleLauncher._uniqueInstance.SUM));
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        Debug.Log(wwwUrl.text);
+    }
+    public IEnumerator PlusGold(string _address)
     {
         WWWForm cForm = new WWWForm();
         cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
