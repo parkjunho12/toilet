@@ -22,7 +22,7 @@ public class LobbyManager : MonoBehaviour
 
     public static LobbyManager _uniqueInstance;
     public GameObject[] _startPosition;
-
+    public GameObject _Arrow;
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
@@ -238,7 +238,9 @@ public class LobbyManager : MonoBehaviour
     public void SettingPlayer()
     {
         _prefabPlayer.transform.position = _startPosition[0].transform.position;
-        _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;        
+        _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;
+        StartCoroutine(this.PlayerItem("http://dbwo4011.cafe24.com/unity/PlayerItem.php"));
+
     }
     public IEnumerator Call(string _address)
     {
@@ -258,6 +260,44 @@ public class LobbyManager : MonoBehaviour
         yield return wwwUrl;
         Debug.Log(wwwUrl.text);
     }
+    public IEnumerator PlayerItem(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        String Arrow = "";
+        String Shield = "";
+        string[] split_text;
+        split_text = wwwUrl.text.Split(' ');
+        Arrow = split_text[0];
+        Shield = split_text[1];
+        if (int.Parse(Arrow) == 1)
+        {
+           
+            _Arrow.SetActive(true);
+        }
+        else
+        {
+            _Arrow.SetActive(false);
+        }
+        if(int.Parse(Shield) > 0)
+        {
+            Debug.Log(Shield);
+            StartCoroutine(this.UseShield("http://dbwo4011.cafe24.com/unity/UseShield.php", int.Parse(Shield)));
+        }
+
+    }
+
+    public IEnumerator UseShield(string _address,int Sheildnum)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
+        cForm.AddField("Shield", Sheildnum - 1);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+    }
+
     /// <summary>
     /// 게임 시작 메소드.
     /// 플레이어가 변기 주변에 가까이 갈시
