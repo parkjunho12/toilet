@@ -71,6 +71,15 @@ public class PlayerControl : MonoBehaviour
         _rndNumber = Random.Range(0, _unrinal.Length);
         //_rndNumber = 3;
         _unrinal[_rndNumber].SetActive(true);
+
+        if (IsMyItemExist._uniqueInstance.ArrowExist)
+        {
+            _arrow.SetActive(true);
+        }
+        else
+        {
+            _arrow.SetActive(false);
+        }
     }
 
     // Update is called once per frame

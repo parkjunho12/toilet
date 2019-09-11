@@ -70,7 +70,8 @@ namespace TurnTheGameOn.ArrowWaypointer{
 			}
 			if (waypointArrow == null)
 				FindArrow ();
-			waypointArrow.LookAt(arrowTarget);
+            else
+			    waypointArrow.LookAt(arrowTarget);
 		}
 
 		public void WaypointEvent(int waypointEvent){
@@ -101,11 +102,11 @@ namespace TurnTheGameOn.ArrowWaypointer{
 
 		public void FindArrow(){
 			GameObject arrow = GameObject.Find ("Waypoint Arrow");
-			if (arrow == null) {
-				CreateArrow ();
-				waypointArrow = GameObject.Find ("Waypoint Arrow").transform;
-			}else{
+			if (arrow != null) {
 				waypointArrow = arrow.transform;
+			//	//CreateArrow ();
+			//	waypointArrow = GameObject.Find ("Waypoint Arrow").transform;
+			//}else{
 			}
 		}
 

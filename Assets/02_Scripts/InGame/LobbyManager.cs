@@ -86,7 +86,9 @@ public class LobbyManager : MonoBehaviour
         _touchShootUI.SetActive(true);
         _gameStateUI[_rndNum].SetActive(false);
         _gameStateTxt[_rndNum].GetComponent<Text>();
-        _gameStateTxt[_rndNum].SetActive(false);       
+        _gameStateTxt[_rndNum].SetActive(false);  
+        
+
     }
 
     // Update is called once per frame

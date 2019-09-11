@@ -5,53 +5,12 @@ using UnityEngine.UI;
 
 public class LobbyManagers : MonoBehaviour
 {
-    public Dictionary<string, GetItem> GetItems = new Dictionary<string, GetItem>();
-    static LobbyManagers _uniqueInstance;
-
     [SerializeField] GameObject _mainMenu;
     [SerializeField] GameObject _optionMenu;
     [SerializeField] GameObject _volumeGraphicMenu;
     [SerializeField] GameObject _shopMenu;
 
     public Light _gold;
-    public Text _myGold;
-    public Text _buyState;
-
-    int _myProperty;
-    bool _arrowBought;
-
-    public static LobbyManagers Instance
-    {
-        get
-        {
-            if(_uniqueInstance == null)
-            {
-                _uniqueInstance = GameObject.FindObjectOfType<LobbyManagers>();
-            }
-            return LobbyManagers._uniqueInstance;
-        }
-    }
-
-    public Text GOLD
-    {
-        get { return _myGold; }
-        set { _myGold = value; }
-    }
-
-    void Start()
-    {
-        //_myProperty = 10000;
-        _myGold.text = PlayerPrefs.GetInt("Money").ToString();
-
-        CreateMyItemState("Arrow", 1000, false);
-
-        _buyState.gameObject.SetActive(false);
-    }
-    public void CreateMyItemState(string _itemName , int _itemPrice, bool _boughtState)
-    {
-        GetItem newItem = new GetItem(_itemName, _itemPrice, _boughtState);
-        GetItems.Add(_itemName, newItem);
-    }
 
     public void StartBtn()
     {// 게임시작 버튼.
@@ -83,70 +42,7 @@ public class LobbyManagers : MonoBehaviour
         _volumeGraphicMenu.SetActive(false);
         StartCoroutine(LightGold(2.0f));
     }
-    public void BuyArrow(string itemName)
-    {// 네비 화살표 아이템. 가격 임의
-
-        if(GetItems[itemName].MyItem())
-        {
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "(Arrow) Success!";
-
-            int tmpMoney = PlayerPrefs.GetInt("Money");
-            //PlayerPrefs.SetInt("Money", tmpMoney -= GetItems[itemName].);
-            StartCoroutine(TextOff(1.5f));
-        }
-        else
-        {
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "Not enough Gold..";
-            StartCoroutine(TextOff(1.5f));
-        }
-
-        //if (_arrowBought)
-        //{
-        //    _buyState.gameObject.SetActive(true);
-        //    _buyState.text = "U already have";
-        //    StartCoroutine(TextOff(2.0f));
-        //    return;
-        //}
-
-        //if(_myProperty > 1000)
-        //{// 살 수 있다.
-        //    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-        //    _arrowBought = true;
-        //    _myProperty -= 1000;
-        //    _myGold.text = _myProperty.ToString();
-
-        //    _buyState.gameObject.SetActive(true);
-        //    _buyState.text = "(Arrow) Success!";
-        //    StartCoroutine(TextOff(1.5f));
-        //}
-        //else
-        //{// 못 산다.
-        //    _buyState.gameObject.SetActive(true);
-        //    _buyState.text = "Not enough Gold..";
-        //    StartCoroutine(TextOff(1.5f));
-        //}
-    }
-    public void BuyShield()
-    {// 차를 한 번 막아줄 수 있는 아이템. 가격 임의
-        if (_myProperty > 1000)
-        {// 살 수 있다.
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-            _myProperty -= 1000;
-            _myGold.text = _myProperty.ToString();
-
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "(Shield) Success!";
-            StartCoroutine(TextOff(1.5f));
-        }
-        else
-        {// 못 산다.
-            _buyState.gameObject.SetActive(true);
-            _buyState.text = "Not enough Gold..";
-            StartCoroutine(TextOff(1.5f));
-        }
-    }
+   
 
     public void BackToMainMenu()
     {// 옵션 => 메인메뉴
@@ -169,17 +65,10 @@ public class LobbyManagers : MonoBehaviour
         #endif
     }
 
-
     IEnumerator LightGold(float _delayTime)
     {
         yield return new WaitForSeconds(_delayTime);
         _gold.intensity = Random.Range(6, 15);
         StartCoroutine(LightGold(Random.Range(0.2f, 0.5f)));
-    }
-
-    IEnumerator TextOff(float _delayTime)
-    {
-        yield return new WaitForSeconds(_delayTime);
-        _buyState.gameObject.SetActive(false);
     }
 }

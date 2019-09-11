@@ -5,20 +5,39 @@ using UnityEngine.UI;
 
 public class GetItem : MonoBehaviour
 {
-    public Light _gold;
-    public Text _myGold;
-    public Text _buyState;
+    public static GetItem _uniqueInstance;
 
     string _itemName;
     int _itemPrice;
     bool _arrowBought;
     bool _unlocked;
-
+  
+    public string ItemName
+    {
+        get { return _itemName; }
+        set { _itemName = value; }
+    }
     public int ItemPrice
     {
-
+        get { return _itemPrice; }
+        set { _itemPrice = value; }
     }
-    
+    public bool ArrowBought
+    {
+        get { return _arrowBought; }
+        set { _arrowBought = value; }
+    }
+    public bool Unlocked
+    {
+        get { return _unlocked; }
+        set { _unlocked = value; }
+    }
+
+    void Start()
+    {
+        _uniqueInstance = this;  
+    }
+
     public GetItem(string _itemName, int _itemPrice, bool _arrowBought)
     {
         this._itemName = _itemName;
@@ -33,7 +52,7 @@ public class GetItem : MonoBehaviour
         if(!_unlocked)
         {
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
-            _arrowBought = true;
+            IsMyItemExist._uniqueInstance.ArrowExist = _arrowBought = true;
             SaveAchievment(true);
             return true;
         }
@@ -44,20 +63,21 @@ public class GetItem : MonoBehaviour
     {
         _unlocked = value;
 
-        int tmpMoney = PlayerPrefs.GetInt("Money");
-
-        PlayerPrefs.SetInt("Money", tmpMoney -= 1000);
-        PlayerPrefs.SetInt(name, value ? 1 : 0);
+        _arrowBought = true;
+        PlayerPrefs.SetString("ArrowBought", _arrowBought.ToString());
+        PlayerPrefs.SetInt(_itemName, value ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     public void LoadItemState()
     {
-        _unlocked = PlayerPrefs.GetInt(name) == 1 ? true : false;
+        _unlocked = PlayerPrefs.GetInt(_itemName) == 1 ? true : false;
 
+        string value = PlayerPrefs.GetString("ArrowBought", _arrowBought.ToString());
+        _arrowBought = System.Convert.ToBoolean(value);
         if(_unlocked)
         {
-            _arrowBought = true;
+            IsMyItemExist._uniqueInstance.ArrowExist = _arrowBought = true;           
         }
     }
 }

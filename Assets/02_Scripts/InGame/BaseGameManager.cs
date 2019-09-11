@@ -27,12 +27,8 @@ public class BaseGameManager : MonoBehaviour
     GameObject _GameToLobbyWnd;         // 게임 끝난 후 로비 진입 오브젝트.
 
     eLoadingState _curStateLoading;
-    eStageState _curStage;
-
-    public static BaseGameManager INSTANCE
-    {
-        get { return _uniqueinstance; }
-    }
+    eStageState _curStage;  
+    
     public eLoadingState LOADSTAGE
     {
         get { return _curStateLoading; }
