@@ -45,6 +45,7 @@ public class PlayerControl : MonoBehaviour
     }
     public bool ISACTING
     {
+        get { return _isActing; }
         set { _isActing = value; }
     }
     public int RNDNUM

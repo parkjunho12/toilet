@@ -19,6 +19,8 @@ TagManager:
   - Minus
   - Bottle
   - Car
+  - FxTemporaire
+  - DogShootPointer
   layers:
   - Default
   - TransparentFX

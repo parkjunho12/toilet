@@ -11,16 +11,21 @@ public class LobbyManagers : MonoBehaviour
     [SerializeField] GameObject _shopMenu;
     public Text _HaveArrow;
     public Text _HaveShield;
+    public Text _HavePet_Dog;
     public Light _gold;
     public Text _myGold;
     public Text _buyState;
     public Text _content;
+
+
+    bool _arrowBought;
+    bool _petDogBought;
     int _myProperty;
     int _shield;
-    private bool _arrowBought;
 
     string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
     string cAddress2 = "http://dbwo4011.cafe24.com/unity/BuyArrow.php";
+    string cAddress3 = "http://dbwo4011.cafe24.com/unity/BuyPet_Dog.php";
     public Text GOLD
     {
         get { return _myGold; }
@@ -32,6 +37,7 @@ public class LobbyManagers : MonoBehaviour
         StartCoroutine(FindGold("http://dbwo4011.cafe24.com/unity/FindGold.php"));
         StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
         StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
+        StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet_Dog.php"));        // 강아지펫꺼 추가함.
         StartCoroutine(this.Call(cAddress));
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
@@ -74,6 +80,19 @@ public class LobbyManagers : MonoBehaviour
         _myGold.text = _shield.ToString();
         Debug.Log(_myProperty);
     }
+    public IEnumerator BuyPet_Dog(string _address2)
+    {// 강아지펫꺼 추가함.
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        cForm.AddField("Pet_Dog", int.Parse(_HavePet_Dog.text));
+        WWW wwwUrl = new WWW(_address2, cForm);
+
+        yield return wwwUrl;
+        _myProperty = int.Parse(wwwUrl.text);
+        _myGold.text = _myProperty.ToString();
+        Debug.Log(wwwUrl.text);
+    }
+
     public IEnumerator FindGold(string _address)
     {
         WWWForm cForm = new WWWForm();
@@ -106,6 +125,19 @@ public class LobbyManagers : MonoBehaviour
         _HaveShield.GetComponent<Text>().text = wwwUrl.text.ToString();
         Debug.Log(wwwUrl.text);
     }
+    public IEnumerator FindPet_Dog(string _address)
+    {// 강아지펫꺼 추가함.
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        if (wwwUrl.text.Equals("1"))
+        {
+            _petDogBought = true;
+            _HavePet_Dog.GetComponent<Text>().text = "Have";
+        }
+        Debug.Log(wwwUrl.text);
+    }
 
     public void OptionBtn()
     {// 메인메뉴 => 옵션.
@@ -131,8 +163,6 @@ public class LobbyManagers : MonoBehaviour
     }
     public void BuyArrow()
     {// 네비 화살표 아이템. 가격 임의
-        
-        
         if (_HaveArrow.GetComponent<Text>().text.Equals("Have"))
         {
             _buyState.gameObject.SetActive(true);
@@ -177,6 +207,35 @@ public class LobbyManagers : MonoBehaviour
             _buyState.gameObject.SetActive(true);
             _buyState.text = "Not enough Gold..";
             StartCoroutine(TextOff(1.5f));
+        }
+    }
+    public void BuyPet_Dog()
+    {// 강아지펫꺼 추가함.
+        if (_HavePet_Dog.GetComponent<Text>().text.Equals("Have"))
+        {
+            _buyState.gameObject.SetActive(true);
+            _buyState.text = "U already have";
+            StartCoroutine(TextOff(2.0f));
+            return;
+        }
+        else
+        {
+            if (int.Parse(_myGold.text) >= 1000)
+            {// 살 수 있다.
+                StartCoroutine(this.BuyPet_Dog(cAddress3));
+                StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet_Dog.php"));
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
+                _petDogBought = true;
+                _buyState.gameObject.SetActive(true);
+                _buyState.text = "(Pet.Dog) Success!";
+                StartCoroutine(TextOff(1.5f));
+            }
+            else
+            {// 못 산다.
+                _buyState.gameObject.SetActive(true);
+                _buyState.text = "Not enough Gold..";
+                StartCoroutine(TextOff(1.5f));
+            }
         }
     }
 

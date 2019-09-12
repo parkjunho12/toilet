@@ -24,6 +24,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject[] _startPosition;
     public GameObject _Arrow;
     [SerializeField] GameObject _prefabPlayer;
+    [SerializeField] GameObject _prefabDog;
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
@@ -239,6 +240,8 @@ public class LobbyManager : MonoBehaviour
     {
         _prefabPlayer.transform.position = _startPosition[0].transform.position;
         _prefabPlayer.transform.rotation = _startPosition[0].transform.rotation;
+        _prefabDog.transform.position = _startPosition[1].transform.position;
+        _prefabDog.transform.rotation = _startPosition[1].transform.rotation;
         StartCoroutine(this.PlayerItem("http://dbwo4011.cafe24.com/unity/PlayerItem.php"));
 
     }
@@ -274,7 +277,6 @@ public class LobbyManager : MonoBehaviour
         Shield = split_text[1];
         if (int.Parse(Arrow) == 1)
         {
-           
             _Arrow.SetActive(true);
         }
         else

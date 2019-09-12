@@ -6,9 +6,11 @@ using UnityEngine;
 public class StartMovePos : MonoBehaviour
 {
     [SerializeField] GameObject _prefabPlayer;
+    //[SerializeField] GameObject _prefabDog;
 
     Transform[] _roamPoints;
     List<GameObject> _ltSpawns;
+    //List<GameObject> _ltSpawnss;
 
     bool spawnCheck;
 
@@ -16,6 +18,7 @@ public class StartMovePos : MonoBehaviour
     void Start()
     {
         _ltSpawns = new List<GameObject>();
+        //_ltSpawnss = new List<GameObject>();
         GatheringRoammingPoint();
 
         spawnCheck = true;
@@ -37,11 +40,16 @@ public class StartMovePos : MonoBehaviour
     private void SpawnPlyWalkPath()
     {
         GameObject go = _prefabPlayer;
+        //GameObject goo = _prefabDog;
         PlayerControl ply;
+        //PlayerController dog;
 
         ply = go.GetComponent<PlayerControl>();
+        //dog = goo.GetComponent<PlayerController>();
         ply.SettingWalkPathRoamming(_roamPoints);
+        //dog.SettingWalkPathRoamming(_roamPoints);
         _ltSpawns.Add(go);
+        //_ltSpawnss.Add(goo);
 
         //Debug.Log("StartMovePos WalkPath Success");
     }

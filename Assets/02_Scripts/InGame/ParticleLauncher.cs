@@ -7,6 +7,7 @@ public class ParticleLauncher : MonoBehaviour
 {
     public static ParticleLauncher _uniqueInstance;
     public AudioClip[] _soundEff;
+    [SerializeField] GameObject _isDogActive;
     [SerializeField] GameObject[] _peeScore;
     [SerializeField] GameObject[] _plus;
     [SerializeField] GameObject[] _scoreEff;        // 물폭탄, 별폭죽, BAAM, 솜사탕폭죽
@@ -65,8 +66,19 @@ public class ParticleLauncher : MonoBehaviour
         else if (other.gameObject.CompareTag("Fly"))
         {
             //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
-            _sum += 1.0f;
-            _flyScore += 2.0f;
+            if (_isDogActive.activeSelf == true)
+            {
+                _plus[_rndNum].GetComponent<Text>().text = "+ 3";
+                _sum += 3.0f;
+                _flyScore += 3.0f;
+            }
+            else
+            {
+                _plus[_rndNum].GetComponent<Text>().text = "+ 3";
+                _sum += 2.0f;
+                _flyScore += 2.0f;
+            }
+
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
             _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
@@ -91,14 +103,14 @@ public class ParticleLauncher : MonoBehaviour
             _scoreEff[3].transform.position = particleCollisionEvent.intersection;
             _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 350 == 0)
+        else if (_flyScore % 330 == 0)
         {// BAAM
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
             _scoreEff[2].GetComponent<ParticleSystem>().Play();
             _scoreEff[2].transform.position = particleCollisionEvent.intersection;
             _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 800 == 0)
+        else if (_flyScore % 810 == 0)
         {// 별
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
             _scoreEff[1].GetComponent<ParticleSystem>().Play();

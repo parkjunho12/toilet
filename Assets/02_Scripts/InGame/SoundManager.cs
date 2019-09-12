@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
         COMBO_YEAHH,
         COMBO,
         SHOP_BUY,
+        BARK,
     }
 
     public static SoundManager _uniqueinstance;
@@ -79,7 +80,7 @@ public class SoundManager : MonoBehaviour
         _bgmPlayer.Play();
     }
 
-    public void PlayEffSound(eEffType type, float vol = 0.4f, bool isloop = false)
+    public void PlayEffSound(eEffType type, float vol = 0.6f, bool isloop = false)
     {
         GameObject go = new GameObject("EffectSound");
         go.transform.SetParent(transform);
