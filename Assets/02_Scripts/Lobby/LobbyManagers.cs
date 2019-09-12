@@ -25,7 +25,7 @@ public class LobbyManagers : MonoBehaviour
 
     string cAddress = "http://dbwo4011.cafe24.com/unity/select.php";
     string cAddress2 = "http://dbwo4011.cafe24.com/unity/BuyArrow.php";
-    string cAddress3 = "http://dbwo4011.cafe24.com/unity/BuyPet_Dog.php";
+    string cAddress3 = "http://dbwo4011.cafe24.com/unity/BuyPet.php";
     public Text GOLD
     {
         get { return _myGold; }
@@ -37,7 +37,7 @@ public class LobbyManagers : MonoBehaviour
         StartCoroutine(FindGold("http://dbwo4011.cafe24.com/unity/FindGold.php"));
         StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
         StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
-        StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet_Dog.php"));        // 강아지펫꺼 추가함.
+        StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));        // 강아지펫꺼 추가함.
         StartCoroutine(this.Call(cAddress));
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
@@ -80,11 +80,10 @@ public class LobbyManagers : MonoBehaviour
         _myGold.text = _shield.ToString();
         Debug.Log(_myProperty);
     }
-    public IEnumerator BuyPet_Dog(string _address2)
-    {// 강아지펫꺼 추가함.
+    public IEnumerator BuyPet(string _address2)
+    {
         WWWForm cForm = new WWWForm();
         cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
-        cForm.AddField("Pet_Dog", int.Parse(_HavePet_Dog.text));
         WWW wwwUrl = new WWW(_address2, cForm);
 
         yield return wwwUrl;
@@ -92,7 +91,6 @@ public class LobbyManagers : MonoBehaviour
         _myGold.text = _myProperty.ToString();
         Debug.Log(wwwUrl.text);
     }
-
     public IEnumerator FindGold(string _address)
     {
         WWWForm cForm = new WWWForm();
@@ -222,8 +220,8 @@ public class LobbyManagers : MonoBehaviour
         {
             if (int.Parse(_myGold.text) >= 1000)
             {// 살 수 있다.
-                StartCoroutine(this.BuyPet_Dog(cAddress3));
-                StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet_Dog.php"));
+                StartCoroutine(this.BuyPet(cAddress3));
+                StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
                 _petDogBought = true;
                 _buyState.gameObject.SetActive(true);

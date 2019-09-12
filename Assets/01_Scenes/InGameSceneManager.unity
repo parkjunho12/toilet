@@ -2781,6 +2781,11 @@ PrefabInstance:
       propertyPath: _startPosition.Array.data[1]
       value: 
       objectReference: {fileID: 145138591}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _Dog
+      value: 
+      objectReference: {fileID: 3881988422423667531}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f312d10f67801e4cb2279f9b44e2309, type: 3}
 --- !u!1001 &1623483995
@@ -4597,7 +4602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4343527246573924, guid: 7451ef01e53127446b9d7406220542f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.45
+      value: 1.464
       objectReference: {fileID: 0}
     - target: {fileID: 4343527246573924, guid: 7451ef01e53127446b9d7406220542f6, type: 3}
       propertyPath: m_LocalRotation.x

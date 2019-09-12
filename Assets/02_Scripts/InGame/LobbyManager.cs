@@ -47,7 +47,7 @@ public class LobbyManager : MonoBehaviour
     float _fadeNum;
     bool _isSpawn;
     int _rndNum;
-
+    public GameObject _Dog;
     public static LobbyManager INSTANCE
     {
         get { return _uniqueInstance; }
@@ -271,10 +271,12 @@ public class LobbyManager : MonoBehaviour
         yield return wwwUrl;
         String Arrow = "";
         String Shield = "";
+        String Pet = "";
         string[] split_text;
         split_text = wwwUrl.text.Split(' ');
         Arrow = split_text[0];
         Shield = split_text[1];
+        Pet = split_text[2];
         if (int.Parse(Arrow) == 1)
         {
             _Arrow.SetActive(true);
@@ -283,7 +285,15 @@ public class LobbyManager : MonoBehaviour
         {
             _Arrow.SetActive(false);
         }
-        if(int.Parse(Shield) > 0)
+        if (int.Parse(Pet) == 1)
+        {
+            _Dog.SetActive(true);
+        }
+        else
+        {
+            _Dog.SetActive(false);
+        }
+        if (int.Parse(Shield) > 0)
         {
             Debug.Log(Shield);
             StartCoroutine(this.UseShield("http://dbwo4011.cafe24.com/unity/UseShield.php", int.Parse(Shield)));
