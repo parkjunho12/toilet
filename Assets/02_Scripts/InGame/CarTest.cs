@@ -21,13 +21,13 @@ public class CarTest : MonoBehaviour
     void Awake()
     {
         _prefabPlayer = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(CarPass(Random.Range(5, 15)));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND ||
-           LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
+        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
         {
             transform.position = Vector3.MoveTowards(transform.position, _endPos.transform.position, _movSpeed * Time.deltaTime);
             //transform.LookAt(_carMovePoints[_nextIndex]);
@@ -39,7 +39,6 @@ public class CarTest : MonoBehaviour
 
                 if (_timeCheck >= 1.5f)
                 {
-                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_PASS, 0.3f);
                     this.gameObject.transform.position = _startPos.transform.position;
                 }
             }
@@ -49,7 +48,19 @@ public class CarTest : MonoBehaviour
             }
 
         }
+        else if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-   
+    IEnumerator CarPass(float _delaytime)
+    {
+        yield return new WaitForSeconds(_delaytime);
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_PASS, 0.3f);
+        StartCoroutine(CarPass(Random.Range(5, 15)));
+
+    }
+
+
 }

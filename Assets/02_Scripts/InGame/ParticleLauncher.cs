@@ -74,7 +74,7 @@ public class ParticleLauncher : MonoBehaviour
             }
             else
             {
-                _plus[_rndNum].GetComponent<Text>().text = "+ 3";
+                _plus[_rndNum].GetComponent<Text>().text = "+ 2";
                 _sum += 2.0f;
                 _flyScore += 2.0f;
             }

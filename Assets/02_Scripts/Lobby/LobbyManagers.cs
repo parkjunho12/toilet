@@ -99,7 +99,7 @@ public class LobbyManagers : MonoBehaviour
         yield return wwwUrl;
         _myProperty = int.Parse(wwwUrl.text);
         _myGold.text = _myProperty.ToString();
-        Debug.Log(wwwUrl.text.ToString());
+        //Debug.Log(wwwUrl.text.ToString());
     }
     public IEnumerator FindArrow(string _address)
     {

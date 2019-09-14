@@ -29,14 +29,15 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
     [SerializeField] GameObject _miniMap;
-    [SerializeField] Text _findTimer;
+    [SerializeField] GameObject _prefabCarPoints;
+    [SerializeField] GameObject _auraShield;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject[] _ctf3Light;
-    [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
+    [SerializeField] Text _findTimer;
     public Text _isShield;
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
@@ -94,8 +95,8 @@ public class LobbyManager : MonoBehaviour
     void Update()
     {
         _prefabPlayer.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y, 0);
-        _miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
-        _miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
+        //_miniMap.transform.position = new Vector3(_prefabPlayer.transform.position.x, 30, _prefabPlayer.transform.position.z);
+        //_miniMap.transform.rotation = Quaternion.Euler(90, 0, 0);
 
         //Debug.Log(_curState);
         switch (_curState)
@@ -277,6 +278,7 @@ public class LobbyManager : MonoBehaviour
         Arrow = split_text[0];
         Shield = split_text[1];
         Pet = split_text[2];
+
         if (int.Parse(Arrow) == 1)
         {
             _Arrow.SetActive(true);
@@ -285,6 +287,7 @@ public class LobbyManager : MonoBehaviour
         {
             _Arrow.SetActive(false);
         }
+
         if (int.Parse(Pet) == 1)
         {
             _Dog.SetActive(true);
@@ -293,11 +296,13 @@ public class LobbyManager : MonoBehaviour
         {
             _Dog.SetActive(false);
         }
+
         if (int.Parse(Shield) > 0)
         {
             Debug.Log(Shield);
             StartCoroutine(this.UseShield("http://dbwo4011.cafe24.com/unity/UseShield.php", int.Parse(Shield)));
             _isShield.GetComponent<Text>().text = "1";
+            _auraShield.SetActive(true);
         }
 
     }

@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject _shootPos;
     public GameObject[] _unrinal;
     public GameObject _arrow;
+    public GameObject _auraShield;
 
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
@@ -239,16 +240,16 @@ public class PlayerControl : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Car"))
         {
-            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
- 
-            
             Destroy(other.gameObject);
             if (_isShield.GetComponent<Text>().text.Equals("1"))
             {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
                 _isShield.GetComponent<Text>().text = "0";
+                _auraShield.SetActive(false);
             }
             else
             {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
                 _crash = true;
                 UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
                 UIFader._uniqueInstance.FadeIn(0.4f);
