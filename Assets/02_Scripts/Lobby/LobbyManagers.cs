@@ -34,11 +34,8 @@ public class LobbyManagers : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(FindGold("http://dbwo4011.cafe24.com/unity/FindGold.php"));
-        StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
-        StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
-        StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));        // 강아지펫꺼 추가함.
-        StartCoroutine(this.Call(cAddress));
+        StartCoroutine(this.Call(cAddress));     // 강아지펫꺼 추가함.
+       
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
     }
@@ -144,6 +141,10 @@ public class LobbyManagers : MonoBehaviour
         _optionMenu.SetActive(true);
         _volumeGraphicMenu.SetActive(true);
         _shopMenu.SetActive(false);
+        StartCoroutine(this.FindGold("http://dbwo4011.cafe24.com/unity/FindGold.php"));
+        StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
+        StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
+        StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));
     }
 
     public void Volume_GrphicBTN()
@@ -174,6 +175,7 @@ public class LobbyManagers : MonoBehaviour
             {// 살 수 있다.
                 StartCoroutine(this.BuyArrow(cAddress2));
                 StartCoroutine(this.FindArrow("http://dbwo4011.cafe24.com/unity/FindArrow.php"));
+                _HaveArrow.GetComponent<Text>().text = "Have";
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
                 _arrowBought = true;
                 _buyState.gameObject.SetActive(true);
@@ -193,9 +195,10 @@ public class LobbyManagers : MonoBehaviour
         Debug.Log(int.Parse(_myGold.text));
         if (int.Parse(_myGold.text) >= 1000)
         {// 살 수 있다.
+            _HaveShield.GetComponent<Text>().text = (int.Parse(_HaveShield.GetComponent<Text>().text) + 1).ToString();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
             StartCoroutine(this.BuyShield("http://dbwo4011.cafe24.com/unity/BuyShield.php"));
-            StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
+            //StartCoroutine(this.FindShield("http://dbwo4011.cafe24.com/unity/FindShield.php"));
             _buyState.gameObject.SetActive(true);
             _buyState.text = "(Shield) Success!";
             StartCoroutine(TextOff(1.5f));
