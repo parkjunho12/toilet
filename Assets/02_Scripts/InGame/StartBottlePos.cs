@@ -6,6 +6,7 @@ using UnityEngine;
 public class StartBottlePos : MonoBehaviour
 {
     [SerializeField] GameObject _bottle;
+    [SerializeField] GameObject _rootObj;
 
     Transform[] _roamPoints;
     List<GameObject> _ltSpawns;
@@ -31,6 +32,10 @@ public class StartBottlePos : MonoBehaviour
                 SpawnBottle();
                 _spawnCheck = false;
             }
+        }
+        else if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.START)
+        {
+            _rootObj.SetActive(false);
         }
     }
 

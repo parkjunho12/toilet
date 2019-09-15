@@ -70,9 +70,9 @@ public class PlayerControl : MonoBehaviour
 
         //_shootPos.SetActive(false);
 
-        _rndNumber = Random.Range(0, _unrinal.Length);
-        //_rndNumber = 3;
-        _unrinal[_rndNumber].SetActive(true);
+        //_rndNumber = Random.Range(0, _unrinal.Length);
+        _rndNumber = 0;
+        _unrinal[0].SetActive(true);
     }
 
     // Update is called once per frame
