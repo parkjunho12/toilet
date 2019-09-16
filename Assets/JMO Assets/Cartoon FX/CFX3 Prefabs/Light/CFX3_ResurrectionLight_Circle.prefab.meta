@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: b001267f8e7aa804a8a7433e8833b575
+guid: ada5d62ffe762ce4fbccc70dcdbc9022
 labels:
 - CartoonFX
 - Toon
 - Particles
-PrefabImporter:
-  externalObjects: {}
+NativeFormatImporter:
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
