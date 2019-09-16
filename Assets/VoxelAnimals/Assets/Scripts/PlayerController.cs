@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 18.5f;
-    public GameObject _shootPos;
     //public float jumpForce = 300;
     //public float timeBeforeNextJump = 1.2f;
     //private float canJump = 0f;
