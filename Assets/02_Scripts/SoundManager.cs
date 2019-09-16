@@ -26,6 +26,12 @@ public class SoundManager : MonoBehaviour
         GAMEOVER,
         PEE_SOUND,
         EAAAA,
+        COMBO01,
+        COMBO02,
+        COMBO03,
+        SHOP_BUY,
+        SHIELD,
+        BARK,
     }
 
     public static SoundManager _uniqueinstance;

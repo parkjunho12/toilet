@@ -120,9 +120,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator Bark(float _delayTime)
     {
         yield return new WaitForSeconds(_delayTime);
-        //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
         yield return new WaitForSeconds(0.7f);
-        //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
         StartCoroutine(Bark(Random.Range(3, 7)));
     }
 }
