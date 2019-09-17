@@ -31,6 +31,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _miniMap;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] GameObject _auraShield;
+    [SerializeField] GameObject _Dog;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject[] _ctf3Light;
@@ -48,7 +49,7 @@ public class LobbyManager : MonoBehaviour
     float _fadeNum;
     bool _isSpawn;
     int _rndNum;
-    public GameObject _Dog;
+
     public static LobbyManager INSTANCE
     {
         get { return _uniqueInstance; }

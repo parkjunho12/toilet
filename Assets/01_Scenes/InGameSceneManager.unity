@@ -1167,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 864243023, guid: 8885fa752a96246418d513a6a005896d, type: 3}
       propertyPath: _auraShield
       value: 
-      objectReference: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+      objectReference: {fileID: 864243026}
     - target: {fileID: 864243023, guid: 8885fa752a96246418d513a6a005896d, type: 3}
       propertyPath: _isShield
       value: 
@@ -1429,6 +1429,12 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &864243026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309709205, guid: 8885fa752a96246418d513a6a005896d,
+    type: 3}
+  m_PrefabInstance: {fileID: 864243021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &864243027 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1673605968, guid: 8885fa752a96246418d513a6a005896d,
@@ -2110,7 +2116,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _auraShield
       value: 
-      objectReference: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+      objectReference: {fileID: 864243026}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f312d10f67801e4cb2279f9b44e2309, type: 3}
 --- !u!1 &1660509813 stripped
@@ -2426,6 +2432,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7704831265810222986, guid: 31fed356320dbfa429747d64f40305af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7704831265847485321, guid: 31fed356320dbfa429747d64f40305af,
         type: 3}
       propertyPath: m_IsActive
@@ -2459,11 +2470,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1752426005, guid: 31fed356320dbfa429747d64f40305af, type: 3}
       propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7704831265810222986, guid: 31fed356320dbfa429747d64f40305af,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

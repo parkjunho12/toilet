@@ -230,25 +230,35 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log("SettingWalkPathRoamming Success");
     }
 
+    float Timer;
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bottle"))
+        if (other.gameObject.CompareTag("Bottle"))
         {
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.FINISHPEE);
             LobbyManager._uniqueInstance.PLAYCOUNT += 15.0f;
             Destroy(other.gameObject);
         }
-        if(other.gameObject.CompareTag("Car"))
+
+        if (other.gameObject.CompareTag("Car"))
         {
+
             Destroy(other.gameObject);
             if (_isShield.GetComponent<Text>().text.Equals("1"))
             {
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
-                _isShield.GetComponent<Text>().text = "0";
                 _auraShield.SetActive(false);
+                Timer += Time.deltaTime;
+                Debug.Log(Timer);
+                if (Timer > 0.03f)
+                {
+                    Timer = 0.0f;
+                    _isShield.GetComponent<Text>().text = "0";
+                }
             }
             else
             {
+
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
                 _crash = true;
                 UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
@@ -257,5 +267,6 @@ public class PlayerControl : MonoBehaviour
             }
 
         }
+
     }
 }
