@@ -249,7 +249,7 @@ public class PlayerControl : MonoBehaviour
                 _auraShield.SetActive(false);
                 Timer += Time.deltaTime;
                 Debug.Log(Timer);
-                if (Timer > 0.021f)
+                if (Timer > 0.022f)
                 {
                     
                     Timer = 0.0f;
