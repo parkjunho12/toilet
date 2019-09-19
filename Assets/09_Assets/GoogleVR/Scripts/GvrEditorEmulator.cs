@@ -53,7 +53,7 @@ public class GvrEditorEmulator : MonoBehaviour
     private float mouseX = 0;
     private float mouseY = 0;
     private float mouseZ = 0;
-
+    
     /// <summary>Gets the instance for this singleton class.</summary>
     /// <value>The instance for this singleton class.</value>
     public static GvrEditorEmulator Instance

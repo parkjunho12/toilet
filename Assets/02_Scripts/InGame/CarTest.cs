@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarTest : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CarTest : MonoBehaviour
     [SerializeField] float _rotSpeed = 5.0f;
     [SerializeField] GameObject _startPos;
     [SerializeField] GameObject _endPos;
+    [SerializeField] GameObject _auraShield;
+    [SerializeField] GameObject _carCrashBoom;
 
     List<Vector3> _carMovePoints;
     Vector3 _posTarget;
@@ -15,7 +18,7 @@ public class CarTest : MonoBehaviour
 
     int _curIndex;
     int _nextIndex;
-    float _timeCheck;
+    //float _timeCheck;
     bool _distance;
 
     void Awake()
@@ -35,9 +38,8 @@ public class CarTest : MonoBehaviour
 
             if (Vector3.Distance(transform.position, _endPos.transform.position) <= 0.3f)
             {
-                _timeCheck += Time.deltaTime;
 
-                if (_timeCheck >= 1.5f)
+                //if (_timeCheck >= 1.5f)
                 {
                     this.gameObject.transform.position = _startPos.transform.position;
                 }
@@ -62,5 +64,40 @@ public class CarTest : MonoBehaviour
 
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+            if (LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text.Equals("1"))
+            {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
+                LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text = "0";
+                _auraShield.SetActive(false);
+            }
+            else
+            {
+                PlayerControl._uniqueInstance.ChangedAction(PlayerControl._uniqueInstance.CURSTATE =
+                    PlayerControl.ePlayerActState.CRASH_TO_CAR);
+                _carCrashBoom.GetComponent<ParticleSystem>().Play();
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
+                LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+                //StartCoroutine(returnIDLE(5.0f));
+                //UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+                //UIFader._uniqueInstance.FadeIn(0.4f);
+            }
+        }
+    }
 
+    //IEnumerator returnIDLE(float _delayTime)
+    //{
+    //    yield return new WaitForSeconds(_delayTime);
+    //    PlayerControl._uniqueInstance.CURSTATE = PlayerControl.ePlayerActState.IDLE;
+    //    if (_crash)
+    //    {
+    //        _crash = false;
+    //        UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
+    //        UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
+    //    }
+    //}
 }

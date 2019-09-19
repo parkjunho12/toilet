@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
         IDLE,
         WALK,
         RUN,
+        CRASH_TO_CAR,
     }
     
     public static PlayerControl _uniqueInstance;
@@ -70,15 +71,17 @@ public class PlayerControl : MonoBehaviour
 
         //_shootPos.SetActive(false);
 
-        //_rndNumber = Random.Range(0, _unrinal.Length);
-        _rndNumber = 0;
-        _unrinal[0].SetActive(true);
+        //_rndNumber = 0;
+        //_unrinal[0].SetActive(true);
+        _rndNumber = Random.Range(0, _unrinal.Length);
+        _unrinal[_rndNumber].SetActive(true);
+
+        StartCoroutine(Breath(7.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(_curPlyState);
         //if (!SpawnControl._uniqueInstance.SPAWNCHECK)
         //if(LobbyManager.INSTANCE.NOWGAMESTATE == LobbyManager.eGameState.PLYRUNNING)
         {
@@ -87,18 +90,17 @@ public class PlayerControl : MonoBehaviour
                 case ePlayerActState.RUN:
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        _timeCheck += Time.deltaTime;
-                        if (_timeCheck > 2.7f)
+                        //_timeCheck += Time.deltaTime;
+                        //if (_timeCheck > 2.7f)
                         {// 숨소리 효과음.
-                            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
-                            _timeCheck = 0;
-
-                            if (_crash)
-                            {
-                                _crash = false;
-                                UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
-                                UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
-                            }
+                            //SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+                            //_timeCheck = 0;
+                            //if (_crash)
+                            //{
+                            //    _crash = false;
+                            //    UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
+                            //    UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
+                            //}
                         }
 
                         if (FixedTouchField._uniqueInstance.PRESSED)
@@ -155,16 +157,20 @@ public class PlayerControl : MonoBehaviour
                     }
                     break;
                 case ePlayerActState.WALK:
+                    StopCoroutine(Breath(2.7f));
                     if (Vector3.Distance(transform.position, _walkPoints[_rndNumber]) < 0.15f)
                     {
+                        _isActing = true;
                         _shootPos.SetActive(true);
+                        _auraShield.SetActive(false);
 
-                        LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
                         ChangedAction(ePlayerActState.IDLE);
                         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.ZIPPERDOWN);
+                        LobbyManager._uniqueInstance.NOWGAMESTATE = LobbyManager.eGameState.START;      // 게임 시작
                         LobbyManager._uniqueInstance.PLAYCOUNT = 50.0f;
-                        _isActing = true;
                     }
+                    break;
+                default:
                     break;
             }
             
@@ -202,12 +208,16 @@ public class PlayerControl : MonoBehaviour
                 _naviAgent.stoppingDistance = 0;
                 break;
             case ePlayerActState.IDLE:
-                _naviAgent.enabled = false;                
+                _naviAgent.enabled = true;                
                 break;
             case ePlayerActState.WALK:
                 _naviAgent.enabled = true;
                 _naviAgent.speed = 1.0f;
                 _naviAgent.stoppingDistance = 0;
+                break;
+            case ePlayerActState.CRASH_TO_CAR:
+                _naviAgent.enabled = false;
+                StartCoroutine(returnIDLE(4.0f));
                 break;
             default:
                 break;
@@ -230,7 +240,7 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log("SettingWalkPathRoamming Success");
     }
 
-    float Timer;
+    //float Timer;
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bottle"))
@@ -240,33 +250,49 @@ public class PlayerControl : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.CompareTag("Car"))
-        {
+        //if (other.gameObject.CompareTag("Car"))
+        //{
+        //    Destroy(other.gameObject);
+        //    if (_isShield.GetComponent<Text>().text.Equals("1"))
+        //    {
+        //        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
+        //        _auraShield.SetActive(false);
+        //       // Debug.Log(Timer);
+        //        //if (Timer > 0.0227f)
+        //        {
+        //           //Timer = 0.0f;
+        //            _isShield.GetComponent<Text>().text = "0";
+        //        }
+        //    }
+        //    if(_isShield.GetComponent<Text>().text != "1")
+        //    {
+        //        _crash = true;
+        //        ChangedAction(ePlayerActState.CRASH_TO_CAR);
+        //        StartCoroutine(returnIDLE(5.0f));
+        //        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
+        //        UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+        //        UIFader._uniqueInstance.FadeIn(0.4f);
+        //        LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+        //    }
+        //}
+    }
 
-            Destroy(other.gameObject);
-            if (_isShield.GetComponent<Text>().text.Equals("1"))
-            {
-                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
-                _auraShield.SetActive(false);
-                Timer += Time.deltaTime;
-                Debug.Log(Timer);
-                if (Timer > 0.03f)
-                {
-                    Timer = 0.0f;
-                    _isShield.GetComponent<Text>().text = "0";
-                }
-            }
-            else
-            {
+    IEnumerator Breath(float _delayTime)
+    {
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH, 0.3f);
+        yield return new WaitForSeconds(_delayTime);
+        StartCoroutine(Breath(7.0f));
+        //if (_crash)
+        //{
+        //    _crash = false;
+        //    UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.yellow;
+        //    UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
+        //}
+    }
 
-                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
-                _crash = true;
-                UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
-                UIFader._uniqueInstance.FadeIn(0.4f);
-                LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
-            }
-
-        }
-
+    IEnumerator returnIDLE(float _delayTime)
+    {
+        yield return new WaitForSeconds(_delayTime);
+        _curPlyState = ePlayerActState.IDLE;
     }
 }

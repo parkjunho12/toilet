@@ -26,7 +26,7 @@ public class CharacterMoveToUnrinal : MonoBehaviour
         _aniCtrl = GetComponent<Animator>();
         _naviMesh = GetComponent<NavMeshAgent>();
 
-        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
+        // SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.RUNNING_BREATH);
     }
 
     // Update is called once per frame

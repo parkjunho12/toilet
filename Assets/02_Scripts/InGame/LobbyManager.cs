@@ -31,7 +31,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _miniMap;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] GameObject _auraShield;
-    [SerializeField] GameObject _Dog;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject[] _ctf3Light;
@@ -73,6 +72,11 @@ public class LobbyManager : MonoBehaviour
     {
         get { return _fadeNum; }
         set { _fadeNum = value; }
+    }
+    public Text ISSHIELD
+    {
+        get { return _isShield; }
+        set { _isShield = value; }
     }
 
     // Start is called before the first frame update
@@ -291,11 +295,11 @@ public class LobbyManager : MonoBehaviour
 
         if (int.Parse(Pet) == 1)
         {
-            _Dog.SetActive(true);
+            _prefabDog.SetActive(true);
         }
         else
         {
-            _Dog.SetActive(false);
+            _prefabDog.SetActive(false);
         }
 
         if (int.Parse(Shield) > 0)

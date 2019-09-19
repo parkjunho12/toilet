@@ -9,6 +9,8 @@ public class LobbyManagers : MonoBehaviour
     [SerializeField] GameObject _optionMenu;
     [SerializeField] GameObject _volumeGraphicMenu;
     [SerializeField] GameObject _shopMenu;
+    [SerializeField] GameObject _howToPlay;
+    
     public Text _HaveArrow;
     public Text _HaveShield;
     public Text _HavePet_Dog;
@@ -147,6 +149,15 @@ public class LobbyManagers : MonoBehaviour
         StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));
     }
 
+    public void HowToPlayBtn()
+    {// 메인메뉴 => 옵션.
+        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);
+        _mainMenu.SetActive(false);
+        _optionMenu.SetActive(false);
+        _shopMenu.SetActive(false);
+        _howToPlay.SetActive(true);
+    }
+
     public void Volume_GrphicBTN()
     {// 옵션 => 음향 및 그래픽 조절
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BTN);
@@ -247,6 +258,7 @@ public class LobbyManagers : MonoBehaviour
         _volumeGraphicMenu.SetActive(false);
         _shopMenu.SetActive(false);
         _mainMenu.SetActive(true);
+        _howToPlay.SetActive(false);
     }
 
     public void QuitBtn()
