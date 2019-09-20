@@ -257,17 +257,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _effClips.Array.data[14]
       value: 
-      objectReference: {fileID: 8300000, guid: 351e04e5fa0648b4a97bef9688ee619f, type: 3}
+      objectReference: {fileID: 8300000, guid: 0ddd2c00efb3e3840bc5d91cf12c0452, type: 3}
     - target: {fileID: 8164540835980244096, guid: 91d08cd30f60a404b9b9203c711db510,
         type: 3}
       propertyPath: _effClips.Array.data[15]
       value: 
-      objectReference: {fileID: 8300000, guid: 0ddd2c00efb3e3840bc5d91cf12c0452, type: 3}
+      objectReference: {fileID: 8300000, guid: fae7af72a33182243a943d80b36ccb05, type: 3}
     - target: {fileID: 8164540835980244096, guid: 91d08cd30f60a404b9b9203c711db510,
         type: 3}
       propertyPath: _effClips.Array.data[16]
       value: 
-      objectReference: {fileID: 8300000, guid: fae7af72a33182243a943d80b36ccb05, type: 3}
+      objectReference: {fileID: 8300000, guid: 351e04e5fa0648b4a97bef9688ee619f, type: 3}
     - target: {fileID: 8164540835980244096, guid: 91d08cd30f60a404b9b9203c711db510,
         type: 3}
       propertyPath: _effClips.Array.data[17]
@@ -277,11 +277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _effClips.Array.data[18]
       value: 
-      objectReference: {fileID: 8300000, guid: f3c8c9b409a1cef4689d2502ca2cfa93, type: 3}
+      objectReference: {fileID: 8300000, guid: 7279390bb10064248932f097029e406c, type: 3}
     - target: {fileID: 8164540835980244096, guid: 91d08cd30f60a404b9b9203c711db510,
         type: 3}
       propertyPath: _effClips.Array.data[19]
       value: 
-      objectReference: {fileID: 8300000, guid: 7279390bb10064248932f097029e406c, type: 3}
+      objectReference: {fileID: 8300000, guid: f3c8c9b409a1cef4689d2502ca2cfa93, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91d08cd30f60a404b9b9203c711db510, type: 3}

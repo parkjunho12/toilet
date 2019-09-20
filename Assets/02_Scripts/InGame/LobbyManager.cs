@@ -36,6 +36,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text[] _timer;
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
+    [SerializeField] Text _isShield;
 
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
@@ -72,6 +73,11 @@ public class LobbyManager : MonoBehaviour
         get { return _fadeNum; }
         set { _fadeNum = value; }
     }
+    public Text ISSHIELD
+    {
+        get { return _isShield; }
+        set { _isShield = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +93,8 @@ public class LobbyManager : MonoBehaviour
         _touchShootUI.SetActive(true);
         _gameStateUI[_rndNum].SetActive(false);
         _gameStateTxt[_rndNum].GetComponent<Text>();
-        _gameStateTxt[_rndNum].SetActive(false);       
+        _gameStateTxt[_rndNum].SetActive(false);
+        _isShield.text = "1";
     }
 
     // Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarTest : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CarTest : MonoBehaviour
     [SerializeField] float _rotSpeed = 5.0f;
     [SerializeField] GameObject _startPos;
     [SerializeField] GameObject _endPos;
+    [SerializeField] GameObject _auraShield;
+    [SerializeField] GameObject _carCrashBoom;
 
     List<Vector3> _carMovePoints;
     Vector3 _posTarget;
@@ -60,6 +63,29 @@ public class CarTest : MonoBehaviour
         SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_PASS, 0.3f);
         StartCoroutine(CarPass(Random.Range(5, 15)));
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+            if (LobbyManager._uniqueInstance.ISSHIELD.GetComponent<Text>().text.Equals("1"))
+            {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
+                LobbyManager._uniqueInstance.ISSHIELD.GetComponent<Text>().text = "0";
+                _auraShield.SetActive(false);
+            }
+            else
+            {
+                _carCrashBoom.GetComponent<ParticleSystem>().Play();
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
+                LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+                //StartCoroutine(returnIDLE(5.0f));
+                //UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+                //UIFader._uniqueInstance.FadeIn(0.4f);
+            }
+        }
     }
 
 
