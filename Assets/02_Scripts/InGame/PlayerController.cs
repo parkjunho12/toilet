@@ -9,36 +9,36 @@ public class PlayerController : MonoBehaviour
     //public float jumpForce = 300;
     //public float timeBeforeNextJump = 1.2f;
     //private float canJump = 0f;
-    public Transform _lookAt;
-    NavMeshAgent _naviAgent;
-    Animator anim;
-    Rigidbody rb;
+    //public Transform _lookAt;
+    //NavMeshAgent _naviAgent;
+    //Animator anim;
+    //Rigidbody rb;
     //GameObject _prefabPlayer;
 
-    List<Vector3> _walkPoints;
-    Vector3 _posTarget;
+    //List<Vector3> _walkPoints;
+    //Vector3 _posTarget;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
+        StartCoroutine(Bark(Random.Range(3, 7)));
+        //anim = GetComponent<Animator>();
+        //rb = GetComponent<Rigidbody>();
         //_naviAgent = GetComponent<NavMeshAgent>();
 
         //_prefabPlayer = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(Bark(Random.Range(3, 7)));
     }
 
     void Update()
     {
-        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
-        {
-            ControllPlayer();
-        }
-        else
-        {
-            anim.SetInteger("Walk", 0);
-        }
-        transform.LookAt(_lookAt);
+        //if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
+        //{
+        //    ControllPlayer();
+        //}
+        //else
+        //{
+        //    anim.SetInteger("Walk", 0);
+        //}
+        //transform.LookAt(_lookAt);
         //else if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.START)
         //{           
         //    DogWalkToToilet();
@@ -61,44 +61,44 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    void ControllPlayer()
-    {
+    //void ControllPlayer()
+    //{
         
-        //float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        //float moveVertical = Input.GetAxisRaw("Vertical");
+    //    //float moveHorizontal = Input.GetAxisRaw("Horizontal");
+    //    //float moveVertical = Input.GetAxisRaw("Vertical");
 
-        // Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        if (FixedTouchField._uniqueInstance.PRESSED)
-        {
-            anim.SetInteger("Walk", 1);
-        }
-        else
-        {
-            anim.SetInteger("Walk", 0);
-        }
-        //if (Vector3.Distance(transform.position, _prefabPlayer.transform.position) < 2.0f)
-        //{
-        //    //transform.LookAt(_prefabPlayer.transform.position);
-        //}
-        //else
-        //{
-        //    anim.SetInteger("Walk", 1);
-        //    //transform.position = Vector3.MoveTowards(transform.position, _prefabPlayer.transform.position, movementSpeed * Time.deltaTime);
-        //    //transform.LookAt(_prefabPlayer.transform.position);
-        //}
+    //    // Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+    //    if (FixedTouchField._uniqueInstance.PRESSED)
+    //    {
+    //        anim.SetInteger("Walk", 1);
+    //    }
+    //    else
+    //    {
+    //        anim.SetInteger("Walk", 0);
+    //    }
+    //    //if (Vector3.Distance(transform.position, _prefabPlayer.transform.position) < 2.0f)
+    //    //{
+    //    //    //transform.LookAt(_prefabPlayer.transform.position);
+    //    //}
+    //    //else
+    //    //{
+    //    //    anim.SetInteger("Walk", 1);
+    //    //    //transform.position = Vector3.MoveTowards(transform.position, _prefabPlayer.transform.position, movementSpeed * Time.deltaTime);
+    //    //    //transform.LookAt(_prefabPlayer.transform.position);
+    //    //}
 
-        //if (movement != Vector3.zero)
-        //{
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
-        //    anim.SetInteger("Walk", 1);
-        //}
-        //else
-        //{
-        //    anim.SetInteger("Walk", 0);
-        //}
+    //    //if (movement != Vector3.zero)
+    //    //{
+    //    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
+    //    //    anim.SetInteger("Walk", 1);
+    //    //}
+    //    //else
+    //    //{
+    //    //    anim.SetInteger("Walk", 0);
+    //    //}
 
-        //transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
-    }
+    //    //transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+    //}
 
     //public void DogWalkToToilet()
     //{

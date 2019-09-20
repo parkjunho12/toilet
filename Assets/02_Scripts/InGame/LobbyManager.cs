@@ -216,7 +216,8 @@ public class LobbyManager : MonoBehaviour
     IEnumerator GoToLobby(float _delayTime)
     {
         yield return new WaitForSeconds(_delayTime);
-        SceneChanger._uniqueInstance.FadeToLevel02(1);
+        //SceneChanger._uniqueInstance.FadeToLevel02(1);
+        SceneChanger._uniqueInstance.OnFadeCompleteInGame();
     }
 
     public void GameReady()
