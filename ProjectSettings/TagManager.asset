@@ -21,6 +21,9 @@ TagManager:
   - Car
   - FxTemporaire
   - DogShootPointer
+  - dontmove
+  - listlast
+  - ControllerSpawn
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class LobbyManagers : MonoBehaviour
     [SerializeField] GameObject _volumeGraphicMenu;
     [SerializeField] GameObject _shopMenu;
     [SerializeField] GameObject _howToPlay;
-    
+    public GameObject centerEye;
     public Text _HaveArrow;
     public Text _HaveShield;
     public Text _HavePet_Dog;
@@ -37,11 +37,11 @@ public class LobbyManagers : MonoBehaviour
     void Start()
     {
         StartCoroutine(this.Call(cAddress));     // 강아지펫꺼 추가함.
-
+        transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
     }
-
+   
     public void StartBtn()
     {// 게임시작 버튼.
         SceneChanger._uniqueInstance.IMAGE.SetActive(true);

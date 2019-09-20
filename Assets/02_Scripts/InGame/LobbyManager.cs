@@ -28,7 +28,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
-    [SerializeField] GameObject _miniMap;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] GameObject _auraShield;
     [SerializeField] GameObject[] _gameStateUI;

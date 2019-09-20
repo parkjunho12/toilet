@@ -19,26 +19,31 @@ public class PlayerControl : MonoBehaviour
     public GameObject[] _unrinal;
     public GameObject _arrow;
     public GameObject _auraShield;
-
+    public GameObject centerEye;
     protected float ShootAngle;
     protected float ShootAngleSpeed = 0.2f;
+    public Vector2 joystick;
+    public static Vector3 _movedir;
+    public Text _isShield; 
 
     Animator aniCtrl;
     NavMeshAgent _naviAgent;
     Rigidbody _rigidbody;
-
+    Transform _controllerPos;
     GameObject _car;
     Transform _lookPos;
     Transform _gameStartBtn;
     List<Vector3> _walkPoints;
+
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-    public Text _isShield;
     float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
     bool _isActing;
     bool _crash;
+    float dirX = 0;
+    float dirZ = 0;
 
     public ePlayerActState CURSTATE
     {// 플레이어 에니메이션 상태.
@@ -70,7 +75,8 @@ public class PlayerControl : MonoBehaviour
         _timeCheck = 0;
 
         //_shootPos.SetActive(false);
-
+        _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
+        _shootPos.SetActive(false);
         //_rndNumber = 0;
         //_unrinal[0].SetActive(true);
         _rndNumber = Random.Range(0, _unrinal.Length);
@@ -103,29 +109,63 @@ public class PlayerControl : MonoBehaviour
                             //}
                         }
 
-                        if (FixedTouchField._uniqueInstance.PRESSED)
-                        {// 화면이 터치될 시 캐릭터 움직임..
-                         // 시간차에 따른 캐릭터 달리기 속도 저하..
+                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) || Input.GetMouseButton(0))
+                        {
+                            PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.RUN);
+                            Vector2 coord = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, OVRInput.Controller.RTrackedRemote);
+                            transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
+                            var absX = Mathf.Abs(coord.x);
+                            var absY = Mathf.Abs(coord.y);
+                            if (absX > absY)
+                            {
+                                if (coord.x > 0)
+                                    dirX = +1;
+                                else
+                                    dirX = -1;
+                            }
+                            else
+                            {
+                                if (coord.y > 0)
+                                    dirZ = +1;
+                                else
+                                    dirZ = -1;
+                            }
+
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
-                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                    * 8.5f * Time.deltaTime);
+
+                                _movedir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
-                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 6.0f * Time.deltaTime);
+                                bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+                                //if (FixedTouchField._uniqueInstance.PRESSED)
+                                if (iskeydown)
+                                {
+                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);
+                               
+                                }
+                                else
+                                {
+                                  
+                                    _movedir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
+                                }
+
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else
                             {
-                                transform.Translate(new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z)
-                                                                    * 5.0f * Time.deltaTime);
+                                _movedir = new Vector3(dirX * 5.5f, 0, dirZ * 5.5f);
+                                transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                         }
                         else
                         {// 화면 터치가 안됬을 시 캐릭터 IDLE..
-                            ChangedAction(ePlayerActState.IDLE);
+                            PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.IDLE);
+                            dirX = 0;
+                            dirZ = 0;
                         }
                     }
 
@@ -141,7 +181,7 @@ public class PlayerControl : MonoBehaviour
                     _isActing = true;
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        if (FixedTouchField._uniqueInstance.PRESSED)
+                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) )
                         {
                             aniCtrl.enabled = true;
                             ChangedAction(ePlayerActState.RUN);
