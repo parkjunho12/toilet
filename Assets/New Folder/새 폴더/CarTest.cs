@@ -8,6 +8,8 @@ public class CarTest : MonoBehaviour
     [SerializeField] float _rotSpeed = 5.0f;
     [SerializeField] GameObject _startPos;
     [SerializeField] GameObject _endPos;
+    [SerializeField] GameObject _auraShield;
+    [SerializeField] GameObject _carCrashBoom;
 
     List<Vector3> _carMovePoints;
     Vector3 _posTarget;
@@ -62,5 +64,28 @@ public class CarTest : MonoBehaviour
 
     }
 
-
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+            if (LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text.Equals("1"))
+            {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
+                LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text = "0";
+                _auraShield.SetActive(false);
+            }
+            else
+            {
+                //PlayerControl._uniqueInstance.ChangedAction(PlayerControl._uniqueInstance.CURSTATE =
+                //    PlayerControl.ePlayerActState.CRASH_TO_CAR);
+                _carCrashBoom.GetComponent<ParticleSystem>().Play();
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
+                LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
+                //StartCoroutine(returnIDLE(5.0f));
+                //UIFader._uniqueInstance.UIELEMENT.GetComponent<Image>().color = Color.white;
+                //UIFader._uniqueInstance.FadeIn(0.4f);
+            }
+        }
+    }
 }
