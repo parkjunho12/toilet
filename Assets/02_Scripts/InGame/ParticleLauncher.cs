@@ -65,6 +65,7 @@ public class ParticleLauncher : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
+            Handheld.Vibrate();
             //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
             if (_isDogActive.activeSelf == true)
             {
