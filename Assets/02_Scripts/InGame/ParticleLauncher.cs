@@ -17,7 +17,7 @@ public class ParticleLauncher : MonoBehaviour
 
     List<ParticleCollisionEvent> collisionEvent;
     public Gradient particleGradient;
-
+    int count;
     float _timeCheck;
     float _urinalScore;
     float _flyScore;
@@ -65,7 +65,6 @@ public class ParticleLauncher : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
-            Handheld.Vibrate();
             //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
             if (_isDogActive.activeSelf == true)
             {
@@ -91,28 +90,32 @@ public class ParticleLauncher : MonoBehaviour
             EmitAtLocation(collisionEvent[i]);
         }
     }
+    bool is_combo = false;
 
     void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
     {
         splatter.transform.position = particleCollisionEvent.intersection;
         splatter.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
 
-        if (_flyScore % 150 == 0)
+        if (_flyScore % 150 == 0 && _flyScore != 0)
         {// 솜사탕
+            Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
             _scoreEff[3].GetComponent<ParticleSystem>().Play();
             _scoreEff[3].transform.position = particleCollisionEvent.intersection;
             _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 330 == 0)
+        else if (_flyScore % 330 == 0 && _flyScore != 0)
         {// BAAM
+            Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
             _scoreEff[2].GetComponent<ParticleSystem>().Play();
             _scoreEff[2].transform.position = particleCollisionEvent.intersection;
             _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
-        else if (_flyScore % 810 == 0)
+        else if (_flyScore % 810 == 0 && _flyScore != 0)
         {// 별
+            Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
             _scoreEff[1].GetComponent<ParticleSystem>().Play();
             _scoreEff[1].transform.position = particleCollisionEvent.intersection;
