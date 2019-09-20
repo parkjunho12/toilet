@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarTest : MonoBehaviour
 {
@@ -69,16 +70,26 @@ public class CarTest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Destroy(this.gameObject);
+<<<<<<< HEAD
             if (LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text.Equals("1"))
             {
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
                 LobbyManager._uniqueInstance._isShield.GetComponent<Text>().text = "0";
+=======
+            if (LobbyManager._uniqueInstance.ISSHIELD.GetComponent<Text>().text.Equals("1"))
+            {
+                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHIELD, 1.0f);
+                LobbyManager._uniqueInstance.ISSHIELD.GetComponent<Text>().text = "0";
+>>>>>>> junoda
                 _auraShield.SetActive(false);
             }
             else
             {
+<<<<<<< HEAD
                 //PlayerControl._uniqueInstance.ChangedAction(PlayerControl._uniqueInstance.CURSTATE =
                 //    PlayerControl.ePlayerActState.CRASH_TO_CAR);
+=======
+>>>>>>> junoda
                 _carCrashBoom.GetComponent<ParticleSystem>().Play();
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.CAR_CRASH);
                 LobbyManager._uniqueInstance.PLAYCOUNT -= 25.0f;
@@ -88,4 +99,9 @@ public class CarTest : MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> junoda
 }

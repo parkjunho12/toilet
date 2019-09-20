@@ -9,13 +9,15 @@ public class ParticleLauncher : MonoBehaviour
     public AudioClip[] _soundEff;
     [SerializeField] GameObject[] _peeScore;
     [SerializeField] GameObject[] _plus;
+    [SerializeField] GameObject[] _scoreEff;        // 물폭탄, 별폭죽, BAAM, 솜사탕폭죽
+    [SerializeField] GameObject _isDogActive;
 
     public ParticleSystem particleLauncher;         // 총알 발사되는 파티클 개체
     public ParticleSystem splatter;                 // 발사된 총알개체가 벽에 충돌될때 호출되는 충돌반응 이펙트  
 
     List<ParticleCollisionEvent> collisionEvent;
     public Gradient particleGradient;
-
+    int count;
     float _timeCheck;
     float _urinalScore;
     float _flyScore;
@@ -58,32 +60,67 @@ public class ParticleLauncher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Toilet"))
         {
-         
             _sum += 0.01f;
             _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
+            //AudioSource.PlayClipAtPoint(_soundEff[1], transform.position);
+            if (_isDogActive.activeSelf == true)
+            {
+                _plus[_rndNum].GetComponent<Text>().text = "+ 3";
+                _sum += 3.0f;
+                _flyScore += 3.0f;
+            }
+            else
+            {
+                _plus[_rndNum].GetComponent<Text>().text = "+ 2";
+                _sum += 2.0f;
+                _flyScore += 2.0f;
+            }
+
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
-          
-            _sum += 5.0f;
             _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
         }
 
-
-   
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvent);
         for (int i = 0; i < collisionEvent.Count; i++)
         {
             EmitAtLocation(collisionEvent[i]);
         }
     }
+    bool is_combo = false;
 
     void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
     {
         splatter.transform.position = particleCollisionEvent.intersection;
         splatter.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+
+        if (_flyScore % 150 == 0 && _flyScore != 0)
+        {// 솜사탕
+            Handheld.Vibrate();
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
+            _scoreEff[3].GetComponent<ParticleSystem>().Play();
+            _scoreEff[3].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
+        else if (_flyScore % 330 == 0 && _flyScore != 0)
+        {// BAAM
+            Handheld.Vibrate();
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
+            _scoreEff[2].GetComponent<ParticleSystem>().Play();
+            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
+        else if (_flyScore % 810 == 0 && _flyScore != 0)
+        {// 별
+            Handheld.Vibrate();
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+            _scoreEff[1].GetComponent<ParticleSystem>().Play();
+            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        }
 
         ParticleSystem.MainModule psMain = splatter.main;
         psMain.startColor = particleGradient.Evaluate(Random.Range(0f, 1f));
@@ -92,20 +129,17 @@ public class ParticleLauncher : MonoBehaviour
     private void Update()
     {
         //if (Input.GetMouseButtonDown(0))
-        if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
+        if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
         {
-            bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-            //if (FixedTouchField._uniqueInstance.PRESSED)
-            if (iskeydown || Input.GetMouseButton(0))
+            if (FixedTouchField._uniqueInstance.PRESSED)
             {
-                
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;
                 ParticleSystem.MainModule psmain = particleLauncher.main;
                 psmain.startColor = particleGradient.Evaluate(UnityEngine.Random.Range(0f, 1f));
                 particleLauncher.Emit(1);
 
                 _timeCheck += Time.deltaTime;
-                if(_timeCheck > 0.1f)
+                if (_timeCheck > 0.1f)
                 {
                     _timeCheck = 0;
                     AudioSource.PlayClipAtPoint(_soundEff[0], particleLauncher.transform.position);

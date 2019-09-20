@@ -73,6 +73,11 @@ public class LobbyManager : MonoBehaviour
         get { return _fadeNum; }
         set { _fadeNum = value; }
     }
+    public Text ISSHIELD
+    {
+        get { return _isShield; }
+        set { _isShield = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
