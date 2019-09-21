@@ -57,6 +57,15 @@ public class LobbyManagers : MonoBehaviour
         yield return wwwUrl;
         _content.GetComponent<Text>().text = wwwUrl.text;
     }
+    public IEnumerator MyScore(string _address)
+    {
+        WWWForm cForm = new WWWForm();
+        cForm.AddField("id", SystemInfo.deviceUniqueIdentifier);
+        WWW wwwUrl = new WWW(_address, cForm);
+        yield return wwwUrl;
+        _content.GetComponent<Text>().text = "<color=#ff0000>"+ wwwUrl.text + "</color>";
+    }
+
     public IEnumerator BuyArrow(string _address2)
     {
         WWWForm cForm = new WWWForm();
@@ -170,6 +179,14 @@ public class LobbyManagers : MonoBehaviour
         _shopMenu.SetActive(true);
         _volumeGraphicMenu.SetActive(false);
         StartCoroutine(LightGold(2.0f));
+    }
+    public void Myranking()
+    {
+        StartCoroutine(this.MyScore("http://dbwo4011.cafe24.com/unity/MyScore.php"));
+    }
+    public void AllUser()
+    {
+        StartCoroutine(this.Call(cAddress));
     }
     public void BuyArrow()
     {// 네비 화살표 아이템. 가격 임의

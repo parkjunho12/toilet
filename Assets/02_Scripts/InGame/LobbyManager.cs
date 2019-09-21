@@ -48,7 +48,7 @@ public class LobbyManager : MonoBehaviour
     float _fadeNum;
     bool _isSpawn;
     int _rndNum;
-
+    int _final_time;
     public static LobbyManager INSTANCE
     {
         get { return _uniqueInstance; }
@@ -158,6 +158,7 @@ public class LobbyManager : MonoBehaviour
                     _curState = eGameState.END;
                     //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
+                _final_time = (int)_timeCheck * 10;
                 break;
             case eGameState.START:
                 _gameStateUI[_rndNum].SetActive(true);
@@ -191,12 +192,13 @@ public class LobbyManager : MonoBehaviour
                 }
                 break;
             case eGameState.RESULT:
-                _timeCheck += Time.deltaTime;
-
-                if (_timeCheck >= 2.0f)
+                _timeCheck += 10;
+                _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
+                if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM)
                 {
                     _timeCheck = 0;
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString() +"\nTime Bonus : " +_final_time;
+                    ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
@@ -265,7 +267,7 @@ public class LobbyManager : MonoBehaviour
     {
         WWWForm cForm = new WWWForm();
         cForm.AddField("UID", SystemInfo.deviceUniqueIdentifier);
-        cForm.AddField("id", ((int)ParticleLauncher._uniqueInstance.SUM));
+        cForm.AddField("id", (int)ParticleLauncher._uniqueInstance.SUM );
         WWW wwwUrl = new WWW(_address, cForm);
         yield return wwwUrl;
         Debug.Log(wwwUrl.text);
