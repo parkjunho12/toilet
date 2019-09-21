@@ -77,6 +77,7 @@ public class PlayerControl : MonoBehaviour
         //_shootPos.SetActive(false);
         _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
         _shootPos.SetActive(false);
+       
         //_rndNumber = 0;
         //_unrinal[0].SetActive(true);
         _rndNumber = Random.Range(0, _unrinal.Length);
@@ -108,6 +109,12 @@ public class PlayerControl : MonoBehaviour
                             //    UIFader._uniqueInstance.FadeIn(LobbyManager._uniqueInstance.FADENUM);
                             //}
                         }
+
+                        //if (Input.GetMouseButtonDown(0))
+                        //{
+                        //    PlayerControl._uniqueInstance.ChangedAction(PlayerControl.ePlayerActState.RUN);
+                        //    transform.Translate(Vector3.back * 5 * Time.deltaTime);
+                        //}
 
                         if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) || Input.GetMouseButton(0))
                         {
@@ -181,7 +188,7 @@ public class PlayerControl : MonoBehaviour
                     _isActing = true;
                     if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
                     {
-                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) )
+                        if (OVRInput.Get(OVRInput.Button.PrimaryTouchpad) /*|| Input.GetMouseButtonDown(0)*/)
                         {
                             aniCtrl.enabled = true;
                             ChangedAction(ePlayerActState.RUN);
