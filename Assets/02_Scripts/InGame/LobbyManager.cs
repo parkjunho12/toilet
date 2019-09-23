@@ -211,7 +211,7 @@ public class LobbyManager : MonoBehaviour
                 if(_timeCheck >= 3)
                 {
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
-                    ParticleLauncher._uniqueInstance.SCORE_EFF[1].GetComponent<ParticleSystem>().Play();
+                    ParticleLauncher._uniqueInstance.SCORE_EFF[0].GetComponent<ParticleSystem>().Play();
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     _curState = eGameState.END;
                 }
