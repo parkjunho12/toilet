@@ -16,6 +16,7 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         RESULT,
+        HAP_RESULT,
         END,
         NONE,
     }
@@ -201,6 +202,17 @@ public class LobbyManager : MonoBehaviour
                     _Plus[_rndNum].gameObject.SetActive(false);
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
+                    _curState = eGameState.HAP_RESULT;
+                }
+                break;
+            case eGameState.HAP_RESULT:
+                _timeCheck += Time.deltaTime;
+
+                if(_timeCheck >= 3)
+                {
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+                    ParticleLauncher._uniqueInstance.SCORE_EFF[1].GetComponent<ParticleSystem>().Play();
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N1");
                     _curState = eGameState.END;
                 }
                 break;

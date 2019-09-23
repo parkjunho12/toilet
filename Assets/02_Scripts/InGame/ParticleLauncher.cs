@@ -45,6 +45,10 @@ public class ParticleLauncher : MonoBehaviour
         get { return _hit; }
         set { _hit = value; }
     }
+    public GameObject[] SCORE_EFF
+    {
+        get { return _scoreEff; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -101,25 +105,25 @@ public class ParticleLauncher : MonoBehaviour
         {// 솜사탕
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
-            _scoreEff[3].GetComponent<ParticleSystem>().Play();
-            _scoreEff[3].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[2].GetComponent<ParticleSystem>().Play();
+            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
         else if (_flyScore % 330 == 0 && _flyScore != 0)
         {// BAAM
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
-            _scoreEff[2].GetComponent<ParticleSystem>().Play();
-            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[1].GetComponent<ParticleSystem>().Play();
+            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
         else if (_flyScore % 810 == 0 && _flyScore != 0)
         {// 별
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
-            _scoreEff[1].GetComponent<ParticleSystem>().Play();
-            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[0].GetComponent<ParticleSystem>().Play();
+            _scoreEff[0].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[0].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
 
         ParticleSystem.MainModule psMain = splatter.main;
@@ -131,7 +135,7 @@ public class ParticleLauncher : MonoBehaviour
         //if (Input.GetMouseButtonDown(0))
         if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
         {
-            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(0))
             {
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;
                 ParticleSystem.MainModule psmain = particleLauncher.main;
