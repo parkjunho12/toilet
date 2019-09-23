@@ -16,6 +16,7 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         RESULT,
+        HAP_RESULT,
         END,
         NONE,
     }
@@ -28,7 +29,6 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _toiletWaterFall;
     [SerializeField] GameObject _bottle;
     [SerializeField] GameObject _touchShootUI;
-    [SerializeField] GameObject _miniMap;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] GameObject _auraShield;
     [SerializeField] GameObject[] _gameStateUI;
@@ -41,6 +41,7 @@ public class LobbyManager : MonoBehaviour
     public Text _isShield;
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
+
     eGameState _curState;
     string cAddress = "http://dbwo4011.cafe24.com/unity/Check2.php";
     float _timeCheck;
@@ -49,6 +50,7 @@ public class LobbyManager : MonoBehaviour
     bool _isSpawn;
     int _rndNum;
     int _final_time;
+
     public static LobbyManager INSTANCE
     {
         get { return _uniqueInstance; }
@@ -77,6 +79,16 @@ public class LobbyManager : MonoBehaviour
     {
         get { return _isShield; }
         set { _isShield = value; }
+    }
+    public int FINAL_TIME
+    {
+        get { return _final_time; }
+        set { _final_time = value; }
+    }
+    public GameObject[] GAMESTATE_TEXT
+    {
+        get { return _gameStateTxt; }
+        set { _gameStateTxt = value; }
     }
 
     // Start is called before the first frame update
@@ -198,10 +210,17 @@ public class LobbyManager : MonoBehaviour
                 {
                     _timeCheck = 0;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString() +"\nTime Bonus : " +_final_time;
-                    ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
+                    _curState = eGameState.HAP_RESULT;
+                }
+                break;
+            case eGameState.HAP_RESULT:
+                _timeCheck += Time.deltaTime;
+                if(_timeCheck >= 3)
+                {
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
                     _curState = eGameState.END;
