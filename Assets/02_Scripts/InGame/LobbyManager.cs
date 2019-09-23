@@ -221,6 +221,9 @@ public class LobbyManager : MonoBehaviour
                 _timeCheck += Time.deltaTime;
                 if(_timeCheck >= 3)
                 {
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+                    ParticleLauncher._uniqueInstance.SCORE_EFF[1].GetComponent<ParticleSystem>().Play();
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = string.Format("Score : {0}", ParticleLauncher._uniqueInstance.SUM.ToString("N1"));
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
                     _curState = eGameState.END;

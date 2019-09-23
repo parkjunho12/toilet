@@ -45,6 +45,10 @@ public class ParticleLauncher : MonoBehaviour
         get { return _hit; }
         set { _hit = value; }
     }
+    public GameObject[] SCORE_EFF
+    {
+        get { return _scoreEff; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -150,21 +154,5 @@ public class ParticleLauncher : MonoBehaviour
                 _timeCheck = 0;
             }
         }
-        else if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.RESULT)
-        {
-            _timeCheck = 0;
-        }
-        else if (LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.HAP_RESULT)
-        {
-            _timeCheck += Time.deltaTime;
-            if(_timeCheck >= 2)
-            {
-                SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
-                _scoreEff[1].GetComponent<ParticleSystem>().Play();
-                LobbyManager._uniqueInstance.GAMESTATE_TEXT[_rndNum].GetComponent<Text>().text
-                    = string.Format("Score : {0}", _sum.ToString("N1"));
-            }
-        }
-
     }
 }
