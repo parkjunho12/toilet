@@ -90,6 +90,7 @@ public class ParticleLauncher : MonoBehaviour
             EmitAtLocation(collisionEvent[i]);
         }
     }
+    bool is_combo = false;
 
     void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
     {
@@ -100,25 +101,25 @@ public class ParticleLauncher : MonoBehaviour
         {// 솜사탕
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO);
-            _scoreEff[0].GetComponent<ParticleSystem>().Play();
-            _scoreEff[0].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[0].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[3].GetComponent<ParticleSystem>().Play();
+            _scoreEff[3].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[3].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
         else if (_flyScore % 330 == 0 && _flyScore != 0)
         {// BAAM
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_YEAHH);
-            _scoreEff[1].GetComponent<ParticleSystem>().Play();
-            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[2].GetComponent<ParticleSystem>().Play();
+            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
         else if (_flyScore % 810 == 0 && _flyScore != 0)
         {// 별
             Handheld.Vibrate();
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
-            _scoreEff[2].GetComponent<ParticleSystem>().Play();
-            _scoreEff[2].transform.position = particleCollisionEvent.intersection;
-            _scoreEff[2].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+            _scoreEff[1].GetComponent<ParticleSystem>().Play();
+            _scoreEff[1].transform.position = particleCollisionEvent.intersection;
+            _scoreEff[1].transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
         }
 
         ParticleSystem.MainModule psMain = splatter.main;
@@ -130,7 +131,7 @@ public class ParticleLauncher : MonoBehaviour
         //if (Input.GetMouseButtonDown(0))
         if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
         {
-            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)/* || Input.GetMouseButton(0)*/)
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
             {
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;
                 ParticleSystem.MainModule psmain = particleLauncher.main;

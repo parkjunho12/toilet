@@ -41,13 +41,7 @@ public class LobbyManagers : MonoBehaviour
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
     }
-
-    //void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //        StartBtn();
-    //}
-
+   
     public void StartBtn()
     {// 게임시작 버튼.
         SceneChanger._uniqueInstance.IMAGE.SetActive(true);
