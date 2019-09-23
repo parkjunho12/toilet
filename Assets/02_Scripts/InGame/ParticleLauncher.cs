@@ -135,7 +135,7 @@ public class ParticleLauncher : MonoBehaviour
         //if (Input.GetMouseButtonDown(0))
         if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.PLAY)
         {
-            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(0))
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) /*|| Input.GetMouseButtonDown(0)*/)
             {
                 particleLauncher.transform.position = GameObject.FindWithTag("ShootPointer").transform.position;
                 ParticleSystem.MainModule psmain = particleLauncher.main;

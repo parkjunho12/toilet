@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OVRCameraRig
       objectReference: {fileID: 0}
+    - target: {fileID: 109308, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.916
@@ -303,12 +307,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1459232241878824169, guid: 126d619cf4daa52469682f85c1378b4a,
+    - target: {fileID: 8876624541098598088, guid: 126d619cf4daa52469682f85c1378b4a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109308, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -322,7 +322,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.42
       objectReference: {fileID: 0}
-    - target: {fileID: 8876624541098598088, guid: 126d619cf4daa52469682f85c1378b4a,
+    - target: {fileID: 1459232241878824169, guid: 126d619cf4daa52469682f85c1378b4a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -504,6 +504,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GazePointerRing
       objectReference: {fileID: 0}
+    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 468500, guid: b0528537cb83e274c845cae208d6f145, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -559,18 +571,6 @@ PrefabInstance:
     - target: {fileID: 11454254, guid: b0528537cb83e274c845cae208d6f145, type: 3}
       propertyPath: cursorRadius
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 468498, guid: b0528537cb83e274c845cae208d6f145, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0528537cb83e274c845cae208d6f145, type: 3}
@@ -908,11 +908,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1458593886228825546, guid: 35b41a6ebf35fc44d9349d7b45831fb3,
-        type: 3}
-      propertyPath: m_Name
-      value: unrinal
-      objectReference: {fileID: 0}
     - target: {fileID: 1458593886229125610, guid: 35b41a6ebf35fc44d9349d7b45831fb3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -982,6 +977,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458593886228825546, guid: 35b41a6ebf35fc44d9349d7b45831fb3,
+        type: 3}
+      propertyPath: m_Name
+      value: unrinal
       objectReference: {fileID: 0}
     - target: {fileID: 1458593886228825538, guid: 35b41a6ebf35fc44d9349d7b45831fb3,
         type: 3}
@@ -1270,16 +1270,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5423968967699269209, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
-        type: 3}
-      propertyPath: _fadeImage
-      value: 
-      objectReference: {fileID: 5423968966043982677}
-    - target: {fileID: 2784098798629983267, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2784098798629983264, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
         type: 3}
       propertyPath: m_RenderMode
@@ -1290,6 +1280,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 428315962}
+    - target: {fileID: 2784098798629983267, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423968967699269209, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
+        type: 3}
+      propertyPath: _fadeImage
+      value: 
+      objectReference: {fileID: 5423968966043982677}
     - target: {fileID: 2784098799493921079, guid: 3c2db6bb8dd658144a8fcf4853a6adba,
         type: 3}
       propertyPath: m_Color.a
@@ -2141,7 +2141,7 @@ PrefabInstance:
     - target: {fileID: 7920086525663132542, guid: 8e5161420df36b948b86972f306d2477,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7920086527370431454, guid: 8e5161420df36b948b86972f306d2477,
         type: 3}

@@ -42,13 +42,13 @@ public class LobbyManagers : MonoBehaviour
         _buyState.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            StartBtn();
-        }
-    }
+    //private void Update()
+    //{
+    //    if(Input.GetMouseButtonDown(0))
+    //    {
+    //        StartBtn();
+    //    }
+    //}
 
     public void StartBtn()
     {// 게임시작 버튼.

@@ -18,7 +18,7 @@ public class FlyController : MonoBehaviour
 
             if (_timeCheck < 5)
             {
-                if (_movTimeCheck > 3.0f)
+                if (_movTimeCheck > 2.5f)
                 {
                     _movTimeCheck = 0;
                     transform.position = _flyMovePos[UnityEngine.Random.Range(0, _flyMovePos.Count)];
@@ -26,7 +26,7 @@ public class FlyController : MonoBehaviour
             }
             else if (_timeCheck >= 5 && _timeCheck < 20)
             {
-                if (_movTimeCheck > 2.3f)
+                if (_movTimeCheck > 2.0f)
                 {
                     _movTimeCheck = 0;
                     transform.position = _flyMovePos[UnityEngine.Random.Range(0, _flyMovePos.Count)];
@@ -34,7 +34,7 @@ public class FlyController : MonoBehaviour
             }
             else if (_timeCheck >= 20 && _timeCheck < 30)
             {
-                if (_movTimeCheck > 2.0f)
+                if (_movTimeCheck > 1.5f)
                 {
                     _movTimeCheck = 0;
                     transform.position = _flyMovePos[UnityEngine.Random.Range(0, _flyMovePos.Count)];
@@ -42,7 +42,7 @@ public class FlyController : MonoBehaviour
             }
             else if (_timeCheck >= 30 && _timeCheck < 40)
             {
-                if (_movTimeCheck > 1.0f)
+                if (_movTimeCheck > 0.9f)
                 {
                     _movTimeCheck = 0;
                     transform.position = _flyMovePos[UnityEngine.Random.Range(0, _flyMovePos.Count)];
@@ -50,7 +50,7 @@ public class FlyController : MonoBehaviour
             }
             else if (_timeCheck >= 40 && _timeCheck < 50)
             {
-                if (_movTimeCheck > 0.5f)
+                if (_movTimeCheck > 0.4f)
                 {
                     _movTimeCheck = 0;
                     transform.position = _flyMovePos[UnityEngine.Random.Range(0, _flyMovePos.Count)];

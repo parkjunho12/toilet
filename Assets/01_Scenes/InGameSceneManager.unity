@@ -2914,11 +2914,6 @@ PrefabInstance:
       propertyPath: _scoreEff.Array.data[2]
       value: 
       objectReference: {fileID: 710685292208360986}
-    - target: {fileID: 106668593025241709, guid: 3d76a0c6a458a824fbca84001c6c11c2,
-        type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4175752819348290270, guid: 3d76a0c6a458a824fbca84001c6c11c2,
         type: 3}
       propertyPath: _peeScore.Array.data[0]
@@ -3024,11 +3019,6 @@ PrefabInstance:
       propertyPath: _scoreEff.Array.data[2]
       value: 
       objectReference: {fileID: 710685292208360986}
-    - target: {fileID: 4175752819348290270, guid: 3d76a0c6a458a824fbca84001c6c11c2,
-        type: 3}
-      propertyPath: particleLauncher
-      value: 
-      objectReference: {fileID: 1271589456112184755}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d76a0c6a458a824fbca84001c6c11c2, type: 3}
 --- !u!114 &1271589456112184749 stripped
@@ -3076,12 +3066,6 @@ GameObject:
 --- !u!4 &1271589456112184754 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4610513761024613994, guid: 3d76a0c6a458a824fbca84001c6c11c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1271589456112184748}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1271589456112184755 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 106668593025241709, guid: 3d76a0c6a458a824fbca84001c6c11c2,
     type: 3}
   m_PrefabInstance: {fileID: 1271589456112184748}
   m_PrefabAsset: {fileID: 0}
