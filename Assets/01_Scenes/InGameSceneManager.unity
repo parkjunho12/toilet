@@ -1517,6 +1517,11 @@ PrefabInstance:
       propertyPath: _auraShield
       value: 
       objectReference: {fileID: 864243026}
+    - target: {fileID: 6615058137706476071, guid: 2f312d10f67801e4cb2279f9b44e2309,
+        type: 3}
+      propertyPath: _scoreEff
+      value: 
+      objectReference: {fileID: 710685292208360986}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f312d10f67801e4cb2279f9b44e2309, type: 3}
 --- !u!114 &1660509817 stripped
@@ -2754,6 +2759,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51451bb898dabe643b91e0e55d1c21f5, type: 3}
+--- !u!1 &710685292208360986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 709513678331338428, guid: 51451bb898dabe643b91e0e55d1c21f5,
+    type: 3}
+  m_PrefabInstance: {fileID: 710685292208360985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1271589456112184748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3035,7 +3046,7 @@ PrefabInstance:
     - target: {fileID: 4610513761024613994, guid: 3d76a0c6a458a824fbca84001c6c11c2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.458
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4610513761024613994, guid: 3d76a0c6a458a824fbca84001c6c11c2,
         type: 3}
@@ -3045,7 +3056,7 @@ PrefabInstance:
     - target: {fileID: 4610513761024613994, guid: 3d76a0c6a458a824fbca84001c6c11c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6199518609435811774, guid: 3d76a0c6a458a824fbca84001c6c11c2,
         type: 3}

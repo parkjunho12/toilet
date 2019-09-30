@@ -37,6 +37,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text[] _myScore;
     [SerializeField] Text[] _Plus;
     [SerializeField] Text _findTimer;
+    [SerializeField] GameObject _scoreEff;
     public Text _isShield;
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
@@ -94,7 +95,7 @@ public class LobbyManager : MonoBehaviour
         _gameStateTxt[_rndNum].GetComponent<Text>();
         _gameStateTxt[_rndNum].SetActive(false);       
     }
-
+    int _nexttime;
     // Update is called once per frame
     void Update()
     {
@@ -193,6 +194,8 @@ public class LobbyManager : MonoBehaviour
                 break;
             case eGameState.RESULT:
                 _timeCheck += 10;
+                
+                _nexttime += 10;
                 _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
                 if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM)
                 {
@@ -204,8 +207,18 @@ public class LobbyManager : MonoBehaviour
                     _Plus[_rndNum].gameObject.SetActive(false);
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
+                }
+                if (_nexttime >= ParticleLauncher._uniqueInstance.SUM + 100)
+                {
+                    _nexttime = 0;
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+                    _scoreEff.GetComponent<ParticleSystem>().Play();
+                    _scoreEff.transform.position = _gameStateTxt[_rndNum].transform.position;
+                 
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Final Score : " + (ParticleLauncher._uniqueInstance.SUM + _final_time).ToString();
                     _curState = eGameState.END;
                 }
+
                 break;
             case eGameState.END:
                 _curState = eGameState.NONE;
