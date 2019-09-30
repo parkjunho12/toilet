@@ -134,7 +134,7 @@ public class PlayerControl : MonoBehaviour
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
 
-                                _movedir = new Vector3(dirX * 7.5f, 0, dirZ * 7.5f);
+                                _movedir = new Vector3(dirX * 8.5f, 0, dirZ *8.5f);
                                 transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
@@ -144,13 +144,13 @@ public class PlayerControl : MonoBehaviour
                                 //if (FixedTouchField._uniqueInstance.PRESSED)
                                 if (iskeydown)
                                 {
-                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);
-                               
+                                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.EAAA);
+                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);                           
                                 }
                                 else
                                 {
                                   
-                                    _movedir = new Vector3(dirX * 6.5f, 0, dirZ * 6.5f);
+                                    _movedir = new Vector3(dirX * 7.0f, 0, dirZ * 7.0f);
                                 }
 
                                 transform.Translate(_movedir * Time.smoothDeltaTime);

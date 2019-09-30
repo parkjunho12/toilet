@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
         SHOP_BUY,
         BARK,
         SHIELD,
+        EAAA,
     }
 
     public static SoundManager _uniqueinstance;
