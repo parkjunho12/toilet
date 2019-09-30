@@ -61,7 +61,7 @@ public class ParticleLauncher : MonoBehaviour
         if (other.gameObject.CompareTag("Toilet"))
         {
             _sum += 0.01f;
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString());
         }
         else if (other.gameObject.CompareTag("Fly"))
         {
@@ -80,7 +80,7 @@ public class ParticleLauncher : MonoBehaviour
             }
 
             SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.HITFLY);
-            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString("N1"));
+            _peeScore[_rndNum].GetComponent<Text>().text = string.Format("점수 : {0}", _sum.ToString());
             _plus[_rndNum].GetComponent<Text>().transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 0.05f, other.transform.position.z + 0.01f);
         }
 

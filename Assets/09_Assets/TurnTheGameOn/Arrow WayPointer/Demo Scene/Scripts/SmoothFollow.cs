@@ -19,8 +19,13 @@ namespace TurnTheGameOn.NPCChat {
 		[SerializeField]
 		private float heightDamping;
 
-		// Update is called once per frame
-		void LateUpdate()
+        private void Start()
+        {
+            StartCoroutine(Bark(Random.Range(3, 7)));
+        }
+
+        // Update is called once per frame
+        void LateUpdate()
 		{
             if(LobbyManager._uniqueInstance.NOWGAMESTATE == LobbyManager.eGameState.STARTFIND)
             {
@@ -56,5 +61,14 @@ namespace TurnTheGameOn.NPCChat {
 
 		}
 
-	}
+        IEnumerator Bark(float _delayTime)
+        {
+            yield return new WaitForSeconds(_delayTime);
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
+            yield return new WaitForSeconds(0.7f);
+            SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BARK);
+            StartCoroutine(Bark(Random.Range(3, 7)));
+        }
+
+    }
 }

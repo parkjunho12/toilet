@@ -37,7 +37,6 @@ public class PlayerControl : MonoBehaviour
 
     Vector3 _posTarget;
     ePlayerActState _curPlyState;
-    float _timeCheck;
     int _idxRoamming = 0;
     int _rndNumber;
     bool _isActing;
@@ -72,7 +71,6 @@ public class PlayerControl : MonoBehaviour
         _posTarget = transform.position;
 
         _isActing = false;
-        _timeCheck = 0;
 
         //_shootPos.SetActive(false);
         _controllerPos = GameObject.FindGameObjectWithTag("ControllerSpawn").transform;
@@ -133,26 +131,25 @@ public class PlayerControl : MonoBehaviour
 
                             if (LobbyManager._uniqueInstance.PLAYCOUNT > 50)
                             {
-
                                 _movedir = new Vector3(dirX * 8.5f, 0, dirZ *8.5f);
                                 transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else if (LobbyManager._uniqueInstance.PLAYCOUNT <= 50
                                 && LobbyManager._uniqueInstance.PLAYCOUNT > 10)
                             {
-                                bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-                                //if (FixedTouchField._uniqueInstance.PRESSED)
-                                if (iskeydown)
-                                {
-                                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.EAAA);
-                                    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);                           
-                                }
-                                else
-                                {
+                                //bool iskeydown = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+                                ////if (FixedTouchField._uniqueInstance.PRESSED)
+                                //if (iskeydown)
+                                //{
+                                //    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.EAAA);
+                                //    _movedir = new Vector3(dirX * 16.5f, 0, dirZ * 16.5f);                           
+                                //}
+                                //else
+                                //{
                                   
-                                    _movedir = new Vector3(dirX * 7.0f, 0, dirZ * 7.0f);
-                                }
+                                //}
 
+                                _movedir = new Vector3(dirX * 7.0f, 0, dirZ * 7.0f);
                                 transform.Translate(_movedir * Time.smoothDeltaTime);
                             }
                             else
