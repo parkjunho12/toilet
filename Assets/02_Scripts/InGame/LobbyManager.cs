@@ -96,6 +96,8 @@ public class LobbyManager : MonoBehaviour
         _gameStateTxt[_rndNum].SetActive(false);       
     }
     int _nexttime;
+    bool _second = true;
+    bool _third = true;
     // Update is called once per frame
     void Update()
     {
@@ -194,14 +196,18 @@ public class LobbyManager : MonoBehaviour
                 break;
             case eGameState.RESULT:
                 _timeCheck += 10;
-                          
-                if(_timeCheck <= ParticleLauncher._uniqueInstance.SUM)
+
+                if (_second)
                 {
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
+
                 }
-                if ((ParticleLauncher._uniqueInstance.SUM + 100)  >= _timeCheck && _timeCheck >= ParticleLauncher._uniqueInstance.SUM)
+                
+                if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM && _third)
                 {
-                    
+                    _timeCheck = 0;
+                    _second = false;
+                    _third = false;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString() + "\nTime Bonus : " + _final_time;
                     ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
@@ -210,7 +216,7 @@ public class LobbyManager : MonoBehaviour
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
                 }
-                if ((ParticleLauncher._uniqueInstance.SUM + 200) >= _timeCheck && _timeCheck >= ParticleLauncher._uniqueInstance.SUM + 100)
+                if (!_third && _timeCheck >= 100)
                 {
                     _timeCheck = 0;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
