@@ -254,6 +254,7 @@ public class LobbyManagers : MonoBehaviour
                 StartCoroutine(this.BuyPet(cAddress3));
                 StartCoroutine(this.FindPet_Dog("http://dbwo4011.cafe24.com/unity/FindPet.php"));
                 SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.SHOP_BUY);
+                _HavePet_Dog.GetComponent<Text>().text = "Have";
                 _petDogBought = true;
                 _buyState.gameObject.SetActive(true);
                 _buyState.text = "(Pet.Dog) Success!";
