@@ -39,6 +39,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Text[] _Plus;
     [SerializeField] Text _findTimer;
     [SerializeField] GameObject _scoreEff;
+    [SerializeField] GameObject _findArrowtxt;
     public Text _isShield;
     BaseGameManager.eStageState _curStageIdx;
     PlayerControl _player;
@@ -122,6 +123,7 @@ public class LobbyManager : MonoBehaviour
                 _findTimer.text = _timeCheck.ToString("N2");
                 if (_timeCheck <= 90 && _timeCheck > 50)
                 {
+                    _findArrowtxt.SetActive(false);
                     _fadeNum = 0.1f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
                 }
