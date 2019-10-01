@@ -16,6 +16,7 @@ public class LobbyManager : MonoBehaviour
         START,
         PLAY,
         RESULT,
+        HAP_RESULT,
         END,
         NONE,
     }
@@ -160,7 +161,7 @@ public class LobbyManager : MonoBehaviour
                     _curState = eGameState.END;
                     //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
-                _final_time = (int)_timeCheck * 10;
+                _final_time = (int)_timeCheck;
 
                 break;
             case eGameState.START:
@@ -196,36 +197,63 @@ public class LobbyManager : MonoBehaviour
                 break;
             case eGameState.RESULT:
                 _timeCheck += 10;
-
-                if (_second)
-                {
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
-
-                }
-                
-                if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM && _third)
+                _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
+                if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM)
                 {
                     _timeCheck = 0;
-                    _second = false;
-                    _third = false;
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString() + "\nTime Bonus : " + _final_time;
-                    ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
+                    _final_time = _final_time * 10;
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N0") + "\nTime Bonus : " + _final_time;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+                    ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
                     _touchShootUI.SetActive(false);
                     _Plus[_rndNum].gameObject.SetActive(false);
+                    _curState = eGameState.HAP_RESULT;
+                }
+                break;
+            //case eGameState.RESULT:
+            //    _timeCheck += 10;
+
+            //    if (_second)
+            //    {
+            //        _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
+
+            //    }
+
+            //    if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM && _third)
+            //    {
+            //        _timeCheck = 0;
+            //        _second = false;
+            //        _third = false;
+            //        _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString("N0") + "\nTime Bonus : " + _final_time;
+            //        ParticleLauncher._uniqueInstance.SUM = ParticleLauncher._uniqueInstance.SUM + _final_time;
+            //        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
+            //        _touchShootUI.SetActive(false);
+            //        _Plus[_rndNum].gameObject.SetActive(false);
+            //        StartCoroutine(this.Call(cAddress));
+            //        StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
+            //    }
+            //    if (!_third && _timeCheck >= 100)
+            //    {
+            //        _timeCheck = 0;
+            //        SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+            //        _scoreEff.GetComponent<ParticleSystem>().Play();
+            //        _scoreEff.transform.position = _gameStateTxt[_rndNum].transform.position;            
+            //        _gameStateTxt[_rndNum].GetComponent<Text>().text = "Final Score : " + (ParticleLauncher._uniqueInstance.SUM + _final_time).ToString();
+            //        _curState = eGameState.END;
+            //    }
+
+            //    break;
+            case eGameState.HAP_RESULT:
+                _timeCheck += Time.deltaTime;
+                if (_timeCheck >= 3)
+                {
+                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
+                    ParticleLauncher._uniqueInstance.SCORE_EFF[1].GetComponent<ParticleSystem>().Play();
+                    _gameStateTxt[_rndNum].GetComponent<Text>().text = string.Format("Score : {0}", ParticleLauncher._uniqueInstance.SUM.ToString("N0"));
                     StartCoroutine(this.Call(cAddress));
                     StartCoroutine(this.PlusGold("http://dbwo4011.cafe24.com/unity/PlusGold.php"));
+                    _curState = eGameState.END; 
                 }
-                if (!_third && _timeCheck >= 100)
-                {
-                    _timeCheck = 0;
-                    SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.COMBO_SHINE);
-                    _scoreEff.GetComponent<ParticleSystem>().Play();
-                    _scoreEff.transform.position = _gameStateTxt[_rndNum].transform.position;            
-                    _gameStateTxt[_rndNum].GetComponent<Text>().text = "Final Score : " + (ParticleLauncher._uniqueInstance.SUM + _final_time).ToString();
-                    _curState = eGameState.END;
-                }
-
                 break;
             case eGameState.END:
                 _curState = eGameState.NONE;
