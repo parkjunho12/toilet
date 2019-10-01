@@ -170,7 +170,7 @@ public class LobbyManager : MonoBehaviour
                     _curState = eGameState.END;
                     //_curState = eGameState.REPLAY_IFNOT_FINISH;
                 }
-                _final_time = (int)_timeCheck * 10;
+                _final_time = (int)_timeCheck;
                 break;
             case eGameState.START:
                 _gameStateUI[_rndNum].SetActive(true);
@@ -208,6 +208,7 @@ public class LobbyManager : MonoBehaviour
                 _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + _timeCheck.ToString();
                 if (_timeCheck >= ParticleLauncher._uniqueInstance.SUM)
                 {
+                    _final_time = _final_time * 10;
                     _timeCheck = 0;
                     _gameStateTxt[_rndNum].GetComponent<Text>().text = "Score : " + ParticleLauncher._uniqueInstance.SUM.ToString() +"\nTime Bonus : " +_final_time;
                     SoundManager._uniqueinstance.PlayEffSound(SoundManager.eEffType.BREATH);
