@@ -41,7 +41,7 @@ public class LobbyManagers : MonoBehaviour
         mysite.transform.eulerAngles = new Vector3(0, centerEye.transform.localEulerAngles.y, 0);
         _content.GetComponent<Text>().text = "edd";
         _buyState.gameObject.SetActive(false);
-        StartBtn();
+     
        
     }
    
