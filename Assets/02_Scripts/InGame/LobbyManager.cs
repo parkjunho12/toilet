@@ -31,6 +31,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _touchShootUI;
     [SerializeField] GameObject _prefabCarPoints;
     [SerializeField] GameObject _auraShield;
+    [SerializeField] GameObject _findArrowTxt;
     [SerializeField] GameObject[] _gameStateUI;
     [SerializeField] GameObject[] _gameStateTxt;
     [SerializeField] GameObject[] _ctf3Light;
@@ -133,6 +134,7 @@ public class LobbyManager : MonoBehaviour
                 {
                     _fadeNum = 0.1f;
                     UIFader._uniqueInstance.FadeIn(_fadeNum);
+                    _findArrowTxt.SetActive(false);
                 }
                 else if (_timeCheck <= 50 && _timeCheck > 40)
                 {
