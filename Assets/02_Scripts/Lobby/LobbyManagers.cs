@@ -144,7 +144,7 @@ public class LobbyManagers : MonoBehaviour
         if (wwwUrl.text.Equals("1"))
         {
             _petDogBought = true;
-            _HavePet_Dog.GetComponent<Text>().text = "Have";
+            //_HavePet_Dog.GetComponent<Text>().text = "Have";
         }
         Debug.Log(wwwUrl.text);
     }
@@ -262,6 +262,7 @@ public class LobbyManagers : MonoBehaviour
                 _petDogBought = true;
                 _buyState.gameObject.SetActive(true);
                 _buyState.text = "(Pet.Dog) Success!";
+                _HavePet_Dog.GetComponent<Text>().text = "Have";
                 StartCoroutine(TextOff(1.5f));
             }
             else
