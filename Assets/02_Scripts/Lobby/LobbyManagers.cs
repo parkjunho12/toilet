@@ -144,7 +144,7 @@ public class LobbyManagers : MonoBehaviour
         if (wwwUrl.text.Equals("1"))
         {
             _petDogBought = true;
-            //_HavePet_Dog.GetComponent<Text>().text = "Have";
+            _HavePet_Dog.GetComponent<Text>().text = "Have";
         }
         Debug.Log(wwwUrl.text);
     }
